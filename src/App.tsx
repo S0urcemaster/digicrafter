@@ -5,6 +5,7 @@ import {UserOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.dark.css'
 import './css/ant.css'
 import './App.css'
+import Edit from "./content/Edit";
 
 enum Theme {
   default = 'default',
@@ -52,72 +53,7 @@ function App() {
             <div className="site-layout-content">
               <Switch>
                 <Route exact path="/">
-                  {/*<Overview />*/}
-                  {/*<UpdateLog />*/}
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
-                  <Title>test</Title>
+                  <Edit></Edit>
                 </Route>
                 <Route exact path="/profile">
                   {/*<Profile />*/}
