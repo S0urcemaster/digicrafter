@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Typography} from 'antd'
 import '../css/edit.css'
+import { Editor } from '@tinymce/tinymce-react';
 import {SyntheticEventData} from "react-dom/test-utils";
 
 const {Title} = Typography
@@ -107,9 +108,25 @@ export default function Edit () {
 
     return (
 
-        <div>
-            {doc}
-        </div>
+        <Editor
+            initialValue="<p>Initial content</p>"
+            init={{
+                height: 500,
+                menubar: false,
+                plugins: [
+                    'advlist autolink lists link image',
+                    'charmap print preview anchor help',
+                    'searchreplace visualblocks code',
+                    'insertdatetime media table paste wordcount'
+                ],
+                toolbar:
+                    'undo redo | formatselect | bold italic | \
+                    alignleft aligncenter alignright | \
+                    bullist numlist outdent indent | help'
+            }}
+            // onChange={this.handleEditorChange}
+            apiKey="esa6a0rrt3bla177zpzlmmhp9xxf3neouip6q8qgc517picl"
+        />
 
     )
 
