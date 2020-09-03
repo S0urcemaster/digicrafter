@@ -1,0 +1,11 @@
+.layout {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.site-layout-content {
+  padding: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - 88px);
+}
