@@ -7,14 +7,15 @@ const {Title} = Typography
 export default function UpdateLog () {
     return (
         <>
-            <Title level={1}>{format(new Date(2020, 9, 5), 'EEEE dd.LL.yyyy')}</Title>
+            <Title level={1}>{format(new Date('2020-09-05'), 'EEEE dd.LL.yyyy')}</Title>
             <Table
                 columns={[
                     {title: "Update", dataIndex: "update", key: "update"},
                     {title: "Time", dataIndex: "time", key: "time"}
                     ]}
                 dataSource={[
-                    {update: "Added nav with localization; Added UpdateLog", time: "1:20"}
+                    {key: "1", update: "Added nav with localization; Added UpdateLog", time: "1:20"},
+                    {key: "2", update: "Configurable menu finished", time: "1:15"},
                 ]}
             />
         </>

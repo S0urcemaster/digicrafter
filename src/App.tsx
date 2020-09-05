@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import {Layout, Row, Col, Space, Button, AutoComplete, Input, Menu, Typography} from 'antd'
-import {Switch, Route, Link} from "react-router-dom";
+import {AutoComplete, Button, Col, Input, Layout, Menu, Row, Space, Typography} from 'antd'
+import {Link, Route, Switch} from "react-router-dom";
 import {UserOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.dark.css'
 import './css/ant.css'
 import './App.css'
-import Edit from "./content/Edit";
 import Nav, {NavItem} from "./Nav"
 import UpdateLog from "./content/UpdateLog";
 
@@ -18,14 +17,26 @@ enum Theme {
 const {Header, Content, Sider} = Layout
 const {Title} = Typography
 
-function menuItems () {
-  const menuItems = []
+function menuItems (topic: any) {
+  const items =
+      <>
+        {Object.values(topic.items as NavItem).map((item) =>
+            <Menu.Item key={item.link} icon={<UserOutlined/>}>
+              {console.log(item.title)}
+              {item.title}
+            </Menu.Item>
+        )}
+      </>
+  return items
+}
 
-  return Object.values(Nav).map(item =>
-      <Menu.Item key={item.link} icon={<UserOutlined/>}>
-        {item.title}
-      </Menu.Item>)
-
+function menuTopics () {
+  return Object.values(Nav).map((topic) => (
+    <>
+      <Title level={3}>{topic.heading}</Title>
+      {menuItems(topic)}
+      </>
+  ))
     // for(let key in Nav) {
     //
     //   menuItems.push(
@@ -44,7 +55,7 @@ function App() {
         <Sider width={200}>
           <Link to="/"><Title level={3}>digicrafter</Title></Link>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-            {menuItems()}
+            {menuTopics()}
           </Menu>
         </Sider>
         <Layout>

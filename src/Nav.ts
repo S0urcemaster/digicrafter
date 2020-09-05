@@ -1,6 +1,13 @@
 import * as local from './local'
 
-const loc = local.en
+const {nav} = local.en
+
+export type NavSection = {
+    [key: string]: {
+        heading: string,
+        items: NavItem,
+    }
+}
 
 export type NavItem = {
     [key: string]: {
@@ -9,9 +16,22 @@ export type NavItem = {
     }
 }
 
-const Nav = {
-
-    passwordGenerator: {link: loc.nav.passwordGenerator.link, title: loc.nav.passwordGenerator.title}
+const Nav:NavSection = {
+    tools: {
+        heading: nav.tools.heading,
+        items: {
+            passwordGenerator: {
+                link: nav.tools.items.passwordGenerator.link,
+                title: nav.tools.items.passwordGenerator.title
+            },
+        }
+    },
+    projects: {
+        heading: nav.projects.heading,
+        items: {
+            digicrafter: {link: nav.projects.items.digicrafter.link, title: nav.projects.items.digicrafter.title}
+        }
+    }
 
 }
 
