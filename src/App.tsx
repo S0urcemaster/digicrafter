@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {Layout, Row, Col, Space, Button, AutoComplete, Input, Menu, Typography} from 'antd'
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Link} from "react-router-dom";
 import {UserOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.dark.css'
 import './css/ant.css'
 import './App.css'
 import Edit from "./content/Edit";
+import Nav, {NavItem} from "./Nav"
+import UpdateLog from "./content/UpdateLog";
 
 enum Theme {
   default = 'default',
@@ -16,17 +18,33 @@ enum Theme {
 const {Header, Content, Sider} = Layout
 const {Title} = Typography
 
+function menuItems () {
+  const menuItems = []
+
+  return Object.values(Nav).map(item =>
+      <Menu.Item key={item.link} icon={<UserOutlined/>}>
+        {item.title}
+      </Menu.Item>)
+
+    // for(let key in Nav) {
+    //
+    //   menuItems.push(
+    //       <Menu.Item key={Nav.key.link} icon={<UserOutlined/>}>
+    //         {Nav.passwordGenerator.title}
+    //       </Menu.Item>
+    //   )
+    // }
+
+}
 
 function App() {
   const [theme, setTheme] = useState(Theme.default)
   return (
       <Layout className="layout" data-theme={theme}>
         <Sider width={200}>
-          <Title level={3}>digicrafter</Title>
+          <Link to="/"><Title level={3}>digicrafter</Title></Link>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
-              nav 1
-            </Menu.Item>
+            {menuItems()}
           </Menu>
         </Sider>
         <Layout>
@@ -53,7 +71,7 @@ function App() {
             <div className="site-layout-content">
               <Switch>
                 <Route exact path="/">
-                  <Edit></Edit>
+                  <UpdateLog />
                 </Route>
                 <Route exact path="/profile">
                   {/*<Profile />*/}
