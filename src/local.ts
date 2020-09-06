@@ -19,9 +19,47 @@ export const en = {
                 passwordGenerator: {
                     link: "/password-generator",
                     title: "Readable Password Generator",
-                }
+                },
+                writer: {
+                    link: "/writer",
+                    title: "Writer",
+                },
+                // : {
+                //     link: "/",
+                //     title: "",
+                // },
             }
-        }
+        },
+        music: {
+            heading: "Electronic Music",
+            items: {
+                production: {
+                    link: "/music-production",
+                    title: "Production",
+                },
+                mixing: {
+                    link: "/music-mixing",
+                    title: "Mixing",
+                },
+                // : {
+                //     link: "/",
+                //     title: "",
+                // },
+            }
+        },
+        // : {
+        //     heading: "",
+        //     items: {
+        //         : {
+        //             link: "/",
+        //             title: "",
+        //         },
+        //         // : {
+        //         //     link: "/",
+        //         //     title: "",
+        //         // },
+        //     }
+        // },
     }
 }
 export const de = {

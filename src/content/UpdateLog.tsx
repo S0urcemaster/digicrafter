@@ -16,6 +16,10 @@ export default function UpdateLog () {
                 dataSource={[
                     {key: "1", update: "Added nav with localization; Added UpdateLog", time: "1:20"},
                     {key: "2", update: "Configurable menu finished", time: "1:15"},
+                    {key: "3", update: "Fixed menu errors", time: "1:45"},
+                    {key: "4", update: "", time: ""},
+                    {key: "5", update: "", time: ""},
+                    {key: "6", update: "", time: ""},
                 ]}
             />
         </>

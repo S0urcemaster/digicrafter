@@ -5,8 +5,10 @@ import {UserOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.dark.css'
 import './css/ant.css'
 import './App.css'
-import Nav, {NavItem} from "./Nav"
+import Nav, {NavItem, NavSection} from "./Nav"
 import UpdateLog from "./content/UpdateLog";
+import Edit from "./content/Edit";
+import SubMenu from "antd/es/menu/SubMenu";
 
 enum Theme {
   default = 'default',
@@ -16,44 +18,32 @@ enum Theme {
 
 const {Header, Content, Sider} = Layout
 const {Title} = Typography
+const {nav} = Nav
 
-function menuItems (topic: any) {
-  const items =
-      <>
-        {Object.values(topic.items as NavItem).map((item) =>
-            <Menu.Item key={item.link} icon={<UserOutlined/>}>
-              {console.log(item.title)}
-              {item.title}
+function menuItems (topic:any, props?:any) {
+  return Object.values(topic as NavItem).map((item, props) =>
+            <Menu.Item className="menuItem" key={item.link} {...props}>
+                {item.title}
             </Menu.Item>
-        )}
-      </>
-  return items
+  )
 }
 
-function menuTopics () {
-  return Object.values(Nav).map((topic) => (
-    <>
-      <Title level={3}>{topic.heading}</Title>
-      {menuItems(topic)}
-      </>
+function menuTopics (props?:any) {
+  return Object.values(Nav as NavSection).map((topic, props ) => (
+      <SubMenu key={`sub${topic.heading}`} title={topic.heading} {...props}>
+        {menuItems(topic.items, props)}
+      </SubMenu>
   ))
-    // for(let key in Nav) {
-    //
-    //   menuItems.push(
-    //       <Menu.Item key={Nav.key.link} icon={<UserOutlined/>}>
-    //         {Nav.passwordGenerator.title}
-    //       </Menu.Item>
-    //   )
-    // }
-
 }
 
 function App() {
   const [theme, setTheme] = useState(Theme.default)
   return (
       <Layout className="layout" data-theme={theme}>
-        <Sider width={200}>
-          <Link to="/"><Title level={3}>digicrafter</Title></Link>
+        <Sider className="sider" width={200}>
+          <div className="digicrafterContainer">
+            <Link to="/"><Title className='digicrafter' level={3}>digicrafter</Title></Link>
+          </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
             {menuTopics()}
           </Menu>
@@ -84,8 +74,8 @@ function App() {
                 <Route exact path="/">
                   <UpdateLog />
                 </Route>
-                <Route exact path="/profile">
-                  {/*<Profile />*/}
+                <Route exact path={Nav.tools.items.edit.link}>
+                  {<Edit />}
                 </Route>
                 <Route exact path="/preferences">
                   {/*<Preferences />*/}

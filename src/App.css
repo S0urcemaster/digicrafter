@@ -1,3 +1,19 @@
+.digicrafter {
+  /*margin-bottom: ;*/
+  /*line-height: 64px;*/
+  /*text-align:center;*/
+  margin-bottom: 0px!important;
+  /*vertical-align: middle;*/
+}
+
+.digicrafterContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:64px;
+  padding-right:20px;
+}
+
 .layout {
   max-width: 100%;
   overflow: hidden;
@@ -8,4 +24,27 @@
   overflow-y: scroll;
   overflow-x: hidden;
   height: calc(100vh - 88px);
+}
+
+.sider {
+  padding: 0 10px
+}
+
+.menuTitle {
+  margin-top:10px;
+  margin-bottom:0px!important;
+}
+
+.menuTitle:first-child {
+  margin-top: 0px;
+}
+
+.menuItem {
+  line-height: 1;
+  margin-top: 5px;
+}
+
+.menuItem:first-child {
+  line-height: 1;
+  margin-top: 0;
 }
