@@ -21,8 +21,8 @@ export const en = {
                     title: "Readable Password Generator",
                 },
                 writer: {
-                    link: "/writer",
-                    title: "Writer",
+                    link: "/type",
+                    title: "Type",
                 },
                 // : {
                 //     link: "/",
@@ -40,6 +40,19 @@ export const en = {
                 mixing: {
                     link: "/music-mixing",
                     title: "Mixing",
+                },
+                // : {
+                //     link: "/",
+                //     title: "",
+                // },
+            }
+        },
+        blog: {
+            heading: "Blog",
+            items: {
+                mindDistraction: {
+                    link: "/blog/mind-distraction",
+                    title: "Mind Distraction",
                 },
                 // : {
                 //     link: "/",

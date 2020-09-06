@@ -7,11 +7,12 @@ import { Slate, Editable, withReact } from 'slate-react'
 
 import {Typography} from 'antd'
 import '../css/edit.css'
+import Content from "../Content";
 
 const {Title} = Typography
 
 
-export default function Edit () {
+export default function Type () {
 
     const editor = useMemo(() => withReact(createEditor()), [])
 
@@ -24,12 +25,14 @@ export default function Edit () {
     ])
 
     return (
-        <Slate editor={editor} value={value} onChange={newValue => {
-        // @ts-ignore
-        setValue(newValue);
-        }}>
-            <Editable />
-        </Slate>
+        <Content title="Slate Test">
+            <Slate editor={editor} value={value} onChange={newValue => {
+                // @ts-ignore
+                setValue(newValue);
+            }}>
+                <Editable />
+            </Slate>
+        </Content>
     )
 
 }

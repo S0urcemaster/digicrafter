@@ -46,11 +46,18 @@ const Nav:NavSection = {
             // : {link: nav, title: nav},
         }
     },
+    blog: {
+        heading: nav.blog.heading,
+        items: {
+            mindDistraction: {link: nav.blog.items.mindDistraction.link, title: nav.blog.items.mindDistraction.title},
+            // : {link: nav, title: nav},
+        }
+    },
     // : {
-    //     heading: nav,
+    //     heading: nav.heading,
     //     items: {
-    //         : {link: nav, title: nav},
-    //         // : {link: nav, title: nav},
+    //         : {link: nav.items.link, title: nav.title},
+    //         // : {link: nav.link, title: nav.title},
     //     }
     // },
 
