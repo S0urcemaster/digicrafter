@@ -100,6 +100,9 @@ h1.ant-typography {
     text-shadow: 0 0 8px #2b5822;
     animation: glow1 50000ms linear infinite 40000ms;
 }
+.ant-tabs-tab-btn {
+    color: #49c16b !important;
+}
 @keyframes glow1 {
     40% {
         text-shadow: 0 0 8px #3d8833;

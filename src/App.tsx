@@ -4,7 +4,7 @@ import {Link, Route, Switch, useHistory} from "react-router-dom";
 import {UserOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.dark.css'
 import './css/ant.css'
-import './App.css'
+import './css/App.css'
 import './css/digicrafter.css'
 import Nav, {NavItem, NavSection} from "./Nav"
 import Digicrafter from "./content/Digicrafter";

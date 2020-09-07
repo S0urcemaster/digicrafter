@@ -1,6 +1,6 @@
 import React from "react";
 import {Typography} from "antd";
-import '../App.css'
+import '../css/App.css'
 import Content from "../components/Content";
 
 const {Title, Text} = Typography
