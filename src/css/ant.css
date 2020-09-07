@@ -31,7 +31,7 @@
     flex: 0 0 256px !important;
     max-width: 256px !important;
     min-width: 256px !important;
-    padding: 0 10px !important;
+    padding: 0 !important;
 }
 /*.ant-layout-sider-dark {*/
 /*    overflow: auto;*/
@@ -54,6 +54,10 @@
 }
 .ant-form-item {
     margin-bottom: 12px;
+}
+.ant-menu {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .ant-menu-submenu-title {
     margin-top: 0 !important;
@@ -85,15 +89,11 @@
 }
 .ant-menu-item-selected {
     background-color: #1f1f1f !important;
-    color: #55c149 !important;
+    color: #49c16b !important;
 }
 .ant-menu-submenu-selected {
     /*background-color: #1f1f1f !important;*/
-    color: #55c149 !important;
-}
-.ant-menu-submenu-open {
-    /*background-color: #1f1f1f !important;*/
-    color: #55c149 !important;
+    color: #49c16b !important;
 }
 h1.ant-typography {
     font-size: 34px;

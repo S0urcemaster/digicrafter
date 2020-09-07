@@ -11,6 +11,7 @@ import Digicrafter from "./content/Digicrafter";
 import Type from "./content/Type";
 import SubMenu from "antd/es/menu/SubMenu";
 import Home from "./content/Home";
+import ReactTraining from "./content/ReactTraining";
 
 enum Theme {
   default = 'default',
@@ -25,10 +26,10 @@ const {nav} = Nav
 
 function App() {
   const [theme, setTheme] = useState(Theme.default)
-  const [menuOpenKeys, setMenuOpenKeys] = useState([Nav.projects.heading])
+  const [menuOpenKeys, setMenuOpenKeys] = useState([Nav.home.heading])
   const rootKeys = Object.values(Nav).map((item) => item.heading)
   const history = useHistory()
-  const [selectedMenu, setSelectedMenu] = useState(Nav.projects.items.digicrafter.link)
+  const [selectedMenu, setSelectedMenu] = useState(Nav.home.items.landing.link)
 
   function menuItems (topic:any, props?:any) {
     return Object.values(topic as NavItem).map((item, props) =>
@@ -81,7 +82,7 @@ function App() {
           </Menu>
         </Sider>
         <Layout>
-          <Header>
+          <Header className="header">
             <Row justify="space-between">
               <Col>
                 <Space>
@@ -106,21 +107,21 @@ function App() {
                 <Route exact path="/">
                   <Home />
                 </Route>
+                <Route exact path={Nav.home.items.landing.link}>
+                  <Home />
+                </Route>
+                <Route exact path={Nav.home.items.reactTraining.link}>
+                  <ReactTraining />
+                </Route>
+                <Route exact path={Nav.projects.items.digicrafter.link}>
+                  {<Digicrafter />}
+                </Route>
                 <Route exact path={Nav.tools.items.edit.link}>
                   {<Type />}
                 </Route>
-                <Route exact path={Nav.projects.items.digicrafter.link}>
-                  <Digicrafter />
-                </Route>
-                {/*<Route exact path="/account/new" render={(props) => */}
-                {/*    <NewAccount {...props} loaded={accountLoaded} user={user}/>}>*/}
+                {/*<Route exact path={Nav.items.link}>*/}
+                {/*  < />*/}
                 {/*</Route>*/}
-                {/*<Route exact path="/account/:id" render={(props) =>*/}
-                {/*    <Account {...props} loaded={accountLoaded} user={user}/>}>*/}
-                {/*</Route>*/}
-                <Route exact path="/update-log">
-                  {/*<Digicrafter />*/}
-                </Route>
               </Switch>
               <div style={{height:"20px"}}></div>
             </div>

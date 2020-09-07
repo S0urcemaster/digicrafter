@@ -21,6 +21,14 @@ export type NavItem = {
 }
 
 const Nav:NavSection = {
+    home: {
+        heading: nav.home.heading,
+        items: {
+            landing: {link: nav.home.items.landing.link, title: nav.home.items.landing.title},
+            reactTraining: {link: nav.home.items.reactTraining.link, title: nav.home.items.reactTraining.title},
+            // : {link: nav.link, title: nav.title},
+        }
+    },
     tools: {
         heading: nav.tools.heading,
         items: {
@@ -35,7 +43,21 @@ const Nav:NavSection = {
         items: {
             digicrafter: {link: nav.projects.items.digicrafter.link, title: nav.projects.items.digicrafter.title},
             kontakt: {link: nav.projects.items.kontakt.link, title: nav.projects.items.kontakt.title},
+            beatportFilter: {link: nav.projects.items.beatportFilter.link, title: nav.projects.items.beatportFilter.title},
+            timers: {link: nav.projects.items.timers.link, title: nav.projects.items.timers.title},
             // : {link: nav, title: nav},
+        }
+    },
+    projectsArchive: {
+        heading: nav.projectsArchive.heading,
+        items: {
+            projectsArchiveOverview: {link: nav.projectsArchive.items.projectsArchiveOverview.link, title: nav.projectsArchive.items.projectsArchiveOverview.title},
+            pushDJ: {link: nav.projectsArchive.items.pushDJ.link, title: nav.projectsArchive.items.pushDJ.title},
+            tyreDB: {link: nav.projectsArchive.items.tyreDB.link, title: nav.projectsArchive.items.tyreDB.title},
+            p32DJ: {link: nav.projectsArchive.items.p32dj.link, title: nav.projectsArchive.items.p32dj.title},
+            timeclockFX: {link: nav.projectsArchive.items.timeclockFX.link, title: nav.projectsArchive.items.timeclockFX.title},
+            cclua: {link: nav.projectsArchive.items.cclua.link, title: nav.projectsArchive.items.cclua.title},
+            // : {link: nav.link, title: nav.title},
         }
     },
     music: {

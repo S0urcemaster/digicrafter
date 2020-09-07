@@ -7,7 +7,7 @@ import { Slate, Editable, withReact } from 'slate-react'
 
 import {Typography} from 'antd'
 import '../css/edit.css'
-import Content from "../Content";
+import Content from "../components/Content";
 
 const {Title} = Typography
 

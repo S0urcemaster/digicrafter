@@ -1,5 +1,22 @@
 export const en = {
     nav: {
+        home: {
+            heading: "Home",
+            items: {
+                landing: {
+                    link: "/",
+                    title: "Landing Page",
+                },
+                reactTraining: {
+                    link: "/react-training",
+                    title: "React Training",
+                },
+                // : {
+                //     link: "/",
+                //     title: "",
+                // },
+            }
+        },
         projects: {
             heading: 'Projects',
             items: {
@@ -9,8 +26,49 @@ export const en = {
                 },
                 kontakt: {
                     link: '/kontakt',
-                    title: 'kontakt base'
-                }
+                    title: 'kontakt base',
+                },
+                beatportFilter: {
+                    link: "/beatport-filters",
+                    title: "Enhanced Beatport Filters",
+                },
+                timers: {
+                    link: "/timers",
+                    title: "Timers",
+                },
+                // : {
+                //     link: "/",
+                //     title: "",
+                // },
+            }
+        },
+        projectsArchive: {
+            heading: "Projects (Archive)",
+            items: {
+                projectsArchiveOverview: {
+                    link: "/projects-archive-overview",
+                    title: "Overview",
+                },
+                pushDJ: {
+                    link: "/pushdj",
+                    title: "Push DJ",
+                },
+                tyreDB: {
+                    link: "/tyredb",
+                    title: "Tyre DB",
+                },
+                p32dj: {
+                    link: "/p32dj",
+                    title: "P 32 DJ Mapping",
+                },
+                timeclockFX: {
+                    link: "/timeclockfx",
+                    title: "TimeClockFX",
+                },
+                cclua: {
+                    link: "/cclua",
+                    title: "CCLua",
+                },
             }
         },
         tools: {

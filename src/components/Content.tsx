@@ -1,8 +1,10 @@
 import React, {PropsWithChildren} from "react";
 import {Typography} from "antd";
-import './App.css'
+import '../App.css'
+import { Link } from "react-router-dom";
 
 const {Title, Text} = Typography
+
 
 export default function Content (props:PropsWithChildren<any>) {
 

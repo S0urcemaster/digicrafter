@@ -2,6 +2,7 @@
   "name": "digicrafter",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://digi-craft.de/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -16,6 +17,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-syntax-highlighter": "^13.5.3",
     "slate": "^0.58.4",
     "slate-react": "^0.58.4",
     "typescript": "^3.7.5"
