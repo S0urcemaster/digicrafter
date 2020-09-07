@@ -45,7 +45,7 @@ export const en = {
         projectsArchive: {
             heading: "Projects (Archive)",
             items: {
-                projectsArchiveOverview: {
+                overview: {
                     link: "/projects-archive-overview",
                     title: "Overview",
                 },

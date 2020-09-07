@@ -12,6 +12,7 @@ import Type from "./content/Type";
 import SubMenu from "antd/es/menu/SubMenu";
 import Home from "./content/Home";
 import ReactTraining from "./content/ReactTraining";
+import ProjectsArchiveOverview from "./content/projectsArchive/Overview"
 
 enum Theme {
   default = 'default',
@@ -70,7 +71,7 @@ function App() {
       <Layout className="layout" data-theme={theme}>
         <Sider className="sider" width={200}>
           <div className="digicrafterContainer">
-            <div onClick={logoClicked}><Title className='digicrafter' level={4}>digicrafter</Title></div>
+            <div onClick={logoClicked}><Title className='digicrafter' level={3}>digicrafter</Title></div>
           </div>
           <Menu theme="dark" mode="inline"
                 // defaultSelectedKeys={[Nav.projects.items.digicrafter.link]}
@@ -118,6 +119,9 @@ function App() {
                 </Route>
                 <Route exact path={Nav.tools.items.edit.link}>
                   {<Type />}
+                </Route>
+                <Route exact path={Nav.projectsArchive.items.overview.link}>
+                  <ProjectsArchiveOverview />
                 </Route>
                 {/*<Route exact path={Nav.items.link}>*/}
                 {/*  < />*/}

@@ -70,7 +70,7 @@ export default function Digicrafter() {
                                              {
                                                  key: "2",
                                                  update: "Getting javascript beautifier; added ContentTabs component",
-                                                 time: addDuration(0, 0)
+                                                 time: addDuration(1, 45)
                                              },
                                              {key: "", update: "", time: addDuration(0, 0)},
                                              {key: "", update: "", time: addDuration(0, 0)},

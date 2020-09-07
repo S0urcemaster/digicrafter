@@ -51,7 +51,7 @@ const Nav:NavSection = {
     projectsArchive: {
         heading: nav.projectsArchive.heading,
         items: {
-            projectsArchiveOverview: {link: nav.projectsArchive.items.projectsArchiveOverview.link, title: nav.projectsArchive.items.projectsArchiveOverview.title},
+            overview: {link: nav.projectsArchive.items.overview.link, title: nav.projectsArchive.items.overview.title},
             pushDJ: {link: nav.projectsArchive.items.pushDJ.link, title: nav.projectsArchive.items.pushDJ.title},
             tyreDB: {link: nav.projectsArchive.items.tyreDB.link, title: nav.projectsArchive.items.tyreDB.title},
             p32DJ: {link: nav.projectsArchive.items.p32dj.link, title: nav.projectsArchive.items.p32dj.title},

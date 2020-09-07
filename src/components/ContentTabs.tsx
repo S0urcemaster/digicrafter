@@ -10,7 +10,7 @@ const { TabPane } = Tabs;
 export default function Content (props:PropsWithChildren<any>) {
 
     return (
-        <div style={{fontFamily:'Nunito'}}>
+        <>
             <Title level={1} style={{paddingTop:'20px', paddingBottom:'20px'}}>{props.title}</Title>
             <Tabs defaultActiveKey={props.tabs[0].title} type="card" size="large">
                 {props.tabs.map((tab:any) =>
@@ -19,7 +19,7 @@ export default function Content (props:PropsWithChildren<any>) {
                     </TabPane>
                 )}
             </Tabs>
-        </div>
+        </>
     )
 
 }

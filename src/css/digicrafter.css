@@ -5,6 +5,9 @@
     animation: reveal 2000ms ease-in-out forwards 200ms,
     glow 40000ms linear infinite 32000ms;
     text-shadow: 0 0 8px #408f36;
+    margin-bottom: 2px !important;
+    white-space: nowrap;
+    letter-spacing: -8px;
 }
 
 .digicrafter:hover {
@@ -22,6 +25,8 @@
 }
 
 @keyframes reveal {
+    0%{
+    }
     80%{
         letter-spacing: 8px;
     }

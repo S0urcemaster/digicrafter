@@ -89,19 +89,45 @@
 }
 .ant-menu-item-selected {
     background-color: #1f1f1f !important;
-    color: #49c16b !important;
+    color: #6fff25 !important;
 }
 .ant-menu-submenu-selected {
     /*background-color: #1f1f1f !important;*/
-    color: #49c16b !important;
+    color: #6fff25 !important;
 }
 h1.ant-typography {
-    font-size: 34px;
+    font-size: 30px;
     text-shadow: 0 0 8px #2b5822;
     animation: glow1 50000ms linear infinite 40000ms;
 }
+h2.ant-typography {
+    font-size: 26px;
+}
+
+h3.ant-typography {
+    font-size: 22px;
+}
+
+h4.ant-typography {
+    font-size: 18px;
+}
+
+h5.ant-typography {
+    font-size: 14px;
+}
+a.ant-typography {
+    color: #4ec31b;
+}
+a.ant-typography:hover {
+    color: #4ec31b;
+    opacity: 0.85;
+}
+a.ant-typography:visited {
+    color: #4ec31b;
+    opacity: 0.85;
+}
 .ant-tabs-tab-btn {
-    color: #49c16b !important;
+    color: #6fff25 !important;
 }
 @keyframes glow1 {
     40% {
