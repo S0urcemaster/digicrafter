@@ -72,8 +72,8 @@ export default function Digicrafter() {
                                                  update: "Getting javascript beautifier; added ContentTabs component",
                                                  time: addDuration(1, 45)
                                              },
-                                             {key: "", update: "", time: addDuration(0, 0)},
-                                             {key: "", update: "", time: addDuration(0, 0)},
+                                             {key: "3", update: "Started Projects Archive Overview", time: addDuration(1, 40)},
+                                             {key: "4", update: "Projects archive page around finished", time: addDuration(1, 0)},
                                              {key: "", update: "", time: addDuration(0, 0)},
                                              {key: "", update: "", time: addDuration(0, 0)},
                                              {key: "", update: "", time: addDuration(0, 0)},
