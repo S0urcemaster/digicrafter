@@ -8,7 +8,7 @@ const {Title, Text} = Typography
 export default function Home () {
 
     return (
-        <Content title="digicrafter - An Application-Style Homepage">
+        <Content title="digicrafter's digital stuff">
             <Text>digicraft stuff</Text>
         </Content>
     )

@@ -7,7 +7,7 @@ const {Title, Text} = Typography
 export default function MusicProduction () {
 
     return (
-        <Content title="Electronic Music Production">
+        <Content title="Zappy Beats Releases">
             <Text>stuff</Text>
         </Content>
     )

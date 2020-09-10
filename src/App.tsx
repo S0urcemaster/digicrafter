@@ -16,6 +16,7 @@ import ProjectsArchiveOverview from "./content/projectsArchive/Overview"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark, atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import axios from "axios";
+import MusicProduction from "./content/MusicProduction";
 
 enum Theme {
   default = 'default',
@@ -36,19 +37,34 @@ function App() {
   const [selectedMenu, setSelectedMenu] = useState(Nav.home.items.landing.link)
   const [sourceVisible, setSourceVisible] = useState(false)
   const [sourceCode, setSourceCode] = useState('')
+  const [sourceCodeFilename, setSourceCodeFilename] = useState('App.tsx')
 
   useEffect(() => {
+    let source:string|undefined = ''
     history.listen((location) => {
-      let path = location.pathname
-      if(path) {
-        path = 'http://localhost:3000/src/App.tsx' //+path
-        axios.get(path)
-            .then(res => {
-              setSourceCode(res.data)
-            })
+      const nav = Object.values(Nav).find(nav => {
+        return Object.values(nav.items).find(item => {
+          const found = item.link === location.pathname
+          source = item.source
+          return found
+        })
+      })
+      console.log (source)
+      if(source) {
+        setSourceCodeFilename(source)
+        const path = 'http://localhost:3000/src' +source
+        loadSource(path)
       }
     })
+    loadSource('http://localhost:3000/src/App.tsx')
   },[])
+
+  function loadSource (path:string) {
+    axios.get(path)
+        .then(res => {
+          setSourceCode(res.data)
+        })
+  }
 
   function menuItems (topic:any, props?:any) {
     return Object.values(topic as NavItem).map((item, props) =>
@@ -132,9 +148,6 @@ function App() {
             <div className="site-drawer-render-in-current-wrapper">
               <div className="site-layout-content">
                 <Switch>
-                  <Route exact path="/">
-                    <Home />
-                  </Route>
                   <Route exact path={Nav.home.items.landing.link}>
                     <Home />
                   </Route>
@@ -142,21 +155,25 @@ function App() {
                     <ReactTraining />
                   </Route>
                   <Route exact path={Nav.projects.items.digicrafter.link}>
-                    {<Digicrafter />}
+                    <Digicrafter />
                   </Route>
                   <Route exact path={Nav.tools.items.edit.link}>
-                    {<Type />}
+                    <Type />
                   </Route>
                   <Route exact path={Nav.projectsArchive.items.overview.link}>
                     <ProjectsArchiveOverview />
+                  </Route>
+                  <Route exact path={Nav.music.items.production.link}>
+                    <MusicProduction />
                   </Route>
                   {/*<Route exact path={Nav.items.link}>*/}
                   {/*  < />*/}
                   {/*</Route>*/}
                 </Switch>
-                <div style={{height:"20px"}}></div>
+                <div style={{height:"20px"}} />
               </div>
               <Drawer
+                  title={sourceCodeFilename}
                   placement="right"
                   closable={false}
                   onClose={onSourceClose}

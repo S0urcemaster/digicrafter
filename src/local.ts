@@ -92,8 +92,8 @@ export const en = {
             heading: "Electronic Music",
             items: {
                 production: {
-                    link: "/music-production",
-                    title: "Production",
+                    link: "/zappy-beats",
+                    title: "Zappy Beats",
                 },
                 mixing: {
                     link: "/music-mixing",
