@@ -76,7 +76,7 @@ export default function Digicrafter() {
                                              {key: "4", update: "Projects archive page around finished", time: addDuration(1, 0)},
                                              {key: "5", update: "'Type' basic layout", time: addDuration(2, 30)},
                                              {key: "6", update: "Miscellaneous", time: addDuration(0, 30)},
-                                             {key: "7", update: "Added sourcecode functionality", time: addDuration(1, 30)},
+                                             {key: "", update: "", time: addDuration(0, 0)},
                                              {key: "", update: "", time: addDuration(0, 0)},
                                              {key: "", update: "", time: addDuration(0, 0)},
                                              {key: "", update: "", time: addDuration(0, 0)},

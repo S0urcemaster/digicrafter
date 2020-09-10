@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {AutoComplete, Button, Col, Drawer, Input, Layout, Menu, Row, Space, Typography} from 'antd'
 import {Link, Route, Switch, useHistory} from "react-router-dom";
 import {UserOutlined} from '@ant-design/icons';
@@ -15,7 +15,6 @@ import ReactTraining from "./content/ReactTraining";
 import ProjectsArchiveOverview from "./content/projectsArchive/Overview"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark, atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import axios from "axios";
 
 enum Theme {
   default = 'default',
@@ -35,20 +34,6 @@ function App() {
   const history = useHistory()
   const [selectedMenu, setSelectedMenu] = useState(Nav.home.items.landing.link)
   const [sourceVisible, setSourceVisible] = useState(false)
-  const [sourceCode, setSourceCode] = useState('')
-
-  useEffect(() => {
-    history.listen((location) => {
-      let path = location.pathname
-      if(path) {
-        path = 'http://localhost:3000/src/App.tsx' //+path
-        axios.get(path)
-            .then(res => {
-              setSourceCode(res.data)
-            })
-      }
-    })
-  },[])
 
   function menuItems (topic:any, props?:any) {
     return Object.values(topic as NavItem).map((item, props) =>
@@ -166,7 +151,7 @@ function App() {
                   width={512}
               >
                 <SyntaxHighlighter language="javascript" style={atomDark}>
-                  {sourceCode}
+                  {'(num) => num + 1'}
                 </SyntaxHighlighter>
               </Drawer>
             </div>
