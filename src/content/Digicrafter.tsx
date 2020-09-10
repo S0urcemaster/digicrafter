@@ -77,8 +77,8 @@ export default function Digicrafter() {
                                              {key: "5", update: "'Type' basic layout", time: addDuration(2, 30)},
                                              {key: "6", update: "Miscellaneous", time: addDuration(0, 30)},
                                              {key: "7", update: "Added sourcecode functionality", time: addDuration(1, 30)},
-                                             {key: "", update: "", time: addDuration(0, 0)},
-                                             {key: "", update: "", time: addDuration(0, 0)},
+                                             {key: "8", update: "Sourcecode functionality finshed", time: addDuration(1, 20)},
+                                             {key: "9", update: "Added Music Soundcloud links", time: addDuration(1, 0)},
                                              {key: "", update: "", time: addDuration(0, 0)},
                                          ]}
                                      />
