@@ -97,7 +97,7 @@ export default function Digicrafter() {
                                              },
                                              {
                                                  key: "1",
-                                                 update: "Added nav with localization; Added Digicrafter",
+                                                 update: "Added nav with localization; Added Projects",
                                                  time: addDuration(1, 20)
                                              },
                                              {key: "2", update: "Configurable menu finished", time: addDuration(1, 15)},

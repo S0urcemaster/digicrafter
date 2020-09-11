@@ -7,7 +7,7 @@ import './css/ant.css'
 import './css/App.css'
 import './css/digicrafter.css'
 import Nav, {NavItem, NavSection} from "./Nav"
-import Digicrafter from "./content/Digicrafter";
+import Projects from "./content/Projects";
 import Type from "./content/Type";
 import SubMenu from "antd/es/menu/SubMenu";
 import Home from "./content/Home";
@@ -155,7 +155,7 @@ function App() {
                     <ReactTraining />
                   </Route>
                   <Route exact path={Nav.projects.items.digicrafter.link}>
-                    <Digicrafter />
+                    <Projects />
                   </Route>
                   <Route exact path={Nav.tools.items.edit.link}>
                     <Type />
@@ -180,7 +180,7 @@ function App() {
                   visible={sourceVisible}
                   getContainer={false}
                   style={{ position: 'absolute' }}
-                  width={512}
+                  width={768}
               >
                 <SyntaxHighlighter language="javascript" style={atomDark}>
                   {sourceCode}

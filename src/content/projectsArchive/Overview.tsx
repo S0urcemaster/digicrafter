@@ -94,7 +94,7 @@ function tags (names:string[]) {
     return names.map(name => techToTag(name))
 }
 
-export default function  () {
+export default function Overview () {
 
     let key = 1
 

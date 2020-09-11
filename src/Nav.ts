@@ -42,7 +42,7 @@ const Nav:NavSection = {
     projects: {
         heading: nav.projects.heading,
         items: {
-            digicrafter: {link: nav.projects.items.digicrafter.link, title: nav.projects.items.digicrafter.title, source: '/content/Digicrafter.tsx'},
+            digicrafter: {link: nav.projects.items.digicrafter.link, title: nav.projects.items.digicrafter.title, source: '/content/projects/UpdateLogs.tsx'},
             kontakt: {link: nav.projects.items.kontakt.link, title: nav.projects.items.kontakt.title, source: '/content/Kontakt.tsx'},
             beatportFilter: {link: nav.projects.items.beatportFilter.link, title: nav.projects.items.beatportFilter.title},
             timers: {link: nav.projects.items.timers.link, title: nav.projects.items.timers.title},
