@@ -116,14 +116,14 @@ h5.ant-typography {
     font-size: 14px;
 }
 a.ant-typography {
-    color: #4ec31b;
+    color: #c3b21b;
 }
 a.ant-typography:hover {
-    color: #4ec31b;
+    color: #c3b21b;
     opacity: 0.85;
 }
 a.ant-typography:visited {
-    color: #4ec31b;
+    color: #c3b21b;
     opacity: 0.85;
 }
 .ant-tabs-tab-btn {

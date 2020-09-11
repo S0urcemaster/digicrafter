@@ -52,6 +52,8 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.digicrafter, log:"Changing menu structure", duration: addDuration(1, 15)},
             {project: project.digicrafter, log:"Adding IndexedDB functionality", duration: addDuration(1, 30)},
             {project: project.digicrafter, log:"Add home text; set active main menu to location", duration: addDuration(0, 30)},
+            {project: project.digicrafter, log:"Separated internal/external links; Changed internal/external link colors", duration: addDuration(0, 30)},
+            // {project: project.digicrafter, log:"", duration: addDuration(0, 0)},
             // {project: project.digicrafter, log:"", duration: addDuration(0, 0)},
             // {project: project, log:"", duration: addDuration(0, 0)},
         ],

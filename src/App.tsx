@@ -6,7 +6,7 @@ import 'antd/dist/antd.dark.css'
 import './css/ant.css'
 import './css/App.css'
 import './css/digicrafter.css'
-import Nav, {NavItem, NavSection} from "./Nav"
+import {Nav, NavItem, NavSection} from "./Nav"
 import Projects from "./content/Projects";
 import Type from "./content/Type";
 import SubMenu from "antd/es/menu/SubMenu";
@@ -28,7 +28,6 @@ enum Theme {
 
 const {Header, Content, Sider} = Layout
 const {Title} = Typography
-const {nav} = Nav
 
 
 function App() {
@@ -42,11 +41,11 @@ function App() {
   const [sourceCodeFilename, setSourceCodeFilename] = useState('App.tsx')
 
   useEffect(() => {
-    let source:string|undefined = ''
     history.listen((location) => {
       // go through the Nav object and and set the main menu's state to the actual path location
       // also load the right source code (if set)
-      const nav = Object.values(Nav).find(nav => {
+      let source:string|undefined = ''
+      Object.values(Nav).find(nav => {
         const found = Object.values(nav.items).find(item => {
           const found = item.link === location.pathname
           source = item.source

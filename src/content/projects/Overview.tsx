@@ -2,8 +2,10 @@ import React from "react";
 import {Table, Typography} from "antd";
 import '../../css/App.css'
 import tags from "./Tags";
+import {Link} from 'react-router-dom'
+import {Nav} from "../../Nav";
 
-const {Title, Text, Link} = Typography
+const {Title, Text} = Typography
 
 export default function ProjectsOverview () {
 
@@ -30,7 +32,7 @@ export default function ProjectsOverview () {
                        {
                            key: keyUp(),
                            started: "9/2020",
-                           title: <Link href="https://digi-craft.de" target="_blank">digicrafter (digi-craft.de)</Link>,
+                           title: <Link to={Nav.home.items.landing.link}>digicrafter (digi-craft.de)</Link>,
                            description: 'Single-Page Homepage',
                            motivation: 'Fun/Training',
                            tech: tags(['react', 'typescript', 'antdesign', 'css', 'phpstorm']),
@@ -40,7 +42,7 @@ export default function ProjectsOverview () {
                        {
                            key: keyUp(),
                            started: "8/2020",
-                           title: <Link href="https://digi-craft.de/password-generator" target="_blank">Readable Password Generator (digi-craft.de)</Link>,
+                           title: <Link to={Nav.tools.items.passwordGenerator.link}>Readable Password Generator (digi-craft.de)</Link>,
                            description: 'Tool',
                            motivation: 'Need',
                            tech: tags(['typescript', 'javascript']),
@@ -50,7 +52,7 @@ export default function ProjectsOverview () {
                        {
                            key: keyUp(),
                            started: "8/2020",
-                           title: <Link href="https://digi-craft.de/type" target="_blank">digicrafter/>type (digi-craft.de)</Link>,
+                           title: <Link to={Nav.tools.items.edit.link}>digicrafter/>type (digi-craft.de)</Link>,
                            description: 'Tool',
                            motivation: 'Fun/Need',
                            tech: tags(['typescript', 'react']),
@@ -60,27 +62,27 @@ export default function ProjectsOverview () {
                        {
                            key: keyUp(),
                            started: "8/2020",
-                           title: <Link href="https://digi-craft.de/kontaktbase" target="_blank">kontakt 0.2 (digi-craft.de)</Link>,
+                           title: <Typography.Link href="https://digi-craft.de/kontaktbase" target="_blank">kontakt 0.2 (digi-craft.de)</Typography.Link>,
                            description: 'CRM Port of Customerboard',
                            motivation: 'Training',
                            tech: tags(['react', 'typescript', 'antdesign', 'phpstorm', 'css']),
                            scope: "3 months",
-                           repo: <Link href="https://github.com/S0urcemaster/kontaktbase" target="_blank">S0urcemaster/kontakt</Link>,
+                           repo: <Typography.Link href="https://github.com/S0urcemaster/kontaktbase" target="_blank">S0urcemaster/kontakt</Typography.Link>,
                        },
                        {
                            key: keyUp(),
                            started: "7/2020",
-                           title: <Link href="https://digi-craft.de/kontakt" target="_blank">kontakt 0.1 (digi-craft.de)</Link>,
+                           title: <Typography.Link href="https://digi-craft.de/kontakt" target="_blank">kontakt 0.2 (digi-craft.de)</Typography.Link>,
                            description: 'CRM Port of Customerboard',
                            motivation: 'Auftrag',
                            tech: tags(['react', 'javascript', 'materialui', 'phpstorm', 'css']),
                            scope: "3 months discontinued",
-                           repo: <Link href="https://github.com/S0urcemaster/kontakt" target="_blank">S0urcemaster/kontakt</Link>,
+                           repo: <Typography.Link href="https://github.com/S0urcemaster/kontakt" target="_blank">S0urcemaster/kontakt</Typography.Link>,
                        },
                        {
                            key: keyUp(),
                            started: "2014",
-                           title: <Link href="https://digi-craft.de" target="_blank">Timers (digi-craft.de)</Link>,
+                           title: <Link to={Nav.tools.items.timers.link}>Timers (digi-craft.de)</Link>,
                            description: 'Tool',
                            motivation: 'Need',
                            tech: tags(['typescript', 'react']),

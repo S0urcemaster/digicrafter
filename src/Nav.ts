@@ -21,7 +21,7 @@ export type NavItem = {
     }
 }
 
-const Nav:NavSection = {
+export const Nav:NavSection = {
     home: {
         heading: nav.home.heading,
         items: {
@@ -84,4 +84,4 @@ const Nav:NavSection = {
 
 }
 
-export default Nav
+// export default Nav
