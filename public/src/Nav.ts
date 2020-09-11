@@ -17,6 +17,7 @@ export type NavItem = {
     [key: string]: {
         link: string,
         title: string,
+        source?: string,
     }
 }
 
@@ -24,16 +25,16 @@ const Nav:NavSection = {
     home: {
         heading: nav.home.heading,
         items: {
-            landing: {link: nav.home.items.landing.link, title: nav.home.items.landing.title},
-            reactTraining: {link: nav.home.items.reactTraining.link, title: nav.home.items.reactTraining.title},
+            landing: {link: nav.home.items.landing.link, title: nav.home.items.landing.title, source:'/App.tsx'},
+            reactTraining: {link: nav.home.items.reactTraining.link, title: nav.home.items.reactTraining.title, source: '/content/ReactTraining.tsx'},
             // : {link: nav.link, title: nav.title},
         }
     },
     tools: {
         heading: nav.tools.heading,
         items: {
-            passwordGenerator: {link: nav.tools.items.passwordGenerator.link, title: nav.tools.items.passwordGenerator.title},
-            edit: {link: nav.tools.items.writer.link, title: nav.tools.items.writer.title},
+            passwordGenerator: {link: nav.tools.items.passwordGenerator.link, title: nav.tools.items.passwordGenerator.title, source: '/content/PasswordGenerator.tsx'},
+            edit: {link: nav.tools.items.writer.link, title: nav.tools.items.writer.title, source:'/content/Type.tsx'},
             // : {link: nav, title: nav},
             // : {link: nav, title: nav},
         }
@@ -41,23 +42,13 @@ const Nav:NavSection = {
     projects: {
         heading: nav.projects.heading,
         items: {
-            digicrafter: {link: nav.projects.items.digicrafter.link, title: nav.projects.items.digicrafter.title},
-            kontakt: {link: nav.projects.items.kontakt.link, title: nav.projects.items.kontakt.title},
+            overview: {link: nav.projects.items.overview.link, title: nav.projects.items.overview.title, source: '/projects/Overview.tsx'},
+            digicrafter: {link: nav.projects.items.digicrafter.link, title: nav.projects.items.digicrafter.title, source: '/content/projects/UpdateLogs.tsx'},
+            kontakt: {link: nav.projects.items.kontakt.link, title: nav.projects.items.kontakt.title, source: '/content/Kontakt.tsx'},
             beatportFilter: {link: nav.projects.items.beatportFilter.link, title: nav.projects.items.beatportFilter.title},
             timers: {link: nav.projects.items.timers.link, title: nav.projects.items.timers.title},
+            archive: {link: nav.projects.items.archive.link, title: nav.projects.items.archive.title, source: '/projects/Archive.tsx'},
             // : {link: nav, title: nav},
-        }
-    },
-    projectsArchive: {
-        heading: nav.projectsArchive.heading,
-        items: {
-            overview: {link: nav.projectsArchive.items.overview.link, title: nav.projectsArchive.items.overview.title},
-            pushDJ: {link: nav.projectsArchive.items.pushDJ.link, title: nav.projectsArchive.items.pushDJ.title},
-            tyreDB: {link: nav.projectsArchive.items.tyreDB.link, title: nav.projectsArchive.items.tyreDB.title},
-            p32DJ: {link: nav.projectsArchive.items.p32dj.link, title: nav.projectsArchive.items.p32dj.title},
-            timeclockFX: {link: nav.projectsArchive.items.timeclockFX.link, title: nav.projectsArchive.items.timeclockFX.title},
-            cclua: {link: nav.projectsArchive.items.cclua.link, title: nav.projectsArchive.items.cclua.title},
-            // : {link: nav.link, title: nav.title},
         }
     },
     music: {

@@ -32,5 +32,5 @@
 
 .site-drawer-render-in-current-wrapper {
   position: relative;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }

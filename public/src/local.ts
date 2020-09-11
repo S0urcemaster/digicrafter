@@ -20,55 +20,34 @@ export const en = {
         projects: {
             heading: 'Projects',
             items: {
+                overview: {
+                    link: '/projects/overview',
+                    title: 'Overview',
+                },
                 digicrafter: {
-                    link: '/digicrafter',
+                    link: '/projects/digicrafter',
                     title: 'digicrafter',
                 },
                 kontakt: {
-                    link: '/kontakt',
+                    link: '/projects/kontakt',
                     title: 'kontakt base',
                 },
                 beatportFilter: {
-                    link: "/beatport-filters",
+                    link: "/projects/beatport-filters",
                     title: "Enhanced Beatport Filters",
                 },
                 timers: {
-                    link: "/timers",
+                    link: "/projects/timers",
                     title: "Timers",
+                },
+                archive: {
+                    link: "/projects/archive",
+                    title: "Projects (Archive)",
                 },
                 // : {
                 //     link: "/",
                 //     title: "",
                 // },
-            }
-        },
-        projectsArchive: {
-            heading: "Projects (Archive)",
-            items: {
-                overview: {
-                    link: "/projects-archive-overview",
-                    title: "Overview",
-                },
-                pushDJ: {
-                    link: "/pushdj",
-                    title: "Push DJ",
-                },
-                tyreDB: {
-                    link: "/tyredb",
-                    title: "Tyre DB",
-                },
-                p32dj: {
-                    link: "/p32dj",
-                    title: "P 32 DJ Mapping",
-                },
-                timeclockFX: {
-                    link: "/timeclockfx",
-                    title: "TimeClockFX",
-                },
-                cclua: {
-                    link: "/cclua",
-                    title: "CCLua",
-                },
             }
         },
         tools: {
@@ -92,8 +71,8 @@ export const en = {
             heading: "Electronic Music",
             items: {
                 production: {
-                    link: "/music-production",
-                    title: "Production",
+                    link: "/zappy-beats",
+                    title: "Zappy Beats",
                 },
                 mixing: {
                     link: "/music-mixing",

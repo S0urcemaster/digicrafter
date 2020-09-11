@@ -11,10 +11,10 @@ export default function Projects () {
 
 
     return (
-        <ContentTabs title="The digicrafter Project"
+        <ContentTabs title="Active Projects"
                      tabs={[
                          {
-                             title: 'Overview',
+                             title: 'Archive',
                              content: <ProjectsOverview />
                          },
                          {

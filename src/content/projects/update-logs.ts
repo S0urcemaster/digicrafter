@@ -38,20 +38,22 @@ function sumDurations(): Duration {
 }
 
 export const updateLogs: Array<UpdateLogs> = [
-    {
-        date: new Date('2020-09-11'),
-        logs: [
-            {project: project.digicrafter, log:'Changing menu structure; changing UpdateLog', duration: addDuration(1, 45)},
-            // {project: project, log:'', duration: addDuration()},
-        ],
-        total: sumDurations()
-    },
     // {
     //     date: new Date('2020-'),
     //     logs: [
-    //         {project: project, log:'', duration: addDuration()},
+    //         {project: project, log:"", duration: addDuration()},
     //     ],
     //     total: sumDurations()
     // },
+    {
+        date: new Date('2020-09-11'),
+        logs: [
+            {project: project.digicrafter, log:"Changing menu structure; changing UpdateLog", duration: addDuration(1, 45)},
+            {project: project.digicrafter, log:"Changing menu structure", duration: addDuration(1, 15)},
+            // {project: project.digicrafter, log:"", duration: addDuration(0, 0)},
+            // {project: project, log:"", duration: addDuration(0, 0)},
+        ],
+        total: sumDurations()
+    },
 ]
 

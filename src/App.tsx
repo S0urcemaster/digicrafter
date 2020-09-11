@@ -12,7 +12,7 @@ import Type from "./content/Type";
 import SubMenu from "antd/es/menu/SubMenu";
 import Home from "./content/Home";
 import ReactTraining from "./content/ReactTraining";
-import ProjectsArchiveOverview from "./content/projectsArchive/Overview"
+import ProjectsArchive from "./content/projects/Archive"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark, atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import axios from "axios";
@@ -154,14 +154,14 @@ function App() {
                   <Route exact path={Nav.home.items.reactTraining.link}>
                     <ReactTraining />
                   </Route>
-                  <Route exact path={Nav.projects.items.digicrafter.link}>
+                  <Route exact path={Nav.projects.items.overview.link}>
                     <Projects />
                   </Route>
                   <Route exact path={Nav.tools.items.edit.link}>
                     <Type />
                   </Route>
-                  <Route exact path={Nav.projectsArchive.items.overview.link}>
-                    <ProjectsArchiveOverview />
+                  <Route exact path={Nav.projects.items.archive.link}>
+                    <ProjectsArchive />
                   </Route>
                   <Route exact path={Nav.music.items.production.link}>
                     <MusicProduction />

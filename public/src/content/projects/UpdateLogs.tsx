@@ -33,7 +33,7 @@ export default function UpdateLogs () {
     const updateLogs =
         <>
             {ulogs.map((log, index) =>
-                <>
+                <div key={index}>
                     <Title level={3}>{format(log.date, 'EEEE dd.LL.yyyy')}</Title>
                     <Title level={5}>Time Spent: {formatDuration(log.total)}</Title>
                     <Table pagination={false}
@@ -49,7 +49,7 @@ export default function UpdateLogs () {
                                time: formatDuration(value.duration),
                            }))}
                     />
-                </>
+                </div>
             )}
         </>
 
@@ -58,6 +58,7 @@ export default function UpdateLogs () {
     return (
         <>
             {updateLogs}
+            <Title level={5}></Title>
             <Title level={3}>{format(new Date('2020-09-10'), 'EEEE dd.LL.yyyy')}</Title>
             <Table pagination={false}
                    columns={[
@@ -76,7 +77,7 @@ export default function UpdateLogs () {
                            update: "Getting javascript beautifier; added ContentTabs component",
                            time: addDuration(1, 45)
                        },
-                       {key: "3", update: "Started Projects Archive Overview", time: addDuration(1, 40)},
+                       {key: "3", update: "Started Projects Archive Archive", time: addDuration(1, 40)},
                        {key: "4", update: "Projects archive page around finished", time: addDuration(1, 0)},
                        {key: "5", update: "'Type' basic layout", time: addDuration(2, 30)},
                        {key: "6", update: "Miscellaneous", time: addDuration(0, 30)},
@@ -87,6 +88,7 @@ export default function UpdateLogs () {
                    ]}
             />
             <Title level={5}>Time Spent: {sumDurations()}</Title>
+            <Title level={5}>&nbsp;</Title>
             <Title level={3}>{format(new Date('2020-09-07'), 'EEEE dd.LL.yyyy')}</Title>
             <Table pagination={false}
                    columns={[

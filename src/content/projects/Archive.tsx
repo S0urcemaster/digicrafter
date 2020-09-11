@@ -2,99 +2,11 @@ import React from "react";
 import {Table, Tag, Typography} from "antd";
 import Content from "../../components/Content";
 import {format} from "date-fns";
+import tags from "./Tags";
 
 const {Title, Text, Link} = Typography
 
-function languageTag (tag:string) : React.ReactElement {
-    return <Tag color="green">{tag}</Tag>
-}
-
-function frameworkTag (tag:string) : React.ReactElement {
-    return <Tag color="red">{tag}</Tag>
-}
-
-function softwareTag (tag:string) : React.ReactElement {
-    return <Tag color="blue">{tag}</Tag>
-}
-
-function techToTag(tech:string):React.ReactElement {
-    switch (tech) {
-        case 'react':
-            return frameworkTag('React')
-        case 'vue':
-            return frameworkTag('Vue')
-        case 'php':
-            return languageTag('PHP')
-        case 'laravel':
-            return frameworkTag('Laravel')
-        case 'html':
-            return languageTag('HTML')
-        case 'css':
-            return languageTag('CSS')
-        case 'javascript':
-            return languageTag('JavaScript')
-        case 'typescript':
-            return languageTag('TypeScript')
-        case 'xml':
-            return languageTag('XML')
-        case 'java':
-            return languageTag('Java')
-        case 'autohotkey':
-            return languageTag('Autohotkey')
-        case 'jpahibernate':
-            return frameworkTag('JPA/Hibernate')
-        case 'junit':
-            return frameworkTag('JUnit')
-        case 'bea':
-            return frameworkTag('BEA Application Server')
-        case 'sql':
-            return languageTag('SQL')
-        case 'scala':
-            return languageTag('Scala')
-        case 'lua':
-            return languageTag('Lua')
-        case 'csharp':
-            return languageTag('C#')
-        case 'git':
-            return softwareTag('Git')
-        case 'materialui':
-            return frameworkTag('Material UI')
-        case 'studioone':
-            return softwareTag('Studio One')
-        case 'abletonlive':
-            return softwareTag('Ableton Live')
-        case 'maschine':
-            return softwareTag('Maschine 2')
-        case 'traktorpro':
-            return softwareTag('Traktor Pro')
-        case 'blender':
-            return softwareTag('Blender 3D')
-        case 'eclipse':
-            return softwareTag('Eclipse')
-        case 'netbeans':
-            return softwareTag('NetBeans')
-        case 'minecraft':
-            return softwareTag('Minecraft (ComputerCraft)')
-        case 'phpstorm':
-            return softwareTag('PHPStorm')
-        case 'npm':
-            return softwareTag('npm')
-        case 'composer':
-            return softwareTag('Composer')
-        // case '':
-        //     return <Tag color=""></Tag>
-        // case '':
-        //     return <Tag color=""></Tag>
-        default:
-            return <Tag color="cyan">Not found</Tag>
-    }
-}
-
-function tags (names:string[]) {
-    return names.map(name => techToTag(name))
-}
-
-export default function Overview () {
+export default function Archive () {
 
     let key = 1
 
@@ -103,7 +15,7 @@ export default function Overview () {
     }
 
     return (
-        <Content title="Projects Archive Overview">
+        <Content title="Projects Archive Archive">
             <Title level={3}>Finished Projects</Title>
             <Table pagination={false}
                    columns={[
@@ -226,33 +138,36 @@ export default function Overview () {
                            scope: "7 months",
                            repo: "",
                        },
-                       {
-                           key: keyUp(),
-                           year: "",
-                           title: "",
-                           description: '',
-                           motivation: '',
-                           tech: tags([]),
-                           scope: "",
-                           repo: <Link href="" target="_blank">github.com</Link>,
-                       },
-                       {
-                           key: keyUp(),
-                           year: "",
-                           title: "",
-                           description: '',
-                           motivation: '',
-                           tech: tags([]),
-                           scope: "",
-                           repo: <Link href="" target="_blank">github.com</Link>,
-                       },
+                       // {
+                       //     key: keyUp(),
+                       //     year: "",
+                       //     title: "",
+                       //     description: '',
+                       //     motivation: '',
+                       //     tech: tags([]),
+                       //     scope: "",
+                       //     repo: <Link href="" target="_blank">github.com</Link>,
+                       // },
+                       // {
+                       //     key: keyUp(),
+                       //     year: "",
+                       //     title: "",
+                       //     description: '',
+                       //     motivation: '',
+                       //     tech: tags([]),
+                       //     scope: "",
+                       //     repo: <Link href="" target="_blank">github.com</Link>,
+                       // },
                    ]}
             />
+            <Title level={2}></Title>
             <Title level={3}>Unfinished Projects</Title>
             <Table pagination={false}
                    columns={[
                        {title: "Year", dataIndex: "year", key: "year"},
                        {title: "Title", dataIndex: "title", key: "title"},
+                       {title: "Description", dataIndex: "description", key: "description"},
+                       {title: "Motivation", dataIndex: "motivation", key: "motivation"},
                        {title: "Tech", dataIndex: "tech", key: "tech"},
                        {title: "Scope", dataIndex: "scope", key: "scope"},
                        {title: "Repo", dataIndex: "repo", key: "repo"},
@@ -288,36 +203,36 @@ export default function Overview () {
                            scope: "2 months",
                            repo: '',
                        },
-                       {
-                           key: keyUp(),
-                           year: "",
-                           title: "",
-                           description: '',
-                           motivation: '',
-                           tech: tags([]),
-                           scope: "",
-                           repo: <Link href="" target="_blank">github.com</Link>,
-                       },
-                       {
-                           key: keyUp(),
-                           year: "",
-                           title: "",
-                           description: '',
-                           motivation: '',
-                           tech: tags([]),
-                           scope: "",
-                           repo: <Link href="" target="_blank">github.com</Link>,
-                       },
-                       {
-                           key: keyUp(),
-                           year: "",
-                           title: "",
-                           description: '',
-                           motivation: '',
-                           tech: tags([]),
-                           scope: "",
-                           repo: <Link href="" target="_blank">github.com</Link>,
-                       },
+                       // {
+                       //     key: keyUp(),
+                       //     year: "",
+                       //     title: "",
+                       //     description: '',
+                       //     motivation: '',
+                       //     tech: tags([]),
+                       //     scope: "",
+                       //     repo: <Link href="" target="_blank">github.com</Link>,
+                       // },
+                       // {
+                       //     key: keyUp(),
+                       //     year: "",
+                       //     title: "",
+                       //     description: '',
+                       //     motivation: '',
+                       //     tech: tags([]),
+                       //     scope: "",
+                       //     repo: <Link href="" target="_blank">github.com</Link>,
+                       // },
+                       // {
+                       //     key: keyUp(),
+                       //     year: "",
+                       //     title: "",
+                       //     description: '',
+                       //     motivation: '',
+                       //     tech: tags([]),
+                       //     scope: "",
+                       //     repo: <Link href="" target="_blank">github.com</Link>,
+                       // },
                    ]}
             />
         </Content>
