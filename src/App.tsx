@@ -17,6 +17,8 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark, atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import axios from "axios";
 import MusicProduction from "./content/MusicProduction";
+import Timers from "./content/Timers";
+import PasswordGenerator from "./content/PasswordGenerator";
 
 enum Theme {
   default = 'default',
@@ -154,11 +156,17 @@ function App() {
                   <Route exact path={Nav.home.items.reactTraining.link}>
                     <ReactTraining />
                   </Route>
-                  <Route exact path={Nav.projects.items.overview.link}>
-                    <Projects />
+                  <Route exact path={Nav.tools.items.passwordGenerator.link}>
+                    <PasswordGenerator />
                   </Route>
                   <Route exact path={Nav.tools.items.edit.link}>
                     <Type />
+                  </Route>
+                  <Route exact path={Nav.tools.items.timers.link}>
+                    <Timers />
+                  </Route>
+                  <Route exact path={Nav.projects.items.overview.link}>
+                    <Projects />
                   </Route>
                   <Route exact path={Nav.projects.items.archive.link}>
                     <ProjectsArchive />

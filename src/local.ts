@@ -61,6 +61,10 @@ export const en = {
                     link: "/type",
                     title: "Type",
                 },
+                timers: {
+                    link: "/timers",
+                    title: "Timers",
+                },
                 // : {
                 //     link: "/",
                 //     title: "",

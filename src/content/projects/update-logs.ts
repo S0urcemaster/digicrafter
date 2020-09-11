@@ -50,6 +50,7 @@ export const updateLogs: Array<UpdateLogs> = [
         logs: [
             {project: project.digicrafter, log:"Changing menu structure; changing UpdateLog", duration: addDuration(1, 45)},
             {project: project.digicrafter, log:"Changing menu structure", duration: addDuration(1, 15)},
+            {project: project.digicrafter, log:"Adding IndexedDB functionality", duration: addDuration(1, 30)},
             // {project: project.digicrafter, log:"", duration: addDuration(0, 0)},
             // {project: project, log:"", duration: addDuration(0, 0)},
         ],
