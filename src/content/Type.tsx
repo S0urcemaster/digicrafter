@@ -33,9 +33,9 @@ export default function Type () {
     db.friends.add({name: "Josephine", age: 21}).then(()=>{
         return db.friends.where("age").below(25).toArray();
     }).then(youngFriends => {
-        alert ("My young friends: " + JSON.stringify(youngFriends));
+        // alert ("My young friends: " + JSON.stringify(youngFriends));
     }).catch(e => {
-        alert("error: " + e.stack || e);
+        // alert("error: " + e.stack || e);
     });
 
     function editChange (newValue:any) {

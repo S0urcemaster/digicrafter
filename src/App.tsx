@@ -44,14 +44,21 @@ function App() {
   useEffect(() => {
     let source:string|undefined = ''
     history.listen((location) => {
+      // go through the Nav object and and set the main menu's state to the actual path location
+      // also load the right source code (if set)
       const nav = Object.values(Nav).find(nav => {
-        return Object.values(nav.items).find(item => {
+        const found = Object.values(nav.items).find(item => {
           const found = item.link === location.pathname
           source = item.source
+          if(found) {
+            setSelectedMenu(item.link)
+          }
           return found
         })
+        if (found) {
+          setMenuOpenKeys([nav.heading])
+        }
       })
-      console.log (source)
       if(source) {
         setSourceCodeFilename(source)
         const path = 'http://localhost:3000/src' +source
