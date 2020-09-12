@@ -3,7 +3,7 @@ import '../css/Timer.css'
 import React, { useEffect, useState } from "react";
 import { Slate, Editable } from 'slate-react'
 import {Layout, Menu, Tabs, Typography} from 'antd'
-import {NavItem} from "../Nav";
+import {NavItem} from "../lib/Nav";
 
 const {Title} = Typography
 const {Sider, Content} = Layout

@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { createEditor } from 'slate'
 import { Slate, Editable, withReact } from 'slate-react'
 import {Layout, Menu, Tabs, Typography} from 'antd'
-import {NavItem} from "../Nav"
+import {NavItem} from "../lib/Nav"
 import Dexie from 'dexie'
 import {db} from './TypeDB'
 

@@ -99,9 +99,11 @@ h1.ant-typography {
     font-size: 30px;
     text-shadow: 0 0 8px #2b5822;
     animation: glow1 50000ms linear infinite 40000ms;
+    padding: 0
 }
 h2.ant-typography {
     font-size: 26px;
+    margin-top: 13px;
 }
 
 h3.ant-typography {

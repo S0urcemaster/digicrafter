@@ -1,5 +1,5 @@
 import React from "react";
-import {Typography} from "antd";
+import {Space, Typography} from "antd";
 import '../css/App.css'
 import Content from "../components/Content";
 import {Link} from "react-router-dom";
@@ -11,11 +11,13 @@ export default function ReatTraining () {
     return (
         <Content title="React Training">
             <Title level={2}>Introduction</Title>
-            <Text>Coming from a Vue application I did in 3 month I wanted to to challenge React and TypeScript together
-                with a component framework to get a better understandung of JavaScript and TypeScript.
-            </Text>
-            <Text>The time values on this page and on <Link to="/projects/overview">Projects Overview</Link> Update Log, when present,
-                are all measured and no estimation.</Text>
+            <Space direction="vertical">
+                <Text>Coming from a Vue application I did in 3 month I wanted to to challenge React and TypeScript together
+                    with a component framework to get a better understandung of JavaScript and TypeScript.
+                </Text>
+                <Text>The time values on this page and on <Link to="/projects/overview">Projects Overview</Link> Update Log, when present,
+                    are all measured and no estimation.</Text>
+            </Space>
             <Title level={2}>Approach</Title>
             <Title level={3}>Watching YT Videos</Title>
             <Text>~ 5h</Text>

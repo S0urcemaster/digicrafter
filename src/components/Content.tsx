@@ -10,7 +10,7 @@ export default function Content (props:PropsWithChildren<any>) {
 
     return (
         <>
-            <Title level={1} style={{paddingTop:'20px', paddingBottom:'20px', paddingLeft:'20px'}}>{props.title}</Title>
+            <Title level={1} style={{paddingTop:'20px', paddingLeft:'20px', marginBottom:'0'}}>{props.title}</Title>
             <div className="content-content">
                 {props.children}
             </div>

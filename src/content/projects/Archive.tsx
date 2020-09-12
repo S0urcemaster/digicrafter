@@ -3,6 +3,7 @@ import {Table, Tag, Typography} from "antd";
 import Content from "../../components/Content";
 import {format} from "date-fns";
 import tags from "./Tags";
+import {Experience, xpTracker} from "../../lib/Experience";
 
 const {Title, Text, Link} = Typography
 
@@ -13,6 +14,8 @@ export default function Archive () {
     function keyUp () {
         return (key++).toString()
     }
+
+    const duration = new xpTracker()
 
     return (
         <Content title="Projects Archive Archive">
@@ -35,7 +38,7 @@ export default function Archive () {
                            description: 'In-house CRM Projekt. Kunden- und Kontaktdaten, Besuchsberichte',
                            motivation: 'Auftrag',
                            tech: tags(['php', 'laravel', 'vue', 'git', 'javascript', 'phpstorm', 'npm', 'composer']),
-                           scope: "3 months",
+                           scope: duration.addDuration({months:3}),
                            repo: <Link href="https://github.com/flammt/CustomerBoard" target="_blank">flammt/CustomerBoard</Link>,
                        },
                        {
@@ -45,7 +48,7 @@ export default function Archive () {
                            description: 'Electronic Music track',
                            motivation: 'Fun',
                            tech: tags(['studioone', 'maschine']),
-                           scope: "4 days",
+                           scope: duration.addDuration({days:4}),
                            repo: "",
                        },
                        {
@@ -55,7 +58,7 @@ export default function Archive () {
                            description: 'Electronic Music track',
                            motivation: 'Fun',
                            tech: tags(['abletonlive', 'maschine']),
-                           scope: "3 days",
+                           scope: duration.addDuration({days:3}),
                            repo: "",
                        },
                        {
@@ -65,7 +68,7 @@ export default function Archive () {
                            description: 'Electronic Music album',
                            motivation: 'Fun',
                            tech: tags(['studioone', 'maschine']),
-                           scope: "3 months",
+                           scope: duration.addDuration({months:3}),
                            repo: "",
                        },
                        {
@@ -75,7 +78,7 @@ export default function Archive () {
                            description: 'Bewerbung- und Trainingsprojekt',
                            motivation: 'Bewerbung, Training',
                            tech: tags(['php', 'laravel', 'composer', 'npm', 'html', 'css']),
-                           scope: "100 hours",
+                           scope: duration.addDuration({hours:100}),
                            repo: <Link href="https://github.com/snhub/tyreDB" target="_blank">snhub/tyreDB</Link>,
                        },
                        {
@@ -85,7 +88,7 @@ export default function Archive () {
                            description: 'First Electronic Music Album',
                            motivation: 'Test, ob ich was hinkriege',
                            tech: tags(['studioone']),
-                           scope: "1 month",
+                           scope: duration.addDuration({months:1}),
                            repo: "",
                        },
                        {
@@ -95,7 +98,7 @@ export default function Archive () {
                            description: 'Mapping von günstigem Controller auf Traktor Pro',
                            motivation: 'Fun, Produktinteresse',
                            tech: tags(['autohotkey', 'traktorpro']),
-                           scope: "2 weeks",
+                           scope: duration.addDuration({weeks:2}),
                            repo: <Link href="https://github.com/snhub/Hercules-P32-DJ" target="_blank">snhub/Hercules-P32-DJ</Link>,
                        },
                        {

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {AutoComplete, Button, Col, Drawer, Input, Layout, Menu, Row, Space, Typography} from 'antd'
-import {Link, Route, Switch, useHistory} from "react-router-dom";
+import Location, {Link, Route, Switch, useHistory} from "react-router-dom";
 import {UserOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.dark.css'
 import './css/ant.css'
 import './css/App.css'
 import './css/digicrafter.css'
-import {Nav, NavItem, NavSection} from "./Nav"
+import {Nav, NavItem, NavSection} from "./lib/Nav"
 import Projects from "./content/Projects";
 import Type from "./content/Type";
 import SubMenu from "antd/es/menu/SubMenu";
@@ -41,31 +41,39 @@ function App() {
   const [sourceCodeFilename, setSourceCodeFilename] = useState('App.tsx')
 
   useEffect(() => {
+    console.log('effect')
     history.listen((location) => {
       // go through the Nav object and and set the main menu's state to the actual path location
       // also load the right source code (if set)
-      let source:string|undefined = ''
-      Object.values(Nav).find(nav => {
-        const found = Object.values(nav.items).find(item => {
-          const found = item.link === location.pathname
-          source = item.source
-          if(found) {
-            setSelectedMenu(item.link)
-          }
-          return found
-        })
-        if (found) {
-          setMenuOpenKeys([nav.heading])
-        }
-      })
-      if(source) {
-        setSourceCodeFilename(source)
-        const path = 'http://localhost:3000/src' +source
-        loadSource(path)
-      }
+      path2Menu(location)
     })
     loadSource('http://localhost:3000/src/App.tsx')
+    path2Menu(history.location.pathname)
   },[])
+
+  function path2Menu (location: any) {
+    let source:string|undefined = ''
+    Object.values(Nav).find(nav => {
+      const found = Object.values(nav.items).find(item => {
+        const found = item.link === location.pathname
+        source = item.source
+        if(found) {
+          setSelectedMenu(item.link)
+          console.log(item.link)
+        }
+        return found
+      })
+      if (found) {
+        setMenuOpenKeys([nav.heading])
+      }
+    })
+    if(source) {
+      setSourceCodeFilename(source)
+      console.log(source)
+      const path = 'http://localhost:3000/src' +source
+      loadSource(path)
+    }
+  }
 
   function loadSource (path:string) {
     axios.get(path)
