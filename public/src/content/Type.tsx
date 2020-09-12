@@ -4,11 +4,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import { createEditor } from 'slate'
 import { Slate, Editable, withReact } from 'slate-react'
 import {Layout, Menu, Tabs, Typography} from 'antd'
-import {NavItem} from "../Nav";
+import {NavItem} from "../lib/Nav"
+import Dexie from 'dexie'
+import {db} from './TypeDB'
 
 const {Title} = Typography
 const {Sider, Content} = Layout
-const { TabPane } = Tabs;
+const { TabPane } = Tabs
 
 
 export default function Type () {
@@ -26,6 +28,15 @@ export default function Type () {
             ]
         }
     ])
+
+
+    db.friends.add({name: "Josephine", age: 21}).then(()=>{
+        return db.friends.where("age").below(25).toArray();
+    }).then(youngFriends => {
+        // alert ("My young friends: " + JSON.stringify(youngFriends));
+    }).catch(e => {
+        // alert("error: " + e.stack || e);
+    });
 
     function editChange (newValue:any) {
         const cpy = [...editors]

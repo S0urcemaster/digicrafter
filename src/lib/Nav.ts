@@ -43,20 +43,20 @@ export const Nav:NavSection = {
     projects: {
         heading: nav.projects.heading,
         items: {
-            overview: {link: nav.projects.items.overview.link, title: nav.projects.items.overview.title, source: '/projects/Overview.tsx'},
+            overview: {link: nav.projects.items.overview.link, title: nav.projects.items.overview.title, source: '/content/projects/Overview.tsx'},
+            archive: {link: nav.projects.items.archive.link, title: nav.projects.items.archive.title, source: '/content/projects/Archive.tsx'},
             digicrafter: {link: nav.projects.items.digicrafter.link, title: nav.projects.items.digicrafter.title, source: '/content/projects/UpdateLogs.tsx'},
             kontakt: {link: nav.projects.items.kontakt.link, title: nav.projects.items.kontakt.title, source: '/content/Kontakt.tsx'},
             beatportFilter: {link: nav.projects.items.beatportFilter.link, title: nav.projects.items.beatportFilter.title},
-            timers: {link: nav.projects.items.timers.link, title: nav.projects.items.timers.title},
-            archive: {link: nav.projects.items.archive.link, title: nav.projects.items.archive.title, source: '/projects/Archive.tsx'},
+            timers: {link: nav.projects.items.timers.link, title: nav.projects.items.timers.title, source: '/content/Timers.tsx'},
             // : {link: nav, title: nav},
         }
     },
     music: {
         heading: nav.music.heading,
         items: {
-            production: {link: nav.music.items.production.link, title: nav.music.items.production.title},
-            mixing: {link: nav.music.items.mixing.link, title: nav.music.items.mixing.title},
+            production: {link: nav.music.items.production.link, title: nav.music.items.production.title, source:'/content/MusicProduction.tsx'},
+            mixing: {link: nav.music.items.mixing.link, title: nav.music.items.mixing.title, source:'/content/MusicMixing.tsx'},
             // : {link: nav, title: nav},
         }
     },

@@ -18,7 +18,7 @@ export default function Archive () {
     const duration = new xpTracker()
 
     return (
-        <Content title="Projects Archive Archive">
+        <Content title="Projects Archive">
             <Title level={3}>Finished Projects</Title>
             <Table pagination={false}
                    columns={[

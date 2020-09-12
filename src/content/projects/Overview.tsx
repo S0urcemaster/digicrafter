@@ -19,7 +19,6 @@ export default function ProjectsOverview () {
     return (
         <>
             <Title level={3}>Active Projects</Title>
-            <Title level={4}>Overall Experience:</Title>
             <Table pagination={false}
                    columns={[
                        {title: "Started", dataIndex: "started", key: "started"},

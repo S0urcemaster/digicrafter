@@ -2,97 +2,10 @@ import React from "react";
 import {Table, Tag, Typography} from "antd";
 import Content from "../../components/Content";
 import {format} from "date-fns";
+import tags from "./Tags";
+import {Experience, xpTracker} from "../../lib/Experience";
 
 const {Title, Text, Link} = Typography
-
-function languageTag (tag:string) : React.ReactElement {
-    return <Tag key={tag} color="green">{tag}</Tag>
-}
-
-function frameworkTag (tag:string) : React.ReactElement {
-    return <Tag key={tag} color="red">{tag}</Tag>
-}
-
-function softwareTag (tag:string) : React.ReactElement {
-    return <Tag key={tag} color="blue">{tag}</Tag>
-}
-
-function techToTag(tech:string):React.ReactElement {
-    switch (tech) {
-        case 'react':
-            return frameworkTag('React')
-        case 'vue':
-            return frameworkTag('Vue')
-        case 'php':
-            return languageTag('PHP')
-        case 'laravel':
-            return frameworkTag('Laravel')
-        case 'html':
-            return languageTag('HTML')
-        case 'css':
-            return languageTag('CSS')
-        case 'javascript':
-            return languageTag('JavaScript')
-        case 'typescript':
-            return languageTag('TypeScript')
-        case 'xml':
-            return languageTag('XML')
-        case 'java':
-            return languageTag('Java')
-        case 'autohotkey':
-            return languageTag('Autohotkey')
-        case 'jpahibernate':
-            return frameworkTag('JPA/Hibernate')
-        case 'junit':
-            return frameworkTag('JUnit')
-        case 'bea':
-            return frameworkTag('BEA Application Server')
-        case 'sql':
-            return languageTag('SQL')
-        case 'scala':
-            return languageTag('Scala')
-        case 'lua':
-            return languageTag('Lua')
-        case 'csharp':
-            return languageTag('C#')
-        case 'git':
-            return softwareTag('Git')
-        case 'materialui':
-            return frameworkTag('Material UI')
-        case 'studioone':
-            return softwareTag('Studio One')
-        case 'abletonlive':
-            return softwareTag('Ableton Live')
-        case 'maschine':
-            return softwareTag('Maschine 2')
-        case 'traktorpro':
-            return softwareTag('Traktor Pro')
-        case 'blender':
-            return softwareTag('Blender 3D')
-        case 'eclipse':
-            return softwareTag('Eclipse')
-        case 'netbeans':
-            return softwareTag('NetBeans')
-        case 'minecraft':
-            return softwareTag('Minecraft (ComputerCraft)')
-        case 'phpstorm':
-            return softwareTag('PHPStorm')
-        case 'npm':
-            return softwareTag('npm')
-        case 'composer':
-            return softwareTag('Composer')
-        // case '':
-        //     return <Tag color=""></Tag>
-        // case '':
-        //     return <Tag color=""></Tag>
-        default:
-            return <Tag color="cyan">Not found</Tag>
-    }
-}
-
-function tags (names:string[]) {
-    return names.map(name => techToTag(name))
-}
 
 export default function Archive () {
 
@@ -101,6 +14,8 @@ export default function Archive () {
     function keyUp () {
         return (key++).toString()
     }
+
+    const duration = new xpTracker()
 
     return (
         <Content title="Projects Archive Archive">
@@ -123,7 +38,7 @@ export default function Archive () {
                            description: 'In-house CRM Projekt. Kunden- und Kontaktdaten, Besuchsberichte',
                            motivation: 'Auftrag',
                            tech: tags(['php', 'laravel', 'vue', 'git', 'javascript', 'phpstorm', 'npm', 'composer']),
-                           scope: "3 months",
+                           scope: duration.addDuration({months:3}),
                            repo: <Link href="https://github.com/flammt/CustomerBoard" target="_blank">flammt/CustomerBoard</Link>,
                        },
                        {
@@ -133,7 +48,7 @@ export default function Archive () {
                            description: 'Electronic Music track',
                            motivation: 'Fun',
                            tech: tags(['studioone', 'maschine']),
-                           scope: "4 days",
+                           scope: duration.addDuration({days:4}),
                            repo: "",
                        },
                        {
@@ -143,7 +58,7 @@ export default function Archive () {
                            description: 'Electronic Music track',
                            motivation: 'Fun',
                            tech: tags(['abletonlive', 'maschine']),
-                           scope: "3 days",
+                           scope: duration.addDuration({days:3}),
                            repo: "",
                        },
                        {
@@ -153,7 +68,7 @@ export default function Archive () {
                            description: 'Electronic Music album',
                            motivation: 'Fun',
                            tech: tags(['studioone', 'maschine']),
-                           scope: "3 months",
+                           scope: duration.addDuration({months:3}),
                            repo: "",
                        },
                        {
@@ -163,7 +78,7 @@ export default function Archive () {
                            description: 'Bewerbung- und Trainingsprojekt',
                            motivation: 'Bewerbung, Training',
                            tech: tags(['php', 'laravel', 'composer', 'npm', 'html', 'css']),
-                           scope: "100 hours",
+                           scope: duration.addDuration({hours:100}),
                            repo: <Link href="https://github.com/snhub/tyreDB" target="_blank">snhub/tyreDB</Link>,
                        },
                        {
@@ -173,7 +88,7 @@ export default function Archive () {
                            description: 'First Electronic Music Album',
                            motivation: 'Test, ob ich was hinkriege',
                            tech: tags(['studioone']),
-                           scope: "1 month",
+                           scope: duration.addDuration({months:1}),
                            repo: "",
                        },
                        {
@@ -183,7 +98,7 @@ export default function Archive () {
                            description: 'Mapping von günstigem Controller auf Traktor Pro',
                            motivation: 'Fun, Produktinteresse',
                            tech: tags(['autohotkey', 'traktorpro']),
-                           scope: "2 weeks",
+                           scope: duration.addDuration({weeks:2}),
                            repo: <Link href="https://github.com/snhub/Hercules-P32-DJ" target="_blank">snhub/Hercules-P32-DJ</Link>,
                        },
                        {

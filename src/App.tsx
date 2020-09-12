@@ -42,40 +42,42 @@ function App() {
 
   useEffect(() => {
     console.log('effect')
-    history.listen((location) => {
-      // go through the Nav object and and set the main menu's state to the actual path location
-      // also load the right source code (if set)
-      path2Menu(location)
-    })
+    history.listen((location) => path2Menu(location))
+    // loadSource('https://digi-craft.de/src/App.tsx')
     loadSource('http://localhost:3000/src/App.tsx')
     path2Menu(history.location.pathname)
   },[])
 
   function path2Menu (location: any) {
+    // go through the Nav object and and set the main menu's state to the actual path location
+    // also load the right source code (if set)
     let source:string|undefined = ''
     Object.values(Nav).find(nav => {
       const found = Object.values(nav.items).find(item => {
         const found = item.link === location.pathname
-        source = item.source
         if(found) {
+          source = item.source
           setSelectedMenu(item.link)
-          console.log(item.link)
+          console.log('found: ', item.link)
         }
         return found
       })
       if (found) {
         setMenuOpenKeys([nav.heading])
+        console.log('menu: ', nav.heading)
       }
     })
     if(source) {
       setSourceCodeFilename(source)
-      console.log(source)
+      console.log('source: ', source)
+      // const path = 'https://digi-craft.de/src' +source
       const path = 'http://localhost:3000/src' +source
       loadSource(path)
     }
   }
 
   function loadSource (path:string) {
+    console.log('loading: ', path)
     axios.get(path)
         .then(res => {
           setSourceCode(res.data)

@@ -1,4 +1,15 @@
+a {
+  color: #5cd61f;
+}
 
+a:hover {
+  color: #5cd61f;
+  opacity: 0.85;
+}
+a:visited {
+  color: #5cd61f;
+  opacity: 0.85;
+}
 .layout {
   max-width: 100%;
   overflow: hidden;

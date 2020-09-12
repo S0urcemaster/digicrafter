@@ -21,7 +21,7 @@ export type NavItem = {
     }
 }
 
-const Nav:NavSection = {
+export const Nav:NavSection = {
     home: {
         heading: nav.home.heading,
         items: {
@@ -35,6 +35,7 @@ const Nav:NavSection = {
         items: {
             passwordGenerator: {link: nav.tools.items.passwordGenerator.link, title: nav.tools.items.passwordGenerator.title, source: '/content/PasswordGenerator.tsx'},
             edit: {link: nav.tools.items.writer.link, title: nav.tools.items.writer.title, source:'/content/Type.tsx'},
+            timers: {link: nav.tools.items.timers.link, title: nav.tools.items.timers.title, source:'/content/Timers.tsx'},
             // : {link: nav, title: nav},
             // : {link: nav, title: nav},
         }
@@ -83,4 +84,4 @@ const Nav:NavSection = {
 
 }
 
-export default Nav
+// export default Nav

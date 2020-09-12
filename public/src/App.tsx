@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {AutoComplete, Button, Col, Drawer, Input, Layout, Menu, Row, Space, Typography} from 'antd'
-import {Link, Route, Switch, useHistory} from "react-router-dom";
+import Location, {Link, Route, Switch, useHistory} from "react-router-dom";
 import {UserOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.dark.css'
 import './css/ant.css'
 import './css/App.css'
 import './css/digicrafter.css'
-import Nav, {NavItem, NavSection} from "./Nav"
+import {Nav, NavItem, NavSection} from "./lib/Nav"
 import Projects from "./content/Projects";
 import Type from "./content/Type";
 import SubMenu from "antd/es/menu/SubMenu";
@@ -17,6 +17,8 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark, atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import axios from "axios";
 import MusicProduction from "./content/MusicProduction";
+import Timers from "./content/Timers";
+import PasswordGenerator from "./content/PasswordGenerator";
 
 enum Theme {
   default = 'default',
@@ -26,7 +28,6 @@ enum Theme {
 
 const {Header, Content, Sider} = Layout
 const {Title} = Typography
-const {nav} = Nav
 
 
 function App() {
@@ -40,24 +41,40 @@ function App() {
   const [sourceCodeFilename, setSourceCodeFilename] = useState('App.tsx')
 
   useEffect(() => {
+    console.log('effect')
+    history.listen((location) => path2Menu(location))
+    // loadSource('https://digi-craft.de/src/App.tsx')
+    loadSource('http://localhost:3000/src/App.tsx')
+    path2Menu(history.location.pathname)
+  },[])
+
+  function path2Menu (location: any) {
+    // go through the Nav object and and set the main menu's state to the actual path location
+    // also load the right source code (if set)
     let source:string|undefined = ''
-    history.listen((location) => {
-      const nav = Object.values(Nav).find(nav => {
-        return Object.values(nav.items).find(item => {
-          const found = item.link === location.pathname
+    Object.values(Nav).find(nav => {
+      const found = Object.values(nav.items).find(item => {
+        const found = item.link === location.pathname
+        if(found) {
           source = item.source
-          return found
-        })
+          setSelectedMenu(item.link)
+          console.log('found: ', item.link)
+        }
+        return found
       })
-      console.log (source)
-      if(source) {
-        setSourceCodeFilename(source)
-        const path = 'http://localhost:3000/src' +source
-        loadSource(path)
+      if (found) {
+        setMenuOpenKeys([nav.heading])
+        console.log('menu: ', nav.heading)
       }
     })
-    loadSource('http://localhost:3000/src/App.tsx')
-  },[])
+    if(source) {
+      setSourceCodeFilename(source)
+      console.log('source: ', source)
+      // const path = 'https://digi-craft.de/src' +source
+      const path = 'http://localhost:3000/src' +source
+      loadSource(path)
+    }
+  }
 
   function loadSource (path:string) {
     axios.get(path)
@@ -154,11 +171,17 @@ function App() {
                   <Route exact path={Nav.home.items.reactTraining.link}>
                     <ReactTraining />
                   </Route>
-                  <Route exact path={Nav.projects.items.digicrafter.link}>
-                    <Projects />
+                  <Route exact path={Nav.tools.items.passwordGenerator.link}>
+                    <PasswordGenerator />
                   </Route>
                   <Route exact path={Nav.tools.items.edit.link}>
                     <Type />
+                  </Route>
+                  <Route exact path={Nav.tools.items.timers.link}>
+                    <Timers />
+                  </Route>
+                  <Route exact path={Nav.projects.items.overview.link}>
+                    <Projects />
                   </Route>
                   <Route exact path={Nav.projects.items.archive.link}>
                     <ProjectsArchive />
