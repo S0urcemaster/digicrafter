@@ -1,7 +1,7 @@
 import React from "react";
-import {Button, Typography} from "antd";
+import {Typography} from "antd";
 import '../css/App.css'
-import Content from "../components/Content";
+import Content, {Item, Columns} from "../components/Content";
 import axios from 'axios'
 import {Link} from "react-router-dom";
 
@@ -44,22 +44,61 @@ export default function Home () {
     return (
         <Content title="digicrafter's digital devices">
             {/*<Button onClick={send}>Send</Button>*/}
-            <Title level={3}>Hotlinks</Title>
-            <ul>
-                <li><Link to="/projects/overview">Active Projects</Link></li>
-                <li><Link to="/projects/archive">Finished Projects</Link></li>
-                {/*<li><Text></Text></li>*/}
-                {/*<li><Text></Text></li>*/}
-                {/*<li><Text></Text></li>*/}
-            </ul>
-            <Title level={3}>Functioning</Title>
-            <ul>
-                <li><Text>Internal links switch the main menu (browser url not working, though)</Text></li>
-                <li><Text>Source code of active page loaded async when present (button top-right)</Text></li>
-                {/*<li><Text></Text></li>*/}
-                {/*<li><Text></Text></li>*/}
-                {/*<li><Text></Text></li>*/}
-            </ul>
+            <Columns count={2}>
+                <Item>
+                    <Title level={3}>Hotlinks</Title>
+                    <ul>
+                        <li><Link to="/projects/overview">Active Projects</Link></li>
+                        <li><Link to="/projects/archive">Finished Projects</Link></li>
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                    </ul>
+                </Item>
+                <Item>
+                    <Title level={3}>Functioning</Title>
+                    <ul>
+                        <li><Text>Internal links switch the main menu (browser url not working, though)</Text></li>
+                        <li><Text>Source code of active page loaded async when present (button top-right)</Text></li>
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                    </ul>
+                </Item>
+            </Columns>
+            <Columns count={3}>
+                <Item>
+                    <Title level={3}>Hotlinks</Title>
+                    <ul>
+                        <li><Link to="/projects/overview">Active Projects</Link></li>
+                        <li><Link to="/projects/archive">Finished Projects</Link></li>
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                    </ul>
+                </Item>
+                <Item>
+                    <Title level={3}>Functioning</Title>
+                    <ul>
+                        <li><Text>Internal links switch the main menu (browser url not working, though)</Text></li>
+                        <li><Text>Source code of active page loaded async when present (button top-right)</Text></li>
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                    </ul>
+                </Item>
+                <Item>
+                    <Title level={3}>Hotlinks</Title>
+                    <ul>
+                        <li><Link to="/projects/overview">Active Projects</Link></li>
+                        <li><Link to="/projects/archive">Finished Projects</Link></li>
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                    </ul>
+                </Item>
+            </Columns>
+
             <Text>other stuff</Text>
         </Content>
     )

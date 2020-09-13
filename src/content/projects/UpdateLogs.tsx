@@ -49,6 +49,7 @@ export default function UpdateLogs () {
                                time: formatDuration(value.duration),
                            }))}
                     />
+                    <Title level={5}>&nbsp;</Title>
                 </div>
             )}
         </>
@@ -58,7 +59,7 @@ export default function UpdateLogs () {
     return (
         <>
             {updateLogs}
-            <Title level={5}></Title>
+            <Title level={5}>&nbsp;</Title>
             <Title level={3}>{format(new Date('2020-09-10'), 'EEEE dd.LL.yyyy')}</Title>
             <Table pagination={false}
                    columns={[

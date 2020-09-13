@@ -1,9 +1,7 @@
 import '../css/Timer.css'
 
-import React, { useEffect, useState } from "react";
-import { Slate, Editable } from 'slate-react'
-import {Layout, Menu, Tabs, Typography} from 'antd'
-import {NavItem} from "../lib/Nav";
+import React, { useState } from "react";
+import {Layout, Tabs, Typography} from 'antd'
 
 const {Title} = Typography
 const {Sider, Content} = Layout

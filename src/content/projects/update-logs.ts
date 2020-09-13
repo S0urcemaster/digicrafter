@@ -46,6 +46,16 @@ export const updateLogs: Array<UpdateLogs> = [
     //     total: sumDurations()
     // },
     {
+        date: new Date('2020-09-15'),
+        logs: [
+            {project: project.digicrafter, log:"Added hotlink button;Added projects:todo", duration: addDuration(0, 20)},
+            {project: project.digicrafter, log:"AWS Account & Docs", duration: addDuration(1,0)},
+            {project: project.digicrafter, log:"Content layout & styling", duration: addDuration(1, 30)},
+            // {project: project.digicrafter, log:"", duration: addDuration()},
+        ],
+        total: sumDurations()
+    },
+    {
         date: new Date('2020-09-12'),
         logs: [
             {project: project.digicrafter, log:"Changing menu structure; changing UpdateLog", duration: addDuration(1, 45)},
@@ -56,8 +66,6 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.digicrafter, log:"Testing an Email API", duration: addDuration(1, 10)},
             {project: project.digicrafter, log:"Trying to fix routing from url", duration: addDuration(0, 30)},
             {project: project.digicrafter, log:"Homepage changed; build; deploy", duration: addDuration(0, 30)},
-            // {project: project.digicrafter, log:"", duration: addDuration(0, 0)},
-            // {project: project, log:"", duration: addDuration(0, 0)},
         ],
         total: sumDurations()
     },

@@ -1,11 +1,10 @@
 import React from "react";
-import {Table, Tag, Typography} from "antd";
+import {Table, Typography} from "antd";
 import Content from "../../components/Content";
-import {format} from "date-fns";
 import tags from "./Tags";
 import {Experience, xpTracker} from "../../lib/Experience";
 
-const {Title, Text, Link} = Typography
+const {Title, Link} = Typography
 
 export default function Archive () {
 

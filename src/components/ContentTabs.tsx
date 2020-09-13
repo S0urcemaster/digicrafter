@@ -1,9 +1,8 @@
 import React, {PropsWithChildren} from "react";
 import {Tabs, Typography} from "antd";
 import '../css/App.css'
-import { Link } from "react-router-dom";
 
-const {Title, Text} = Typography
+const {Title} = Typography
 const { TabPane } = Tabs;
 
 

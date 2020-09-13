@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {AutoComplete, Button, Col, Drawer, Input, Layout, Menu, Row, Space, Typography} from 'antd'
-import Location, {Link, Route, Switch, useHistory} from "react-router-dom";
-import {UserOutlined} from '@ant-design/icons';
+import {Route, Switch, useHistory} from "react-router-dom";
 import 'antd/dist/antd.dark.css'
 import './css/ant.css'
 import './css/App.css'
@@ -14,7 +13,7 @@ import Home from "./content/Home";
 import ReactTraining from "./content/ReactTraining";
 import ProjectsArchive from "./content/projects/Archive"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dark, atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import axios from "axios";
 import MusicProduction from "./content/MusicProduction";
 import Timers from "./content/Timers";
@@ -41,7 +40,6 @@ function App() {
   const [sourceCodeFilename, setSourceCodeFilename] = useState('App.tsx')
 
   useEffect(() => {
-    console.log('effect')
     history.listen((location) => path2Menu(location))
     // loadSource('https://digi-craft.de/src/App.tsx')
     loadSource('http://localhost:3000/src/App.tsx')
@@ -50,7 +48,7 @@ function App() {
 
   function path2Menu (location: any) {
     // go through the Nav object and and set the main menu's state to the actual path location
-    // also load the right source code (if set)
+    // also load the right source code (when set)
     let source:string|undefined = ''
     Object.values(Nav).find(nav => {
       const found = Object.values(nav.items).find(item => {
@@ -58,18 +56,15 @@ function App() {
         if(found) {
           source = item.source
           setSelectedMenu(item.link)
-          console.log('found: ', item.link)
         }
         return found
       })
       if (found) {
         setMenuOpenKeys([nav.heading])
-        console.log('menu: ', nav.heading)
       }
     })
     if(source) {
       setSourceCodeFilename(source)
-      console.log('source: ', source)
       // const path = 'https://digi-craft.de/src' +source
       const path = 'http://localhost:3000/src' +source
       loadSource(path)
@@ -77,11 +72,12 @@ function App() {
   }
 
   function loadSource (path:string) {
-    console.log('loading: ', path)
     axios.get(path)
         .then(res => {
           setSourceCode(res.data)
-        })
+        }).catch(() => {
+
+    })
   }
 
   function menuItems (topic:any, props?:any) {
@@ -127,6 +123,7 @@ function App() {
     setSourceVisible(false)
   }
 
+
   return (
       <Layout className="layout" data-theme={theme}>
         <Sider className="sider" width={200}>
@@ -146,7 +143,7 @@ function App() {
           <Header className="header">
             <Row justify="space-between">
               <Col>
-                <Space>
+                <Space size="large">
                   <AutoComplete
                       dropdownClassName="certain-category-search-dropdown"
                       dropdownMatchSelectWidth={500}
@@ -155,6 +152,7 @@ function App() {
                   >
                     <Input.Search placeholder="input here"/>
                   </AutoComplete>
+                  <Button className="button-square button-linkbutton" onClick={() => history.push('/projects/overview')} shape="round">Projects</Button>
                 </Space>
               </Col>
               <Col>
