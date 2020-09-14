@@ -14,7 +14,7 @@ export default function Projects () {
         <ContentTabs title="Active Projects"
                      tabs={[
                          {
-                             title: 'Archive',
+                             title: 'Overview',
                              content: <ProjectsOverview />
                          },
                          {

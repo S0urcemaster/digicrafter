@@ -51,6 +51,8 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.digicrafter, log:"Added hotlink button;Added projects:todo", duration: addDuration(0, 20)},
             {project: project.digicrafter, log:"AWS Account & Docs", duration: addDuration(1,0)},
             {project: project.digicrafter, log:"Content layout & styling", duration: addDuration(1, 30)},
+            {project: project.digicrafter, log:"Added Internal/ExternalLink; Fixed column content layout; Fixing ContentTabs layout", duration: addDuration(0,50)},
+            // {project: project.digicrafter, log:"", duration: addDuration()},
             // {project: project.digicrafter, log:"", duration: addDuration()},
         ],
         total: sumDurations()

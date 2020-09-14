@@ -4,6 +4,8 @@ import '../../css/App.css'
 import tags from "./Tags";
 import {Link} from 'react-router-dom'
 import {Nav} from "../../lib/Nav";
+import InternalLink from "../../components/InternalLink";
+import ExternalLink from "../../components/ExternalLink";
 
 const {Title, Text} = Typography
 
@@ -33,7 +35,7 @@ export default function ProjectsOverview () {
                        {
                            key: keyUp(),
                            started: "9/2020",
-                           title: <Link to={Nav.home.items.landing.link}>digicrafter (digi-craft.de)</Link>,
+                           title: <InternalLink to={Nav.home.items.landing.link}>digicrafter (digi-craft.de)</InternalLink>,
                            description: 'Single-Page Homepage',
                            motivation: 'Fun/Training',
                            tech: tags(['react', 'typescript', 'antdesign', 'css', 'phpstorm']),
@@ -43,7 +45,7 @@ export default function ProjectsOverview () {
                        {
                            key: keyUp(),
                            started: "8/2020",
-                           title: <Link to={Nav.tools.items.passwordGenerator.link}>Readable Password Generator (digi-craft.de)</Link>,
+                           title: <InternalLink to={Nav.tools.items.passwordGenerator.link}>Readable Password Generator (digi-craft.de)</InternalLink>,
                            description: 'Tool',
                            motivation: 'Need',
                            tech: tags(['typescript', 'javascript']),
@@ -53,7 +55,7 @@ export default function ProjectsOverview () {
                        {
                            key: keyUp(),
                            started: "8/2020",
-                           title: <Link to={Nav.tools.items.edit.link}>digi/>type (digi-craft.de)</Link>,
+                           title: <InternalLink to={Nav.tools.items.edit.link}>digi/>type (digi-craft.de)</InternalLink>,
                            description: 'Tool',
                            motivation: 'Fun/Need',
                            tech: tags(['typescript', 'react']),
@@ -63,7 +65,7 @@ export default function ProjectsOverview () {
                        {
                            key: keyUp(),
                            started: "8/2020",
-                           title: <Typography.Link href="https://digi-craft.de/kontaktbase" target="_blank">kontakt 0.2 (digi-craft.de)</Typography.Link>,
+                           title: <ExternalLink href="https://digi-craft.de/kontaktbase" target="_blank">kontakt 0.2 (digi-craft.de)</ExternalLink>,
                            description: 'CRM Port of Customerboard',
                            motivation: 'Training',
                            tech: tags(['react', 'typescript', 'antdesign', 'phpstorm', 'css']),
@@ -73,17 +75,17 @@ export default function ProjectsOverview () {
                        {
                            key: keyUp(),
                            started: "7/2020",
-                           title: <Typography.Link href="https://digi-craft.de/kontakt" target="_blank">kontakt 0.1 (digi-craft.de)</Typography.Link>,
+                           title: <ExternalLink href="https://digi-craft.de/kontakt" target="_blank">kontakt 0.1 (digi-craft.de)</ExternalLink>,
                            description: 'CRM Port of Customerboard',
                            motivation: 'Auftrag',
                            tech: tags(['react', 'javascript', 'materialui', 'phpstorm', 'css']),
                            scope: "3 months discontinued",
-                           repo: <Typography.Link href="https://github.com/S0urcemaster/kontakt" target="_blank">S0urcemaster/kontakt</Typography.Link>,
+                           repo: <ExternalLink href="https://github.com/S0urcemaster/kontakt" target="_blank">S0urcemaster/kontakt</ExternalLink>,
                        },
                        {
                            key: keyUp(),
                            started: "2014",
-                           title: <Link to={Nav.tools.items.timers.link}>Timers (digi-craft.de)</Link>,
+                           title: <InternalLink to={Nav.tools.items.timers.link}>Timers (digi-craft.de)</InternalLink>,
                            description: 'Tool',
                            motivation: 'Need',
                            tech: tags(['typescript', 'react']),

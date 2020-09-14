@@ -31,11 +31,11 @@ export const Item = (props:PropsWithChildren<any>) => {
 
 export const Columns = (props: PropsWithChildren<any>) => {
     return (
-        <Row>
+        <div style={{display:'flex', alignItems:'stretch'}}>
             {props.children.map((child:any) => (
-                <Col xs={24/props.count} style={{minHeight:'inherit'}}>{child}</Col>
+                <div style={{flexGrow:1}}>{child}</div>
             ))}
-        </Row>
+        </div>
     )
 }
 

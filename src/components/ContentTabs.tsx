@@ -9,7 +9,7 @@ const { TabPane } = Tabs;
 export default function Content (props:PropsWithChildren<any>) {
 
     return (
-        <>
+        <div style={{marginTop:'16px', marginLeft:'16px', marginRight:'16px',}}>
             <Title level={1} style={{paddingTop:'20px', paddingBottom:'20px', paddingLeft:'20px'}}>{props.title}</Title>
             <div className="content-content">
                 <Tabs defaultActiveKey={props.tabs[0].title} type="card" size="large">
@@ -20,7 +20,7 @@ export default function Content (props:PropsWithChildren<any>) {
                     )}
                 </Tabs>
             </div>
-        </>
+        </div>
     )
 
 }

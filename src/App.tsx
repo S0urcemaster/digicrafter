@@ -41,8 +41,8 @@ function App() {
 
   useEffect(() => {
     history.listen((location) => path2Menu(location))
-    // loadSource('https://digi-craft.de/src/App.tsx')
-    loadSource('http://localhost:3000/src/App.tsx')
+    loadSource('https://digi-craft.de/src/App.tsx')
+    // loadSource('http://localhost:3000/src/App.tsx')
     path2Menu(history.location.pathname)
   },[])
 
@@ -65,8 +65,8 @@ function App() {
     })
     if(source) {
       setSourceCodeFilename(source)
-      // const path = 'https://digi-craft.de/src' +source
-      const path = 'http://localhost:3000/src' +source
+      const path = 'https://digi-craft.de/src' +source
+      // const path = 'http://localhost:3000/src' +source
       loadSource(path)
     }
   }
