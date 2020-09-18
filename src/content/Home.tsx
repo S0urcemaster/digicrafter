@@ -1,30 +1,18 @@
 import React from "react";
 import {Button, Typography} from "antd";
 import '../css/App.css'
-import Content, {Item, Columns} from "../components/Content";
+import Content, {Item, Columns, Title} from "../components/Content";
 import axios from 'axios'
 import {Link} from "react-router-dom";
 import InternalLink from "../components/InternalLink";
 import ExternalLink from "../components/ExternalLink";
+import {Nav} from "../lib/Nav";
 
-const {Title, Text} = Typography
+const {Text} = Typography
 
 export default function Home () {
 
     function send () {
-        // axios.post("https://api.elasticemail.com/v2/email/send", {
-        //     'from': 'sebastian-teister@outlook.de',
-        //     'fromName': 'Sebastian Teister',
-        //     'to': 'snteister@gmail.com',
-        //     'apikey': '660006A9B11E3A7C3B5ACBA1343673C2B03BD7C4885D5722ADB8C29C60723BE49307FE03BECCE12E8770BFE02C2F34C7',
-        //     'subject': 'test',
-        //     'bodyText': 'test',
-        //     'bodyHtml': 'test',
-        //     'isTransactional': 'true',
-        // })
-        //     .then(res => {
-        //         console.log(res.data)
-        //     })
         axios({
             method: 'post',
             url: 'https://api.elasticemail.com/v2/email/send',
@@ -44,56 +32,48 @@ export default function Home () {
     }
 
     return (
-        <Content title="digicrafter's digital devices">
-            <Button onClick={send}>Send</Button>
+        <Content>
+            <Title>digicrafter's digital devices</Title>
+            {/*<Button onClick={send}>Send</Button>*/}
             <Columns count={2}>
                 <Item>
-                    <Title level={3}>Hotlinks</Title>
+                    <Typography.Title level={3}>Current Project</Typography.Title>
                     <ul>
-                        <li><InternalLink to="/projects/overview">Active Projects</InternalLink></li>
-                        <li><InternalLink to="/projects/archive">Finished Projects</InternalLink></li>
-                        <li><ExternalLink href="">test</ExternalLink></li>
+                        <li><InternalLink to={Nav.tools.items.passwordGenerator.link}>{Nav.tools.items.passwordGenerator.title}</InternalLink></li>
                         {/*<li><Text></Text></li>*/}
                         {/*<li><Text></Text></li>*/}
                     </ul>
+                    <Text></Text>
                 </Item>
                 <Item>
-                    <Title level={3}>Functioning</Title>
+                    <Typography.Title level={3}>Roadmap</Typography.Title>
                     <ul>
-                        <li><Text>Internal links switch the main menu (browser url not working, though)</Text></li>
-                        <li><Text>Source code of active page loaded async when present (button top-right)</Text></li>
+                        <li><Text>Backend API</Text></li>
+                        <li><Text>API Auth</Text></li>
+                        <li><Text></Text></li>
+                        {/*<li><Text></Text></li>*/}
                         {/*<li><Text></Text></li>*/}
                         {/*<li><Text></Text></li>*/}
                         {/*<li><Text></Text></li>*/}
                     </ul>
                 </Item>
             </Columns>
-            <Columns count={3}>
+            <Columns count={2}>
                 <Item>
-                    <Title level={3}>Hotlinks</Title>
+                    <Typography.Title level={3}>Hotlinks</Typography.Title>
                     <ul>
-                        <li><Link to="/projects/overview">Active Projects</Link></li>
-                        <li><Link to="/projects/archive">Finished Projects</Link></li>
-                        {/*<li><Text></Text></li>*/}
+                        <li><InternalLink to={Nav.projects.items.overview.link}>{Nav.projects.items.overview.title}</InternalLink></li>
+                        <li><InternalLink to={Nav.projects.items.archive.link}>{Nav.projects.items.archive.title}</InternalLink></li>
+                        <li><ExternalLink href="">test</ExternalLink></li>
                         {/*<li><Text></Text></li>*/}
                         {/*<li><Text></Text></li>*/}
                     </ul>
                 </Item>
                 <Item>
-                    <Title level={3}>Functioning</Title>
+                    <Typography.Title level={3}>Functioning</Typography.Title>
                     <ul>
                         <li><Text>Internal links switch the main menu (browser url not working, though)</Text></li>
                         <li><Text>Source code of active page loaded async when present (button top-right)</Text></li>
-                        {/*<li><Text></Text></li>*/}
-                        {/*<li><Text></Text></li>*/}
-                        {/*<li><Text></Text></li>*/}
-                    </ul>
-                </Item>
-                <Item>
-                    <Title level={3}>Hotlinks</Title>
-                    <ul>
-                        <li><Link to="/projects/overview">Active Projects</Link></li>
-                        <li><Link to="/projects/archive">Finished Projects</Link></li>
                         {/*<li><Text></Text></li>*/}
                         {/*<li><Text></Text></li>*/}
                         {/*<li><Text></Text></li>*/}
@@ -101,7 +81,6 @@ export default function Home () {
                 </Item>
             </Columns>
 
-            <Text>other stuff</Text>
         </Content>
     )
 

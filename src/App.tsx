@@ -28,6 +28,14 @@ enum Theme {
 const {Header, Content, Sider} = Layout
 const {Title} = Typography
 
+const sider = {
+  // width:'256px',
+  // width: '256px !important',
+  // flex: '0 0 256px !importat',
+  // maxWidth: '256px !important',
+  minWidth: '356px !important',
+}
+
 
 function App() {
   const [theme, setTheme] = useState(Theme.default)
@@ -125,8 +133,8 @@ function App() {
 
 
   return (
-      <Layout className="layout" data-theme={theme}>
-        <Sider className="sider" width={200}>
+      <Layout data-theme={theme}>
+        <Sider>
           <div className="digicrafterContainer">
             <div onClick={logoClicked}><Title className='digicrafter' level={3}>digicrafter</Title></div>
           </div>

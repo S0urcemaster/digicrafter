@@ -7,7 +7,7 @@ import '../css/App.css'
 
 export const Title = (props:PropsWithChildren<any>) => {
     return (
-        <Item>
+        <Item style={{backgroundColor:'#112211'}}>
             <Typography.Title level={1} style={{marginBottom:'0'}}>{props.children}</Typography.Title>
         </Item>
     )
@@ -23,7 +23,7 @@ export const Subtitle = (props:PropsWithChildren<any>) => {
 
 export const Item = (props:PropsWithChildren<any>) => {
     return (
-        <div className="content-item" style={{borderTop:'1px solid #235d32', marginRight:'1px'}}>
+        <div className="content-item" style={{...props.style, borderTop:'1px solid #235d32', marginRight:'1px'}}>
             {props.children}
         </div>
     )
