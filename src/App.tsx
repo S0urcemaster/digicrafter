@@ -161,6 +161,7 @@ function App() {
                     <Input.Search placeholder="input here"/>
                   </AutoComplete>
                   <Button className="button-square button-linkbutton" onClick={() => history.push('/projects/overview')} shape="round">Projects</Button>
+                  <Button className="button-square button-linkbutton" onClick={() => history.push('/password-generator')} shape="round">PWD Generator</Button>
                 </Space>
               </Col>
               <Col>

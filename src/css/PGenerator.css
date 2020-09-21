@@ -1,4 +1,4 @@
-.sider {
+.pgsider {
     background-color: #1f1f1f;
     border-left: 1px solid #235d32;
     position: fixed;
@@ -7,5 +7,16 @@
     max-width: 768px;
     margin-left: 256px;
     padding: 12px;
+    height: 100%;
+    overflow-y: auto;
     /*white-space: normal;*/
+}
+
+.pgcontent {
+    margin-left: 768px;
+    margin-top: 0;
+    background-color: #1f1f1f;
+    border-left: 1px solid #235d32;
+    height: 100%;
+    padding: 10px 10px 10px 20px;
 }
