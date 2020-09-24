@@ -57,9 +57,9 @@ function App() {
   function path2Menu (location: any) {
     // go through the Nav object and and set the main menu's state to the actual path location
     // also load the right source code (when set)
-    let source:string|undefined = ''
+    let source:string = ''
     Object.values(Nav).find(nav => {
-      const found = Object.values(nav.items).find(item => {
+      const found = Object.values(nav.items).find((item) => {
         const found = item.link === location.pathname
         if(found) {
           source = item.source

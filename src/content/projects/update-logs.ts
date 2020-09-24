@@ -62,6 +62,8 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.digicrafter, log:"PG filter words list", duration: addDuration(3, 0)},
             {project: project.digicrafter, log:"PG Backend", duration: addDuration(0, 30)},
             {project: project.digicrafter, log:"PG Frontend", duration: addDuration(2, 50)},
+            {project: project.digicrafter, log:"PG verbs fix", duration: addDuration(1, 10)},
+            {project: project.digicrafter, log:"PG Frontend", duration: addDuration(1, 40)},
             // {project: project.digicrafter, log:"", duration: addDuration()},
             // {project: project.digicrafter, log:"", duration: addDuration()},
             // {project: project.digicrafter, log:"", duration: addDuration()},
