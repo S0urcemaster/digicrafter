@@ -7,7 +7,7 @@
     max-width: 768px;
     margin-left: 256px;
     padding: 12px;
-    height: 100%;
+    height: calc(100% - 48px);
     overflow-y: auto;
     /*white-space: normal;*/
 }
@@ -17,6 +17,22 @@
     margin-top: 0;
     background-color: #1f1f1f;
     border-left: 1px solid #235d32;
-    height: 100%;
+    height: calc(100% - 48px);
     padding: 10px 10px 10px 20px;
 }
+
+/*.ant-radio-button-wrapper:not(:first-child)::before {*/
+/*    position: absolute;*/
+/*    top: 0px;*/
+/*    left: 0px;*/
+/*    display: block;*/
+/*    -webkit-box-sizing: content-box;*/
+/*    box-sizing: content-box;*/
+/*    width: 1px;*/
+/*    height: 100%;*/
+/*    padding: 1px 0;*/
+/*    background-color: #434343;*/
+/*    -webkit-transition: background-color 0.1s;*/
+/*    transition: background-color 0.1s;*/
+/*    content: '';*/
+/*}*/
