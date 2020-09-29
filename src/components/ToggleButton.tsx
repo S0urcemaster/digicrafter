@@ -12,11 +12,11 @@ export default function (props:PropsWithChildren<any>) {
         } else {
             setClassname('unchecked')
         }
+        props.toggleChange(props.children, selected)
     }, [selected])
 
     function click() {
         setSelected(!selected)
-        props.toggleChange(props.children, selected)
     }
 
     return (

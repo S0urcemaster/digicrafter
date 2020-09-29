@@ -6,11 +6,16 @@ import ToggleButton from "./ToggleButton";
 export default function (props:PropsWithChildren<any>) {
 
     const [selected, setSelected] = useState <Map<string, boolean>>(props.items)
+    
+    useEffect(() => {
+        props.selected(Array.from(selected.entries()).map(value => {
+            return value[1] ? value[0] : null
+        }).filter(item => item ? true : false))
+    }, [selected])
 
     function click(key:string, value: boolean) {
         selected.set(key, value)
         setSelected(new Map(selected))
-        props.selected(selected)
     }
 
     return (
