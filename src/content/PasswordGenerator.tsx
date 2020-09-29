@@ -72,6 +72,10 @@ export default function PasswordGenerator() {
     ];
 
     useEffect(() => {
+        generate()
+    }, [])
+
+    useEffect(() => {
         genPasswords(sentences)
     }, [specialActive])
 

@@ -23,9 +23,11 @@ a:visited {
   background-color: #061006;
 }
 
-.content-content {
+.content-item {
   padding: 20px;
-  /*background-color: #1f1f1f;*/
+  background-color: #1f1f1f;
+  height: 100%;
+  /*margin-left: 40px;*/
 }
 
 /*.sider {*/
@@ -44,4 +46,12 @@ a:visited {
 .site-drawer-render-in-current-wrapper {
   position: relative;
   /*overflow: hidden;*/
+}
+
+.button-square {
+  border-radius: 3px;
+}
+
+.button-linkbutton {
+  color: #5cd61f;
 }

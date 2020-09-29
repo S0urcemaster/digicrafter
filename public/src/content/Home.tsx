@@ -1,27 +1,18 @@
 import React from "react";
-import {Button, Typography} from "antd";
+import {Button, Space, Typography} from "antd";
 import '../css/App.css'
-import Content from "../components/Content";
+import Content, {Item, Columns, Title} from "../components/Content";
 import axios from 'axios'
+import {Link} from "react-router-dom";
+import InternalLink from "../components/InternalLink";
+import ExternalLink from "../components/ExternalLink";
+import {Nav} from "../lib/Nav";
 
-const {Title, Text} = Typography
+const {Text} = Typography
 
 export default function Home () {
 
     function send () {
-        // axios.post("https://api.elasticemail.com/v2/email/send", {
-        //     'from': 'sebastian-teister@outlook.de',
-        //     'fromName': 'Sebastian Teister',
-        //     'to': 'snteister@gmail.com',
-        //     'apikey': '660006A9B11E3A7C3B5ACBA1343673C2B03BD7C4885D5722ADB8C29C60723BE49307FE03BECCE12E8770BFE02C2F34C7',
-        //     'subject': 'test',
-        //     'bodyText': 'test',
-        //     'bodyHtml': 'test',
-        //     'isTransactional': 'true',
-        // })
-        //     .then(res => {
-        //         console.log(res.data)
-        //     })
         axios({
             method: 'post',
             url: 'https://api.elasticemail.com/v2/email/send',
@@ -29,7 +20,7 @@ export default function Home () {
                 'from': 'sebastian-teister@outlook.de',
                 'fromName': 'Sebastian Teister',
                 'to': 'snteister@gmail.com',
-                'apikey': '660006A9B11E3A7C3B5ACBA1343673C2B03BD7C4885D5722ADB8C29C60723BE49307FE03BECCE12E8770BFE02C2F34C7',
+                'apikey': '',
                 'subject': 'test',
                 'bodyText': 'test',
                 'bodyHtml': 'test',
@@ -41,9 +32,57 @@ export default function Home () {
     }
 
     return (
-        <Content title="digicrafter's digital stuff">
-            <Button onClick={send}>Send</Button>
-            <Text>digicraft stuff</Text>
+        <Content>
+            <Title>digicrafter's digital devices</Title>
+            {/*<Button onClick={send}>Send</Button>*/}
+            <Columns count={2}>
+                <Item>
+                    <Typography.Title level={3}>What's Here?</Typography.Title>
+                    <ul>
+                        <li><InternalLink to={Nav.tools.items.passwordGenerator.link}>{Nav.tools.items.passwordGenerator.title} 0.1</InternalLink></li>
+                        <li><InternalLink to={Nav.projects.items.overview.link}>Projects {Nav.projects.items.overview.title}</InternalLink></li>
+                        <li><InternalLink to={Nav.projects.items.archive.link}>{Nav.projects.items.archive.title}</InternalLink></li>
+                        {/*<li><InternalLink to={Nav}>{}</InternalLink></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                    </ul>
+                    <Text>More links on the projects /archive pages.</Text>
+                </Item>
+                <Item>
+                    <div style={{display:"flex", justifyContent:"space-between"}}>
+                        <Typography.Title level={3}>Finished Readable Password Generator 0.1</Typography.Title>
+                        <div><Typography.Title level={3}>29.09.2020</Typography.Title></div>
+                    </div>
+                    <ul>
+                        <li><Text>Generate secure passwords you can easily read and write.</Text></li>
+                        <li><Text>Season the generated passwords with extra symbols or numbers.</Text></li>
+                        <li><Text>Generate as much passwords as you like until you find one you like.</Text></li>
+                        <li><Text>Input your own words to play around with them.</Text></li>
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                        {/*<li><Text></Text></li>*/}
+                    </ul>
+                </Item>
+            </Columns>
+            {/*<Columns count={2}>*/}
+            {/*    <Item>*/}
+            {/*        <Typography.Title level={3}>Functioning</Typography.Title>*/}
+            {/*        <ul>*/}
+            {/*            <li><Text>Internal links switch the main menu</Text></li>*/}
+            {/*            <li><Text>Source code of active page loaded async when present (button top-right)</Text></li>*/}
+            {/*            /!*<li><Text></Text></li>*!/*/}
+            {/*            /!*<li><Text></Text></li>*!/*/}
+            {/*            /!*<li><Text></Text></li>*!/*/}
+            {/*        </ul>*/}
+            {/*    </Item>*/}
+            {/*    <Item>*/}
+            {/*        <Typography.Title level={3}>Not Functioning</Typography.Title>*/}
+            {/*        <ul>*/}
+            {/*            <li><Text></Text></li>*/}
+            {/*            /!*<li><Text></Text></li>*!/*/}
+            {/*        </ul>*/}
+            {/*    </Item>*/}
+            {/*</Columns>*/}
+
         </Content>
     )
 

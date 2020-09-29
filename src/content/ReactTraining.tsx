@@ -14,11 +14,15 @@ export default function ReatTraining () {
             <Subtitle>Introduction</Subtitle>
             <Item>
                 <Space direction="vertical">
-                    <Text>Coming from a Vue application I did in 3 month I wanted to to challenge React and TypeScript together
-                        with a component framework to get a better understandung of JavaScript and TypeScript.
+                    <Text>Coming from a Vue application I did in 3 months I wanted to challenge React and TypeScript together
+                        with a component framework to get a better understanding of Single Page Web Apps and JavaScript/TypeScript.
                     </Text>
-                    <Text>The time values on this page and on <Link to="/projects/overview">Projects Overview</Link> Update Log, when present,
-                        are all measured and no estimation.</Text>
+                    <Text>Till now I spent almost 200 hours with learning React. Together with my 4 months Vue experience I still
+                    wouldn't consider myself to have a deep understanding of JavaScript. With Vue you can go with just a little JavaScript knowledge.
+                    React teaches and requires a lot more while giving some advantages in clearness and control maybe.
+                    The concepts in Vue and React are very similar and from my point of view I can't tell how React can be worth
+                    the extra effort. It's probably more interesting from a programmer's perspective while I'd say, Vue has the higher
+                    level of abstraction, though.</Text>
                 </Space>
             </Item>
             <Subtitle level={2}>Approach</Subtitle>
@@ -82,7 +86,41 @@ export default function ReatTraining () {
                         <li>Automatic Menu Building</li>
                         <li>Ant Design Customization/ Styling</li>
                     </ul>
-                    <Text>21h</Text>
+                    <Text>~40h</Text>
+                </Item>
+            </Columns>
+            <Columns count={3}>
+                <Item>
+                    <Typography.Title level={3}>Choosing Password Generator to be The First Tool Developed</Typography.Title>
+                    <Typography.Title level={4}>Challenges:</Typography.Title>
+                    <ul>
+                        <li>TypeScript</li>
+                        <li>React</li>
+                    </ul>
+                    <Text>~40h</Text>
+                </Item>
+                <Item>
+                    {/*<Typography.Title level={3}>Rebuilding The Project With Ant Design And Going For TypeScript On This Occasion</Typography.Title>*/}
+                    {/*<Typography.Title level={4}>Challenges:</Typography.Title>*/}
+                    {/*<ul>*/}
+                    {/*    <li>TypeScript</li>*/}
+                    {/*    <li>Ant Design</li>*/}
+                    {/*    <li>UI UX</li>*/}
+                    {/*</ul>*/}
+                    {/*<Text>21h</Text>*/}
+                </Item>
+                <Item>
+                    {/*<Typography.Title level={3}>Break to Building My Homepage</Typography.Title>*/}
+                    {/*<Typography.Title level={4}>Challenges:</Typography.Title>*/}
+                    {/*<ul>*/}
+                    {/*    <li>TypeScript</li>*/}
+                    {/*    <li>Ant Design</li>*/}
+                    {/*    <li>UI UX</li>*/}
+                    {/*    <li>Localization</li>*/}
+                    {/*    <li>Automatic Menu Building</li>*/}
+                    {/*    <li>Ant Design Customization/ Styling</li>*/}
+                    {/*</ul>*/}
+                    {/*<Text>~40h</Text>*/}
                 </Item>
             </Columns>
         </Content>

@@ -1,21 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import {AutoComplete, Button, Col, Drawer, Input, Layout, Menu, Row, Space, Typography} from 'antd'
-import Location, {Link, Route, Switch, useHistory} from "react-router-dom";
-import {UserOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.dark.css'
 import './css/ant.css'
 import './css/App.css'
 import './css/digicrafter.css'
+import React, {useEffect, useState} from 'react';
+import {Route, Switch, useHistory} from "react-router-dom";
+import axios from "axios";
+import {AutoComplete, Button, Col, Drawer, Input, Layout, Menu, Row, Space, Tooltip, Typography} from 'antd'
+import SubMenu from "antd/es/menu/SubMenu";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import {Nav, NavItem, NavSection} from "./lib/Nav"
 import Projects from "./content/Projects";
 import Type from "./content/Type";
-import SubMenu from "antd/es/menu/SubMenu";
 import Home from "./content/Home";
 import ReactTraining from "./content/ReactTraining";
 import ProjectsArchive from "./content/projects/Archive"
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dark, atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import axios from "axios";
 import MusicProduction from "./content/MusicProduction";
 import Timers from "./content/Timers";
 import PasswordGenerator from "./content/PasswordGenerator";
@@ -29,49 +28,45 @@ enum Theme {
 const {Header, Content, Sider} = Layout
 const {Title} = Typography
 
-
 function App() {
   const [theme, setTheme] = useState(Theme.default)
   const [menuOpenKeys, setMenuOpenKeys] = useState([Nav.home.heading])
-  const rootKeys = Object.values(Nav).map((item) => item.heading)
-  const history = useHistory()
   const [selectedMenu, setSelectedMenu] = useState(Nav.home.items.landing.link)
   const [sourceVisible, setSourceVisible] = useState(false)
   const [sourceCode, setSourceCode] = useState('')
   const [sourceCodeFilename, setSourceCodeFilename] = useState('App.tsx')
+  const rootKeys = Object.values(Nav).map((item) => item.heading)
+  const history = useHistory()
 
   useEffect(() => {
-    console.log('effect')
+    console.log(history.location.pathname)
     history.listen((location) => path2Menu(location))
-    // loadSource('https://digi-craft.de/src/App.tsx')
-    loadSource('http://localhost:3000/src/App.tsx')
+    loadSource('https://digi-craft.de/src/App.tsx')
+    // loadSource('http://localhost:3000/src/App.tsx')
     path2Menu(history.location.pathname)
   },[])
 
   function path2Menu (location: any) {
     // go through the Nav object and and set the main menu's state to the actual path location
-    // also load the right source code (if set)
-    let source:string|undefined = ''
+    // also load the right source code (when set)
+    let source:string = ''
     Object.values(Nav).find(nav => {
-      const found = Object.values(nav.items).find(item => {
+      const found = Object.values(nav.items).find((item) => {
         const found = item.link === location.pathname
         if(found) {
           source = item.source
           setSelectedMenu(item.link)
-          console.log('found: ', item.link)
         }
         return found
       })
       if (found) {
         setMenuOpenKeys([nav.heading])
-        console.log('menu: ', nav.heading)
       }
     })
     if(source) {
       setSourceCodeFilename(source)
-      console.log('source: ', source)
-      // const path = 'https://digi-craft.de/src' +source
-      const path = 'http://localhost:3000/src' +source
+      const path = 'https://digi-craft.de/src' +source
+      // const path = 'http://localhost:3000/src' +source
       loadSource(path)
     }
   }
@@ -80,12 +75,13 @@ function App() {
     axios.get(path)
         .then(res => {
           setSourceCode(res.data)
+        }).catch(() => {
         })
   }
 
   function menuItems (topic:any, props?:any) {
     return Object.values(topic as NavItem).map((item, props) =>
-        <Menu.Item key={item.link} onClick={() => menuClicked(item.link)} {...props}>
+        <Menu.Item key={item.link} onClick={() => menuClicked(item.link)} {...props} disabled={!!item.disabled}>
           {item.title}
         </Menu.Item>
     )
@@ -126,9 +122,15 @@ function App() {
     setSourceVisible(false)
   }
 
+  const RightDrawerTitle =
+      <div style={{display:'flex', justifyContent:'space-between', alignContent:'baseline'}}>
+        {sourceCodeFilename}
+        <Button size="small" onClick={() => setSourceVisible(false)}>x</Button>
+      </div>
+
   return (
-      <Layout className="layout" data-theme={theme}>
-        <Sider className="sider" width={200}>
+      <Layout data-theme={theme}>
+        <Sider>
           <div className="digicrafterContainer">
             <div onClick={logoClicked}><Title className='digicrafter' level={3}>digicrafter</Title></div>
           </div>
@@ -145,7 +147,7 @@ function App() {
           <Header className="header">
             <Row justify="space-between">
               <Col>
-                <Space>
+                <Space size="large">
                   <AutoComplete
                       dropdownClassName="certain-category-search-dropdown"
                       dropdownMatchSelectWidth={500}
@@ -154,10 +156,14 @@ function App() {
                   >
                     <Input.Search placeholder="input here"/>
                   </AutoComplete>
+                  <Button className="button-square button-linkbutton" onClick={() => history.push('/projects/overview')} shape="round">Projects</Button>
+                  <Button className="button-square button-linkbutton" onClick={() => history.push('/password-generator')} shape="round">PWD Generator</Button>
                 </Space>
               </Col>
               <Col>
-                <Button onClick={showSource} shape="round">{"</>"}</Button>
+                <Tooltip placement="left" title="scroll horizontally with <shift>">
+                  <Button onClick={showSource} shape="round">{"<Source/>"}</Button>
+                </Tooltip>
               </Col>
             </Row>
           </Header>
@@ -196,7 +202,7 @@ function App() {
                 <div style={{height:"20px"}} />
               </div>
               <Drawer
-                  title={sourceCodeFilename}
+                  title={RightDrawerTitle}
                   placement="right"
                   closable={false}
                   onClose={onSourceClose}
@@ -205,7 +211,7 @@ function App() {
                   style={{ position: 'absolute' }}
                   width={768}
               >
-                <SyntaxHighlighter language="javascript" style={atomDark}>
+                <SyntaxHighlighter language="tsx" style={atomDark}>
                   {sourceCode}
                 </SyntaxHighlighter>
               </Drawer>

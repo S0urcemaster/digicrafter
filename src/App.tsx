@@ -1,20 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import {AutoComplete, Button, Col, Drawer, Input, Layout, Menu, Row, Space, Typography} from 'antd'
-import {Route, Switch, useHistory} from "react-router-dom";
 import 'antd/dist/antd.dark.css'
 import './css/ant.css'
 import './css/App.css'
 import './css/digicrafter.css'
+import React, {useEffect, useState} from 'react';
+import {Route, Switch, useHistory} from "react-router-dom";
+import axios from "axios";
+import {AutoComplete, Button, Col, Drawer, Input, Layout, Menu, Row, Space, Tooltip, Typography} from 'antd'
+import SubMenu from "antd/es/menu/SubMenu";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import {Nav, NavItem, NavSection} from "./lib/Nav"
 import Projects from "./content/Projects";
 import Type from "./content/Type";
-import SubMenu from "antd/es/menu/SubMenu";
 import Home from "./content/Home";
 import ReactTraining from "./content/ReactTraining";
 import ProjectsArchive from "./content/projects/Archive"
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import axios from "axios";
 import MusicProduction from "./content/MusicProduction";
 import Timers from "./content/Timers";
 import PasswordGenerator from "./content/PasswordGenerator";
@@ -28,26 +28,18 @@ enum Theme {
 const {Header, Content, Sider} = Layout
 const {Title} = Typography
 
-const sider = {
-  // width:'256px',
-  // width: '256px !important',
-  // flex: '0 0 256px !importat',
-  // maxWidth: '256px !important',
-  minWidth: '356px !important',
-}
-
-
 function App() {
   const [theme, setTheme] = useState(Theme.default)
   const [menuOpenKeys, setMenuOpenKeys] = useState([Nav.home.heading])
-  const rootKeys = Object.values(Nav).map((item) => item.heading)
-  const history = useHistory()
   const [selectedMenu, setSelectedMenu] = useState(Nav.home.items.landing.link)
   const [sourceVisible, setSourceVisible] = useState(false)
   const [sourceCode, setSourceCode] = useState('')
   const [sourceCodeFilename, setSourceCodeFilename] = useState('App.tsx')
+  const rootKeys = Object.values(Nav).map((item) => item.heading)
+  const history = useHistory()
 
   useEffect(() => {
+    console.log(history.location.pathname)
     history.listen((location) => path2Menu(location))
     loadSource('https://digi-craft.de/src/App.tsx')
     // loadSource('http://localhost:3000/src/App.tsx')
@@ -84,13 +76,12 @@ function App() {
         .then(res => {
           setSourceCode(res.data)
         }).catch(() => {
-
-    })
+        })
   }
 
   function menuItems (topic:any, props?:any) {
     return Object.values(topic as NavItem).map((item, props) =>
-        <Menu.Item key={item.link} onClick={() => menuClicked(item.link)} {...props}>
+        <Menu.Item key={item.link} onClick={() => menuClicked(item.link)} {...props} disabled={!!item.disabled}>
           {item.title}
         </Menu.Item>
     )
@@ -131,6 +122,11 @@ function App() {
     setSourceVisible(false)
   }
 
+  const RightDrawerTitle =
+      <div style={{display:'flex', justifyContent:'space-between', alignContent:'baseline'}}>
+        {sourceCodeFilename}
+        <Button size="small" onClick={() => setSourceVisible(false)}>x</Button>
+      </div>
 
   return (
       <Layout data-theme={theme}>
@@ -165,7 +161,9 @@ function App() {
                 </Space>
               </Col>
               <Col>
-                <Button onClick={showSource} shape="round">{"</>"}</Button>
+                <Tooltip placement="left" title="scroll horizontally with <shift>">
+                  <Button onClick={showSource} shape="round">{"<Source/>"}</Button>
+                </Tooltip>
               </Col>
             </Row>
           </Header>
@@ -204,7 +202,7 @@ function App() {
                 <div style={{height:"20px"}} />
               </div>
               <Drawer
-                  title={sourceCodeFilename}
+                  title={RightDrawerTitle}
                   placement="right"
                   closable={false}
                   onClose={onSourceClose}
@@ -213,7 +211,7 @@ function App() {
                   style={{ position: 'absolute' }}
                   width={768}
               >
-                <SyntaxHighlighter language="javascript" style={atomDark}>
+                <SyntaxHighlighter language="tsx" style={atomDark}>
                   {sourceCode}
                 </SyntaxHighlighter>
               </Drawer>

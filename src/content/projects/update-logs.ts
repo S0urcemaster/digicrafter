@@ -46,7 +46,7 @@ export const updateLogs: Array<UpdateLogs> = [
     //     total: sumDurations()
     // },
     {
-        date: new Date('2020-09-15'),
+        date: new Date('2020-09-29'),
         logs: [
             {project: project.digicrafter, log:"Added hotlink button;Added projects:todo", duration: addDuration(0, 20)},
             {project: project.digicrafter, log:"AWS Account & Docs", duration: addDuration(1,0)},
@@ -64,7 +64,9 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.digicrafter, log:"PG Frontend", duration: addDuration(2, 50)},
             {project: project.digicrafter, log:"PG verbs fix", duration: addDuration(1, 10)},
             {project: project.digicrafter, log:"PG Frontend", duration: addDuration(1, 40)},
-            // {project: project.digicrafter, log:"", duration: addDuration()},
+            {project: project.digicrafter, log:"Password Generator 0.1 finished", duration: addDuration(10, 0)},
+            {project: project.digicrafter, log:"Deployment", duration: addDuration(1, 40)},
+            {project: project.digicrafter, log:"Frontend last changes", duration: addDuration(2, 40)},
             // {project: project.digicrafter, log:"", duration: addDuration()},
             // {project: project.digicrafter, log:"", duration: addDuration()},
         ],

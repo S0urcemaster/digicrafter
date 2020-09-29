@@ -1,0 +1,26 @@
+.toggleButton {
+    border: 1px solid #165996;
+    border-radius: 2px;
+    background-color: rgba(1, 1, 1, 0);
+    color: white;
+    padding: 3px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 3px;
+    margin-bottom: 3px;
+}
+
+.checked {
+    border-color: #177ddc;
+    color: #177ddc;
+}
+
+.unchecked {
+    border: 1px solid #434343
+}
+
+/*.toggleButton:first-child {*/
+/*    margin-left: 0px;*/
+/*}*/

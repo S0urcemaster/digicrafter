@@ -1,9 +1,9 @@
 import React from "react";
-import {Table, Typography} from "antd";
-import {format, Duration, formatDuration} from "date-fns";
+import {Typography} from "antd";
 import ContentTabs from "../components/ContentTabs";
 import ProjectsOverview from "./projects/Overview";
 import UpdateLogs from "./projects/UpdateLogs";
+import Todo from "./projects/Todo";
 
 const {Title, Text} = Typography
 
@@ -14,13 +14,17 @@ export default function Projects () {
         <ContentTabs title="Active Projects"
                      tabs={[
                          {
-                             title: 'Archive',
+                             title: 'Overview',
                              content: <ProjectsOverview />
                          },
                          {
                              title: 'Update Logs',
                              content: <UpdateLogs />
-                         }
+                         },
+                         {
+                             title: 'Todo',
+                             content: <Todo />
+                         },
                      ]}
         >
         </ContentTabs>
