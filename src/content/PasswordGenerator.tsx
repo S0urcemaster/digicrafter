@@ -172,7 +172,8 @@ export default function PasswordGenerator() {
 
     function capitalsCamelCase(sent: string) : string {
         return sent.split(' ').map(word => {
-            return word[0].toUpperCase() + word.slice(1)
+            if (word.length > 1) return word[0].toUpperCase() + word.slice(1)
+            return word
         }).join(' ')
     }
 
