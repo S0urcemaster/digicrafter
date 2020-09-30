@@ -42,6 +42,7 @@ export default function Home () {
                         <li><InternalLink to={Nav.tools.items.passwordGenerator.link}>{Nav.tools.items.passwordGenerator.title} 0.1</InternalLink></li>
                         <li><InternalLink to={Nav.projects.items.overview.link}>Projects {Nav.projects.items.overview.title}</InternalLink></li>
                         <li><InternalLink to={Nav.projects.items.archive.link}>{Nav.projects.items.archive.title}</InternalLink></li>
+                        <li><ExternalLink href="https://digi-craft.de/customerboard/#/browseAccounts/account/2">Latest productive Project</ExternalLink></li>
                         {/*<li><InternalLink to={Nav}>{}</InternalLink></li>*/}
                         {/*<li><Text></Text></li>*/}
                     </ul>

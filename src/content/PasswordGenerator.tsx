@@ -67,9 +67,6 @@ export default function PasswordGenerator() {
         { label: 'Zufällig', value: 'Zufällig', disabled: true },
         { label: 'Folge', value: 'Folge'},
     ];
-    const replaceOptions = [
-        { label: 'B > 3' },
-    ];
 
     useEffect(() => {
         generate()
@@ -219,7 +216,7 @@ export default function PasswordGenerator() {
 
     function generate() {
         for (let i = 0; i < 5; i++) {
-            axios.get('http://localhost:8000/api/sentence/' +optionWordLength)
+            axios.get('https://digi-craft.de/worddb/api/sentence/' +optionWordLength)
                 .then(res => {
                     let sent = ''
                     Object.values(res.data).forEach((item) => {
@@ -280,10 +277,6 @@ export default function PasswordGenerator() {
         setReplacementsActive(selected)
     }
 
-    function digitSelected(selected: Map<string, boolean>) {
-
-    }
-
     function changeChars(event:React.ChangeEvent<HTMLInputElement>) {
         setUserChars(event.target.value)
     }
@@ -317,7 +310,8 @@ export default function PasswordGenerator() {
                 ]}
             >
                 <p>Die bislang geltenden Regeln für sichere Passwörter gelten als überholt:</p>
-                <ExternalLink href="https://www.deutschlandfunknova.de/beitrag/bill-burr-unsere-passwort-regeln-taugen-nichts">https://www.deutschlandfunknova.de/beitrag/bill-burr-unsere-passwort-regeln-taugen-nichts</ExternalLink>
+                <ExternalLink href="https://www.deutschlandfunknova.de/beitrag/bill-burr-unsere-passwort-regeln-taugen-nichts">https://www.deutschlandfunknova.de/beitrag/bill-burr-unsere-passwort-regeln-taugen-nichts</ExternalLink><br />
+                <ExternalLink href="https://it-service.network/blog/2017/10/23/sichere-passwoerter-passwortsicherheit/">https://it-service.network/blog/2017/10/23/sichere-passwoerter-passwortsicherheit/</ExternalLink>
                 <br />
                 <p style={{paddingTop:'14px'}}>Ein Passwort mit 8 Zeichen, Klein-/Großbuchstaben, Zahlen, Sonderzeichen hat etwa 70^8 = 576 Billionen Kobinationen.</p>
                 <p>Ein Passwort mit 5 Wörtern aus einem minimalen Wortpool von 1000 Wörtern (Deutsch hat 75.000 Wörter) hat bereits 1000^5 = 1 Billiarde Kombinationen,
@@ -342,7 +336,7 @@ export default function PasswordGenerator() {
                 <div className="pgsider">
                     <div style={{display:'flex', justifyContent:'space-between'}}>
                         <Title level={1}>Readable Password Generator</Title>
-                        <Button size="large" icon={<InfoCircleOutlined />} onClick={() => setInfoVisible(true)} />
+                        <Button className="infobutton" size="large" icon={<InfoCircleOutlined />} onClick={() => setInfoVisible(true)} />
                     </div>
                     <Divider orientation="left" style={{marginTop:'8px', color:'lightgreen'}}>Wortbasis</Divider>
                     <Space direction='vertical' style={{width:'100%'}}>
