@@ -25,7 +25,7 @@ enum wordLength {
     short = 'short', medium = 'medium', long = 'long', all = 'all'
 }
 
-export default function PasswordGenerator() {
+export default function () {
 
     const [sentences, setSentences] = useState <string[]>([])
     const [sentence, setSentence] = useState()

@@ -18,6 +18,8 @@ import ProjectsArchive from "./content/projects/Archive"
 import MusicProduction from "./content/MusicProduction";
 import Timers from "./content/Timers";
 import PasswordGenerator from "./content/PasswordGenerator";
+import Wiki from "./content/Wiki";
+import DigiCommander from "./content/DigiBoy";
 
 enum Theme {
   default = 'default',
@@ -183,6 +185,9 @@ function App() {
                   <Route exact path={Nav.tools.items.edit.link}>
                     <Type />
                   </Route>
+                  <Route exact path={Nav.tools.items.digiCommander.link}>
+                    <DigiCommander />
+                  </Route>
                   <Route exact path={Nav.tools.items.timers.link}>
                     <Timers />
                   </Route>
@@ -194,6 +199,9 @@ function App() {
                   </Route>
                   <Route exact path={Nav.music.items.production.link}>
                     <MusicProduction />
+                  </Route>
+                  <Route exact path={Nav.wiki.items[0].link}>
+                    <Wiki />
                   </Route>
                   {/*<Route exact path={Nav.items.link}>*/}
                   {/*  < />*/}

@@ -18,6 +18,7 @@ import ProjectsArchive from "./content/projects/Archive"
 import MusicProduction from "./content/MusicProduction";
 import Timers from "./content/Timers";
 import PasswordGenerator from "./content/PasswordGenerator";
+import Wiki from "./content/Wiki";
 
 enum Theme {
   default = 'default',
@@ -193,7 +194,10 @@ function App() {
                     <ProjectsArchive />
                   </Route>
                   <Route exact path={Nav.music.items.production.link}>
-                    <MusicProduction />
+                    <Wiki />
+                  </Route>
+                  <Route exact path="/wiki/a0">
+                    <Wiki />
                   </Route>
                   {/*<Route exact path={Nav.items.link}>*/}
                   {/*  < />*/}

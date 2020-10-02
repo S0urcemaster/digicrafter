@@ -36,8 +36,9 @@ export const Nav:NavSection = {
         items: {
             passwordGenerator: {link: nav.tools.items.passwordGenerator.link, title: nav.tools.items.passwordGenerator.title, source: '/content/PasswordGenerator.tsx'},
             edit: {link: nav.tools.items.writer.link, title: nav.tools.items.writer.title, source:'/content/Type.tsx'},
+            digiCommander: {link: nav.tools.items.digiCommander.link, title: nav.tools.items.digiCommander.title, source:'/content/DigiBoy.tsx'},
+            tracktag: {link: nav.tools.items.tracktag.link, title: nav.tools.items.tracktag.title, source:'/content/TrackTag.tsx', disabled: true},
             timers: {link: nav.tools.items.timers.link, title: nav.tools.items.timers.title, source:'/content/Timers.tsx', disabled: true},
-            // : {link: nav, title: nav},
             // : {link: nav, title: nav},
         }
     },
@@ -71,7 +72,7 @@ export const Nav:NavSection = {
     wiki: {
         heading: nav.wiki.heading,
         items: {
-            0: {link: nav.wiki.items[0].link, title: nav.wiki.items[0].title, source:'/content/MusicMixing.tsx', disabled: true},
+            0: {link: nav.wiki.items[0].link, title: nav.wiki.items[0].title, source:'/content/MusicMixing.tsx'},
             // : {link: nav.link, title: nav.title},
         }
     },

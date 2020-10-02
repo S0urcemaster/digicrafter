@@ -61,9 +61,17 @@ export const en = {
                     link: "/type",
                     title: "Type",
                 },
+                digiCommander: {
+                    link: "/digi-boy",
+                    title: "Digi Boy",
+                },
                 timers: {
                     link: "/timers",
                     title: "Timers",
+                },
+                tracktag: {
+                    link: "/tracktag",
+                    title: "TrackTag",
                 },
                 // : {
                 //     link: "/",

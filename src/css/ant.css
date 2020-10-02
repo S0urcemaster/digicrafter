@@ -149,6 +149,10 @@ a.ant-typography:visited {
 [data-theme="dark"] .logo {
     /*background: rgba(255,255,255,1);*/
 }
+.ant-menu-item, .ant-menu-submenu-title {
+    -webkit-transition: none;
+    transition: none;
+}
 body {
     margin: 0;
     font-family: Nunito;

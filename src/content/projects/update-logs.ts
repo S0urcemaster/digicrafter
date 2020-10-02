@@ -48,6 +48,15 @@ export const updateLogs: Array<UpdateLogs> = [
     {
         date: new Date('2020-09-29'),
         logs: [
+            {project: project.digicrafter, log:"Added Digiboy & basic layout", duration: addDuration(3, 0)},
+            // {project: project.digicrafter, log:"", duration: addDuration()},
+            // {project: project.digicrafter, log:"", duration: addDuration()},
+        ],
+        total: sumDurations()
+    },
+    {
+        date: new Date('2020-09-29'),
+        logs: [
             {project: project.digicrafter, log:"Added hotlink button;Added projects:todo", duration: addDuration(0, 20)},
             {project: project.digicrafter, log:"AWS Account & Docs", duration: addDuration(1,0)},
             {project: project.digicrafter, log:"Content layout & styling", duration: addDuration(1, 30)},
