@@ -1,17 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, Suspense} from "react";
 import '../css/DigiBoy.css'
-import {Button, Col, Divider, Layout, Modal, Row, Space, Table, Typography} from "antd";
+import {Button, Col, Divider, Layout, Modal, Row, Select, Space, Table, Typography} from "antd";
 import {InfoCircleOutlined} from '@ant-design/icons';
+import {Route, Switch, Redirect, useHistory} from "react-router-dom";
 import {Form, Input, Radio} from 'antd';
-import axios from "axios";
-import ButtonCheckboxRow from "../components/ButtonCheckboxRow";
-import UndisplayContainer from "../components/UndisplayContainer";
 import {ColumnsType} from "antd/lib/table";
-import ExternalLink from "../components/ExternalLink";
-import InternalLink from "../components/InternalLink";
+import {Command, CommandList, commands} from "../lib/digiboy";
+import {Nav} from "../lib/Nav";
+import dbImage from "../img/db.png"
 
 enum FormTitle {
-    new = 'New Task', edit = 'Edit Task'
+    new = 'New Program', edit = 'Edit Program'
 }
 
 type FilteredInfo = {
@@ -61,10 +60,14 @@ export default function () {
         {
             title: 'Name',
             dataIndex: 'name',
-            // specify the condition of filtering result
-            // here is that finding the name started with `value`
             sorter: (a:any, b:any) => a.name.length - b.name.length,
             sortDirections: ['descend'],
+        },
+        {
+            title: 'Description',
+            dataIndex: 'description',
+            // sorter: (a:any, b:any) => a.name.length - b.name.length,
+            // sortDirections: ['descend'],
         },
         {
             title: 'Command',
@@ -97,51 +100,21 @@ export default function () {
         },
         {
             title: 'Actions',
-            dataIndex: 'actions',
+            render: () => <>
+                <Space>
+                    <Typography.Link>Run</Typography.Link>
+                    <Typography.Link>Delete</Typography.Link>
+                </Space>
+            </>,
         },
     ];
 
     const data:Task[] = [
-        {
-            name: 'dump_words',
-            description: 'Make database backup',
-            command: 'postgresDump',
-            nextTimeout: undefined,
-            repeat: false,
-            actions: ['Run', 'Delete'],
-        },
-        {
-            name: 'start_digi',
-            description: 'digicrafter> npm start',
-            command: 'runOS',
-            nextTimeout: undefined,
-            repeat: false,
-            actions: [],
-        },
-        {
-            name: 'deploy_digicrafter',
-            description: 'Run build > copy server',
-            command: '',
-            nextTimeout: undefined,
-            repeat: false,
-            actions: [],
-        },
-        {
-            name: 'cold_start',
-            description: 'Open all after os restart',
-            command: 'runOS',
-            nextTimeout: undefined,
-            repeat: false,
-            actions: [],
-        },
-        {
-            name: 'gelbersack',
-            description: 'Gelber Sack Termine',
-            command: 'mailto',
-            nextTimeout: new Date(),
-            repeat: false,
-            actions: [],
-        },
+        {name: 'dump_words', description: 'Make database backup', command: 'postgresDump', nextTimeout: undefined, repeat: false, actions: ['Run', 'Delete'],},
+        {name: 'start_digi', description: 'digicrafter> npm start', command: 'runOS', nextTimeout: undefined, repeat: false, actions: [],},
+        {name: 'deploy_digicrafter', description: 'Run build > copy server', command: 'sequence', nextTimeout: undefined, repeat: false, actions: [],},
+        {name: 'cold_start', description: 'Open all after os restart', command: 'runOS', nextTimeout: undefined, repeat: false, actions: [],},
+        {name: 'gelbersack', description: 'Gelber Sack Termine', command: 'mailto', nextTimeout: new Date(), repeat: false, actions: [],},
         // {
         //     name: '',
         //     description: '',
@@ -155,6 +128,36 @@ export default function () {
     function onChange(pagination:any, filters:any, sorter:any, extra:any) {
         console.log('params', pagination, filters, sorter, extra);
     }
+
+    function commandSelected (value:string) {
+
+    }
+
+    const CommandSelect = () =>
+        <>
+            <Form.Item
+                label="Command"
+                name="command"
+            >
+                <Select style={{width:'100%'}} defaultValue={Object.values(commands)[0].route} onChange={commandSelected}>
+                    {Object.values(commands).map((command:Command) => <Select.Option value={command.route}>{command.name}</Select.Option>)}
+                </Select>
+            </Form.Item>
+        </>
+
+    const CommandForm = () =>
+        <>
+            <Suspense fallback={<div>Loading..</div>}>
+                <Switch>
+                    {Object.values(commands).map((command:Command) => {
+                        const Form = command.component
+                        return (
+                            <Route path={Nav.tools.items.digiboy.link+command.route}><Form/></Route>)
+                    })}
+                    <Redirect from={Nav.tools.items.digiboy.link} to={Nav.tools.items.digiboy.link+Object.values(commands)[0].route} />
+                </Switch>
+            </Suspense>
+        </>
 
     return (
         <>
@@ -171,19 +174,26 @@ export default function () {
             >
                 <p>test</p>
             </Modal>
-                <div className="dclist">
+            <div style={{display:'flex'}}>
+                <div className="dclist" style={{flex:'0 0 70%'}}>
                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        {/*<div style={{display: 'flex'}}>*/}
+                        {/*</div>*/}
                         <Typography.Title level={1}>Digi Boy Programs</Typography.Title>
-                        <Button className="infobutton" size="large" icon={<InfoCircleOutlined/>}
-                                onClick={() => setInfoVisible(true)}/>
+                        <img src={dbImage} width={40} height={40} alt="Digi Boy"/>
+                        {/*<Button className="infobutton" size="large" icon={<InfoCircleOutlined/>}*/}
+                        {/*        onClick={() => setInfoVisible(true)}/>*/}
                     </div>
                     <Table size="small" columns={columns as any} dataSource={data} onChange={onChange} />
                 </div>
-                <div className="dcform">
+                <div className="dcform" style={{flex:'0 0 30%'}}>
                     <Typography.Title level={1}>{formTitle}</Typography.Title>
-                    {/*<Space direction='vertical' style={{width: '100%'}}>*/}
+                    <CommandSelect />
+                    <div style={{marginTop:'20px'}} />
+                    <CommandForm />
                     {/*    <Input placeholder="Eingabe oder generieren" value={sentences[0]}*/}
                     {/*           onChange={(event) => changeSentence(event, 0)}/>*/}
+                    {/*<Space direction='vertical' style={{width: '100%'}}>*/}
                     {/*    <Input placeholder="Eingabe oder generieren" value={sentences[1]}*/}
                     {/*           onChange={(event) => changeSentence(event, 1)}/>*/}
                     {/*    <Input placeholder="Eingabe oder generieren" value={sentences[2]}*/}
@@ -232,7 +242,7 @@ export default function () {
                     {/*                onClick={generate}>Generieren</Button>*/}
                     {/*    </Form.Item>*/}
                     {/*</Form>*/}
-                    <Divider orientation="left">Passwortoptionen</Divider>
+
                     {/*<Form*/}
                     {/*    labelCol={{span: 6}}*/}
                     {/*    wrapperCol={{span: 16}}*/}
@@ -282,6 +292,7 @@ export default function () {
                     {/*    </Form.Item>*/}
                     {/*</Form>*/}
                 </div>
+            </div>
         </>
     )
 

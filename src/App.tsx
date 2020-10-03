@@ -3,7 +3,7 @@ import './css/ant.css'
 import './css/App.css'
 import './css/digicrafter.css'
 import React, {useEffect, useState} from 'react';
-import {Route, Switch, useHistory} from "react-router-dom";
+import {Route, Switch, Redirect, useHistory} from "react-router-dom";
 import axios from "axios";
 import {AutoComplete, Button, Col, Drawer, Input, Layout, Menu, Row, Space, Tooltip, Typography} from 'antd'
 import SubMenu from "antd/es/menu/SubMenu";
@@ -19,7 +19,7 @@ import MusicProduction from "./content/MusicProduction";
 import Timers from "./content/Timers";
 import PasswordGenerator from "./content/PasswordGenerator";
 import Wiki from "./content/Wiki";
-import DigiCommander from "./content/DigiBoy";
+import DigiBoy from "./content/DigiBoy";
 
 enum Theme {
   default = 'default',
@@ -41,7 +41,6 @@ function App() {
   const history = useHistory()
 
   useEffect(() => {
-    console.log(history.location.pathname)
     history.listen((location) => path2Menu(location))
     loadSource('https://digi-craft.de/src/App.tsx')
     // loadSource('http://localhost:3000/src/App.tsx')
@@ -185,8 +184,9 @@ function App() {
                   <Route exact path={Nav.tools.items.edit.link}>
                     <Type />
                   </Route>
-                  <Route exact path={Nav.tools.items.digiCommander.link}>
-                    <DigiCommander />
+                  {/*<Redirect from={Nav.tools.items.digiboy.link} to={Nav.tools.items.digiboy.link + '/copy'}/>*/}
+                  <Route path={Nav.tools.items.digiboy.link}>
+                    <DigiBoy />
                   </Route>
                   <Route exact path={Nav.tools.items.timers.link}>
                     <Timers />

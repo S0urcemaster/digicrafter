@@ -61,7 +61,7 @@ export const en = {
                     link: "/type",
                     title: "Type",
                 },
-                digiCommander: {
+                digiboy: {
                     link: "/digi-boy",
                     title: "Digi Boy",
                 },
