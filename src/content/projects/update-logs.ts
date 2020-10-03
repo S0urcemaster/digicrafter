@@ -52,6 +52,9 @@ export const updateLogs: Array<UpdateLogs> = [
         logs: [
             {project: project.digiboy, log:"Added Digiboy & basic layout", duration: addDuration(3, 0)},
             {project: project.digiboy, log:"Added Form for Copy; invented Program generic handling", duration: addDuration(3, 30)},
+            {project: project.digicrafter, log:"Added Connections and IndexedDB support", duration: addDuration(1, 20)},
+            // {project: project.digicrafter, log:"", duration: addDuration()},
+            // {project: project.digicrafter, log:"", duration: addDuration()},
             // {project: project.digicrafter, log:"", duration: addDuration()},
         ],
         total: sumDurations()

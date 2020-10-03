@@ -8,32 +8,39 @@ import {ColumnsType} from "antd/lib/table";
 import {Command, CommandList, commands} from "../lib/digiboy";
 import {Nav} from "../lib/Nav";
 import dbImage from "../img/db.png"
+import {idb, DBConnection, IDBConnection} from "../lib/idb";
 
 enum FormTitle {
     new = 'New Program', edit = 'Edit Program'
 }
 
-type FilteredInfo = {
-    name: string,
-    value: string,
-    address: string,
-}
+// type FilteredInfo = {
+//     name: string,
+//     value: string,
+//     address: string,
+// }
+//
+// type SortedInfo = {
+//     name: string,
+//     columnKey: string,
+//     order: string,
+//     address: string,
+//     age: string,
+// }
 
-type SortedInfo = {
-    name: string,
-    columnKey: string,
-    order: string,
-    address: string,
-    age: string,
-}
-
-type Task = {
+type Program = {
     name: string,
     description: string,
     command: string,
     nextTimeout: Date | undefined,
     repeat: boolean,
     actions: string[]
+}
+
+type Connection = {
+    name: string,
+    description: string,
+    path: string,
 }
 
 // type FilteredInfo = {
@@ -56,50 +63,29 @@ export default function () {
     const [formTitle, setFormTitle] = useState(FormTitle.new)
     // const [sortedInfo, setSortedInfo] = useState <SortedInfo | null>(null)
     // const [filteredInfo, setFilteredInfo] = useState <FilteredInfo | null>(null)
-    const columns:ColumnsType<Task> = [
-        {
-            title: 'Name',
-            dataIndex: 'name',
+
+    const programsColumns:ColumnsType<Program> = [
+        {title: 'Name', dataIndex: 'name',
             sorter: (a:any, b:any) => a.name.length - b.name.length,
             sortDirections: ['descend'],
         },
-        {
-            title: 'Description',
-            dataIndex: 'description',
-            // sorter: (a:any, b:any) => a.name.length - b.name.length,
-            // sortDirections: ['descend'],
+        {title: 'Description', dataIndex: 'description',
         },
-        {
-            title: 'Command',
-            dataIndex: 'command',
-            filters: [
-                {
-                    text: 'Joe',
-                    value: 'Joe',
-                },
-                {
-                    text: 'Jim',
-                    value: 'Jim',
-                },
-            ],
+        {title: 'Command', dataIndex: 'command',
+            filters: [{text: 'Joe', value: 'Joe',}, {text: 'Jim', value: 'Jim',},],
             onFilter: (value:any, record:any) => record.name.indexOf(value) === 0,
             sorter: (a:any, b:any) => a.age - b.age,
             defaultSortOrder: 'ascend',
         },
-        {
-            title: 'Timeout',
-            dataIndex: 'timeout',
+        {title: 'Timeout', dataIndex: 'timeout',
             sorter: (a:any, b:any) => a.address.length - b.address.length,
             sortDirections: ['descend', 'ascend'],
         },
-        {
-            title: 'Repeat',
-            dataIndex: 'repeat',
+        {title: 'Repeat', dataIndex: 'repeat',
             sorter: (a:any, b:any) => a.address.length - b.address.length,
             sortDirections: ['descend', 'ascend'],
         },
-        {
-            title: 'Actions',
+        {title: 'Actions',
             render: () => <>
                 <Space>
                     <Typography.Link>Run</Typography.Link>
@@ -109,29 +95,72 @@ export default function () {
         },
     ];
 
-    const data:Task[] = [
+    const connectionsColumns:ColumnsType<Connection> = [
+        {title: 'Name', dataIndex: 'name',
+            sorter: (a:any, b:any) => a.name.length - b.name.length,
+            sortDirections: ['descend'],
+        },
+        {title: 'Description', dataIndex: 'description',
+        },
+        {title: 'path', dataIndex: 'path',
+            sorter: (a:any, b:any) => a.age - b.age,
+            defaultSortOrder: 'ascend',
+        },
+        {title: 'Actions',
+            render: () => <>
+                <Space>
+                    <Typography.Link>Connect</Typography.Link>
+                    <Typography.Link>Disconnect</Typography.Link>
+                </Space>
+            </>,
+        },
+    ];
+
+    const programsData:Program[] = [
         {name: 'dump_words', description: 'Make database backup', command: 'postgresDump', nextTimeout: undefined, repeat: false, actions: ['Run', 'Delete'],},
         {name: 'start_digi', description: 'digicrafter> npm start', command: 'runOS', nextTimeout: undefined, repeat: false, actions: [],},
         {name: 'deploy_digicrafter', description: 'Run build > copy server', command: 'sequence', nextTimeout: undefined, repeat: false, actions: [],},
         {name: 'cold_start', description: 'Open all after os restart', command: 'runOS', nextTimeout: undefined, repeat: false, actions: [],},
         {name: 'gelbersack', description: 'Gelber Sack Termine', command: 'mailto', nextTimeout: new Date(), repeat: false, actions: [],},
-        // {
-        //     name: '',
-        //     description: '',
-        //     command: '',
-        //     timeout: undefined,
-        //     repeat: false,
-        //     actions: [],
-        // },
+        // {name: '', description: '', command: '', nextTimeout: undefined, repeat: false, actions: [],},
     ];
 
-    function onChange(pagination:any, filters:any, sorter:any, extra:any) {
+    const connectionsData:Connection[] = [
+        {name: 'local', description: 'c:/', path: 'C:/',},
+        {name: 'digi-craft', description: 'server', path: 'https://digi-craft.de',},
+        // {name: '', description: '', path: '',},
+    ];
+
+    function onProgramsChange(pagination:any, filters:any, sorter:any, extra:any) {
         console.log('params', pagination, filters, sorter, extra);
     }
 
     function commandSelected (value:string) {
 
     }
+
+    function onConnectionsChange(pagination:any, filters:any, sorter:any, extra:any) {
+        console.log('params', pagination, filters, sorter, extra);
+    }
+
+    function connectionSelected (value:string) {
+
+    }
+
+    try {
+        idb.delete()
+        idb.open()
+    } catch (ex) {
+        console.error(ex)
+    }
+
+    idb.dbConnections.put({name: "local", description: "C:", path: "C:/"}).then (function() {
+        return idb.dbConnections.get(1);
+    }).then(function (dbConnection: IDBConnection | undefined) {
+        alert ("Nicolas has shoe size " + dbConnection? dbConnection!.path: '');
+    }).catch(function(error: string) {
+        alert ("Ooops: " + error);
+    });
 
     const CommandSelect = () =>
         <>
@@ -184,7 +213,9 @@ export default function () {
                         {/*<Button className="infobutton" size="large" icon={<InfoCircleOutlined/>}*/}
                         {/*        onClick={() => setInfoVisible(true)}/>*/}
                     </div>
-                    <Table size="small" columns={columns as any} dataSource={data} onChange={onChange} />
+                    <Table size="small" columns={programsColumns as any} dataSource={programsData} onChange={onProgramsChange} />
+                    <Typography.Title level={1}>Connections</Typography.Title>
+                    <Table size="small" columns={connectionsColumns as any} dataSource={connectionsData} onChange={onConnectionsChange} />
                 </div>
                 <div className="dcform" style={{flex:'0 0 30%'}}>
                     <Typography.Title level={1}>{formTitle}</Typography.Title>
