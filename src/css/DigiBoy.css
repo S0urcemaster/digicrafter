@@ -1,14 +1,15 @@
 .dclist {
     background-color: #1f1f1f;
-    border-left: 1px solid #235d32;
+    /*border-left: 1px solid #565656;*/
+    border-left: 1px solid #061006;
+    border-top: 1px solid #061006;
     /*position: fixed;*/
     /*left: 0;*/
     /*min-width: 768px;*/
     /*max-width: 768px;*/
     /*margin-left: 256px;*/
     padding: 12px;
-    height: calc(100% - 48px);
-    overflow-y: auto;
+    height: 100%;
     /*white-space: normal;*/
 }
 
@@ -16,11 +17,16 @@
     /*margin-left: 768px;*/
     margin-top: 0;
     background-color: #1f1f1f;
-    border-left: 1px solid #235d32;
-    height: calc(100% - 48px);
+    border-left: 1px solid #061006;
+    border-top: 1px solid #061006;
+    height: 100%;
     padding: 10px 10px 10px 20px;
 }
 
 .infobutton {
     color: #20d1ff;
+}
+
+.ant-table-row-level-0 {
+    border-bottom: 1px solid #177ddc!important;
 }

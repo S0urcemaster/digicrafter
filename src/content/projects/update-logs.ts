@@ -52,10 +52,11 @@ export const updateLogs: Array<UpdateLogs> = [
         logs: [
             {project: project.digiboy, log:"Added Digiboy & basic layout", duration: addDuration(3, 0)},
             {project: project.digiboy, log:"Added Form for Copy; invented Program generic handling", duration: addDuration(3, 30)},
-            {project: project.digicrafter, log:"Added Connections and IndexedDB support", duration: addDuration(1, 20)},
-            // {project: project.digicrafter, log:"", duration: addDuration()},
-            // {project: project.digicrafter, log:"", duration: addDuration()},
-            // {project: project.digicrafter, log:"", duration: addDuration()},
+            {project: project.digiboy, log:"Added Connections and IndexedDB support", duration: addDuration(1, 20)},
+            {project: project.digiboy, log:"Layout, Form changes; ideas", duration: addDuration(1, 10)},
+            {project: project.digiboy, log:"Object style forms; IndexedDB Bug", duration: addDuration(4,0)},
+            // {project: project.digiboy, log:"", duration: addDuration()},
+            // {project: project.digiboy, log:"", duration: addDuration()},
         ],
         total: sumDurations()
     },
@@ -81,8 +82,6 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.pgenerator, log:"Password Generator 0.1 finished", duration: addDuration(10, 0)},
             {project: project.pgenerator, log:"Deployment", duration: addDuration(1, 40)},
             {project: project.pgenerator, log:"Frontend last changes", duration: addDuration(2, 40)},
-            // {project: project.digicrafter, log:"", duration: addDuration()},
-            // {project: project.digicrafter, log:"", duration: addDuration()},
         ],
         total: sumDurations()
     },

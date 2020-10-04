@@ -28,7 +28,7 @@ enum wordLength {
 export default function PasswordGenerator() {
 
     const [sentences, setSentences] = useState <string[]>([])
-    const [sentence, setSentence] = useState()
+    const [sentence, setSentence] = useState <string>()
     const [passwords, setPasswords] = useState <string[]>([])
     const [passwordHistory, setPasswordhistory] = useState <string[]>([])
 
@@ -106,9 +106,9 @@ export default function PasswordGenerator() {
     useEffect(() => {
         if (sentence === undefined) return
         if(sentences.length > 4) {
-            setSentences(sentences.concat(sentence).slice(1, 6))
+            setSentences(sentences.concat(sentence!).slice(1, 6))
         } else {
-            setSentences(sentences.concat(sentence).slice(0, 5))
+            setSentences(sentences.concat(sentence!).slice(0, 5))
         }
     }, [sentence])
 
@@ -359,18 +359,18 @@ export default function PasswordGenerator() {
                         layout="horizontal"
                     >
                         <Form.Item label="Generator Modus" name="mode">
-                            <Radio.Group defaultValue='Satzbau' options={modeOptions} optionType="button"/>
+                            <Radio.Group value='Satzbau' options={modeOptions} optionType="button"/>
                         </Form.Item>
                         <UndisplayContainer visible={true}>
                             <Row style={{marginBottom:'10px'}}>
                                 <Col span={6}/>
                                 <Col span={16}>
-                                    <Radio.Group defaultValue='Satzbau 1' options={syntaxOptions} optionType="button"/>
+                                    <Radio.Group value='Satzbau 1' options={syntaxOptions} optionType="button"/>
                                 </Col>
                             </Row>
                         </UndisplayContainer>
                         <Form.Item label="Wortlänge" name="length">
-                            <Radio.Group defaultValue={wordLength.medium} onChange={(event) =>setOptionWordLength(event.target.value)}>
+                            <Radio.Group value={wordLength.medium} onChange={(event) =>setOptionWordLength(event.target.value)}>
                                 <Radio.Button value={wordLength.short}>kurz</Radio.Button>
                                 <Radio.Button value={wordLength.medium}>mittel</Radio.Button>
                                 <Radio.Button value={wordLength.long}>lang</Radio.Button>
@@ -378,7 +378,7 @@ export default function PasswordGenerator() {
                             </Radio.Group>
                         </Form.Item>
                         {/*<Form.Item label="Generator Optionen" name="options">*/}
-                        {/*    <Radio.Group defaultValue='alliteration'>*/}
+                        {/*    <Radio.Group value='alliteration'>*/}
                         {/*        <Radio.Button value="alliteration">Alliteration</Radio.Button>*/}
                         {/*        <Radio.Button value="5">CamelCase</Radio.Button>*/}
                         {/*        <Radio.Button value="random">Zufällig groß</Radio.Button>*/}
@@ -396,7 +396,7 @@ export default function PasswordGenerator() {
                         layout="horizontal"
                     >
                         <Form.Item label="Worttrennung" name="spacing">
-                            <Radio.Group defaultValue={spacing.none} onChange={changeSpacing}>
+                            <Radio.Group value={spacing.none} onChange={changeSpacing}>
                                 <Radio.Button value={spacing.none}>Ohne</Radio.Button>
                                 <Radio.Button value={spacing.spaces}>Leerzeichen</Radio.Button>
                                 <Radio.Button value={spacing.user}>Eigene Zeichen</Radio.Button>
@@ -407,7 +407,7 @@ export default function PasswordGenerator() {
                             <Row style={{marginBottom:'10px'}}>
                                 <Col span={6}/>
                                 <Col span={16}>
-                                    <Radio.Group defaultValue='Folge' options={numbersOptions} optionType="button"/>
+                                    <Radio.Group value='Folge' options={numbersOptions} optionType="button"/>
                                 </Col>
                             </Row>
                             <Row style={{marginBottom:'10px'}}>
@@ -426,7 +426,7 @@ export default function PasswordGenerator() {
                             </Row>
                         </UndisplayContainer>
                         <Form.Item label="Groß-/Kleinschreibung" name="capitals">
-                            <Radio.Group defaultValue={capitals.spelling} onChange={changeCapitals}>
+                            <Radio.Group value={capitals.spelling} onChange={changeCapitals}>
                                 <Radio.Button value={capitals.spelling}>Wie Eingabe</Radio.Button>
                                 <Radio.Button value={capitals.camelcase}>CamelCase</Radio.Button>
                                 <Radio.Button value={capitals.random}>Zufällig</Radio.Button>

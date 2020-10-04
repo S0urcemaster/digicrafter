@@ -55,7 +55,7 @@ export default function ProjectsOverview () {
                        {
                            key: keyUp(),
                            started: "8/2020",
-                           title: <InternalLink to={Nav.tools.items.edit.link}>digi/>type (digi-craft.de)</InternalLink>,
+                           title: <InternalLink to={Nav.tools.items.edit.link}>digi/&gt;type (digi-craft.de)</InternalLink>,
                            description: 'Tool',
                            motivation: 'Fun/Need',
                            tech: tags(['typescript', 'react']),

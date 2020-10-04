@@ -21,7 +21,7 @@
     align-items: center;
     height:48px;
     padding-right:20px;
-    border-bottom: 1px solid #235d32;
+    border-bottom: 1px solid #1f1f1f;
 }
 
 @keyframes reveal {

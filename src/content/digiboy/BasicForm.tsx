@@ -1,10 +1,12 @@
 import React, {PropsWithChildren} from "react";
 import {Button, Form, Input, Select, Space, Typography} from "antd";
 import {Command, commands} from "../../lib/digiboy";
+import NarrowForm from "../../components/NarrowForm";
 
 export default function (props:PropsWithChildren<any>) {
 
     return (
+        <NarrowForm>
         <Form
             labelCol={{ span: 8 }}
             wrapperCol= {{ span: 16 }}
@@ -13,19 +15,11 @@ export default function (props:PropsWithChildren<any>) {
             onFinish={props.onFinish}
             onFinishFailed={props.onFinishFailed}
         >
-            <Form.Item
-                label="Name"
-                name="name"
-                rules={[{ required: true, message: 'Please input program name!' }]}
-            >
+            <Form.Item style={{margin:0}} label="Name" name="name" rules={[{ required: true, message: ' ' }]}>
                 <Input />
             </Form.Item>
 
-            <Form.Item
-                label="Description"
-                name="description"
-                rules={[{ required: false, message: 'Please leave a note.' }]}
-            >
+            <Form.Item label="Description" name="description" rules={[{ required: false, message: ' ' }]}>
                 <Input />
             </Form.Item>
 
@@ -42,6 +36,7 @@ export default function (props:PropsWithChildren<any>) {
             </Form.Item>
 
         </Form>
+        </NarrowForm>
     )
 
 }
