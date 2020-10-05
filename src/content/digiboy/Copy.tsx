@@ -25,18 +25,6 @@ export default function () {
                 onFinshFailed = {onFinishFailed}
             >
                 <Form.Item
-                    label="Connection"
-                    name="connection"
-                    rules={[{ required: true, message: ' ' }]}
-                    initialValue= 'local'
-                >
-                    <Select style={{width:'100%'}} value="local" onChange={connectionSelected}>
-                        {/*{Object.values(commands).map((command:Command) => <Select.Option value={command.route}>{command.name}</Select.Option>)}*/}
-                        <Select.Option value='local'>Local</Select.Option>
-                        <Select.Option value='remote'>Remote</Select.Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item
                     label="From"
                     name="from"
                     rules={[{ required: true, message: <></> }]}
@@ -52,7 +40,7 @@ export default function () {
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit">
-                        Create
+                        Save
                     </Button>
                 </Form.Item>
             </BasicForm>

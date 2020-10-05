@@ -55,6 +55,8 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.digiboy, log:"Added Connections and IndexedDB support", duration: addDuration(1, 20)},
             {project: project.digiboy, log:"Layout, Form changes; ideas", duration: addDuration(1, 10)},
             {project: project.digiboy, log:"Object style forms; IndexedDB Bug", duration: addDuration(4,0)},
+            {project: project.digiboy, log:"Models refactoring", duration: addDuration(1, 20)},
+            {project: project.digiboy, log:"Command form with variable payload; remove warning", duration: addDuration(5, 10)},
             // {project: project.digiboy, log:"", duration: addDuration()},
             // {project: project.digiboy, log:"", duration: addDuration()},
         ],

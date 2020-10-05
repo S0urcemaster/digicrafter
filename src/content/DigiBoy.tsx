@@ -1,16 +1,17 @@
 import React, {useEffect, useState, Suspense} from "react";
 import '../css/DigiBoy.css'
-import {Button, Col, Divider, Layout, Modal, Row, Select, Space, Table, Typography} from "antd";
+import {Button, Modal, Select, Space, Table, Typography} from "antd";
 import {InfoCircleOutlined} from '@ant-design/icons';
 import {Route, Switch, Redirect, useHistory} from "react-router-dom";
 import {Form, Input, Radio} from 'antd';
 import {ColumnsType} from "antd/lib/table";
-import {Command, CommandList, commands} from "../lib/digiboy";
 import {Nav} from "../lib/Nav";
 import dbImage from "../img/db.png"
-import {idb, DBEndpoint, IDBEndpoint, IDBProgram, DBProgram} from "../lib/idb";
+import {idb} from "../lib/data/idb";
+import * as db from "../lib/data/digiboy";
 import BasicForm from "./digiboy/BasicForm";
 import {BrowserNotify, run} from "../lib/Programs";
+import {selfEP} from "../lib/digiboy/Endpoints";
 
 enum FormTitle {
     new = 'New Program', edit = 'Edit Program'
@@ -39,7 +40,7 @@ type Program = {
     description: string,
     command: string,
     nextTimeout: Date | undefined,
-    repeat: boolean,
+    lastrun: Date,
     actions: string[]
 }
 
@@ -88,7 +89,7 @@ export default function () {
             sorter: (a:any, b:any) => a.address.length - b.address.length,
             sortDirections: ['descend', 'ascend'],
         },
-        {title: 'Repeat', dataIndex: 'repeat',
+        {title: 'Last Run', dataIndex: 'lastrun',
             sorter: (a:any, b:any) => a.address.length - b.address.length,
             sortDirections: ['descend', 'ascend'],
         },
@@ -102,15 +103,19 @@ export default function () {
         },
     ];
 
-    // let programs: IDBProgram[] = []
+    // let programs: DBProgram[] = []
 
     function runProgram (p: Program) {
-        // const program = programs.find((program) => {
-        //     return program.name === p.name
-        // })
-        // console.log(p)
-        // if (program) program.run()
-        // else alert(false)
+        let programs: db.Program[] = []
+        idb.dbPrograms.toArray().then((ps) => {
+            programs = ps
+        }).then(() => {
+            const program = programs.find((program) => {
+                return program.name === p.name
+            })
+            if (program) program.run()
+            else alert(false)
+        })
     }
 
     const connectionsColumns:ColumnsType<Connection> = [
@@ -135,22 +140,22 @@ export default function () {
     ];
 
     const programsData:Program[] = [
-        {name: 'notify:hello', description: 'Notify me!', command: 'BrowserNotify', nextTimeout: undefined, repeat: false, actions: ['Run', 'Delete'],},
-        {name: 'sudo chmod', description: 'digicrafter> npm start', command: 'runOS', nextTimeout: undefined, repeat: false, actions: [],},
-        {name: 'push update', description: 'write update log and commit/push git', command: 'sequence', nextTimeout: undefined, repeat: false, actions: [],},
-        {name: 'cold_start', description: 'Open all after os restart', command: 'runOS', nextTimeout: undefined, repeat: false, actions: [],},
-        {name: 'gelbersack', description: 'Gelber Sack Termine', command: 'mailto', nextTimeout: new Date(), repeat: false, actions: [],},
-        {name: 'digicrafter lines', description: 'count lines of code', command: 'sourcestats/lines', nextTimeout: undefined, repeat: false, actions: ['Run', 'Delete'],},
-        {name: 'start_digi1', description: 'digicrafter> npm start', command: 'runOS', nextTimeout: undefined, repeat: false, actions: [],},
-        {name: 'deploy_digicrafter1', description: 'Run build > copy server', command: 'sequence', nextTimeout: undefined, repeat: false, actions: [],},
-        {name: 'cold_start1', description: 'Open all after os restart', command: 'runOS', nextTimeout: undefined, repeat: false, actions: [],},
-        {name: 'gelbersack1', description: 'Gelber Sack Termine', command: 'mailto', nextTimeout: new Date(), repeat: false, actions: [],},
-        {name: 'dump_words2', description: 'Make database backup', command: 'postgresDump', nextTimeout: undefined, repeat: false, actions: ['Run', 'Delete'],},
-        {name: 'start_digi2', description: 'digicrafter> npm start', command: 'runOS', nextTimeout: undefined, repeat: false, actions: [],},
-        {name: 'deploy_digicrafter2', description: 'Run build > copy server', command: 'sequence', nextTimeout: undefined, repeat: false, actions: [],},
-        {name: 'cold_start2', description: 'Open all after os restart', command: 'runOS', nextTimeout: undefined, repeat: false, actions: [],},
-        {name: 'gelbersack2', description: 'Gelber Sack Termine', command: 'mailto', nextTimeout: new Date(), repeat: false, actions: [],},
-        // {name: '', description: '', command: '', nextTimeout: undefined, repeat: false, actions: [],},
+        {name: 'notify:hello', description: 'Notify me!', command: 'BrowserNotify', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
+        {name: 'sudo chmod', description: 'digicrafter> npm start', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'push update', description: 'write update log and commit/push git', command: 'sequence', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'cold_start', description: 'Open all after os restart', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'gelbersack', description: 'Gelber Sack Termine', command: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
+        {name: 'digicrafter lines', description: 'count lines of code', command: 'sourcestats/lines', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
+        {name: 'start_digi1', description: 'digicrafter> npm start', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'deploy_digicrafter1', description: 'Run build > copy server', command: 'sequence', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'cold_start1', description: 'Open all after os restart', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'gelbersack1', description: 'Gelber Sack Termine', command: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
+        {name: 'dump_words2', description: 'Make database backup', command: 'postgresDump', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
+        {name: 'start_digi2', description: 'digicrafter> npm start', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'deploy_digicrafter2', description: 'Run build > copy server', command: 'sequence', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'cold_start2', description: 'Open all after os restart', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'gelbersack2', description: 'Gelber Sack Termine', command: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
+        // {name: '', description: '', command: '', nextTimeout: undefined, lastrun: false, actions: [],},
     ];
 
     const connectionsData:Connection[] = [
@@ -191,13 +196,13 @@ export default function () {
         console.error(ex)
     }
 
-    // idb.dbCommands.put({name:"BrowserNotify", path:"/browser/notify"}).then(() => {
-    //
-    // }).catch(function(error: string) {
-    //     alert ("Put command: " + error);
-    // });
+    idb.dbCommands.put({name:"BrowserNotify", path:"/browser/notify"}).then(() => {
 
-    const dbp = new DBProgram("notify:hello", "Browsernotify")
+    }).catch(function(error: string) {
+        alert ("Put command: " + error);
+    });
+
+    const dbp = new db.Program("notify:hello", "Browsernotify", [])
     dbp.save()
     // dbp.save()
     // idb.dbPrograms.add(dbp).then((id) => {
@@ -210,29 +215,22 @@ export default function () {
     // });
 
 
-    // idb.dbEndpoints.put({name: "local", description: "C:", path: "C:/"}).then (function() {
-    //     return idb.dbEndpoints.get(1);
-    // }).then(function (dbConnection: IDBEndpoint | undefined) {
-    //     // alert ("Nicolas has shoe size " + dbConnection? dbConnection!.path: '');
-    // }).catch(function(error: string) {
-    //     alert ("Put connection: " + error);
-    // });
+    idb.dbEndpoints.put({name: "local", description: "C:", type: db.EndpointType.local, path: "C:/"}).then (function() {
+        return idb.dbEndpoints.get(1);
+    }).then(function (dbConnection: db.IEndpoint | undefined) {
+        // alert ("Nicolas has shoe size " + dbConnection? dbConnection!.path: '');
+    }).catch(function(error: string) {
+        alert ("Put connection: " + error);
+    });
 
-    // console.log(Notification.permission);
-    // if (Notification.permission === "granted") {
-    //     // alert("we have permission");
-    // } else if (Notification.permission !== "denied") {
-    //     Notification.requestPermission().then(permission => {
-    //         console.log(permission);
-    //     });
-    // }
     // new BrowserNotify('x', 'y').run()
+    selfEP.run({name: selfEP.commands[1].name, payload: {text: 'Hallo', number: 5}})
 
     const CommandSelect = () =>
         <>
             <Form.Item label="Command" name="command">
-                <Select style={{width:'100%'}} value={Object.values(commands)[0].route} onChange={commandSelected}>
-                    {Object.values(commands).map((command:Command) => <Select.Option key={command.name} value={command.route}>{command.name}</Select.Option>)}
+                <Select style={{width:'100%'}} value={Object.values(db.commands)[0].route} onChange={commandSelected}>
+                    {Object.values(db.commands).map((command:db.UICommand) => <Select.Option key={command.name} value={command.route}>{command.name}</Select.Option>)}
                 </Select>
             </Form.Item>
         </>
@@ -241,12 +239,12 @@ export default function () {
         <>
             <Suspense fallback={<div>Loading..</div>}>
                 <Switch>
-                    {Object.values(commands).map((command:Command) => {
-                        const Form = command.component
+                    {Object.values(db.commands).map((command:db.UICommand) => {
+                        const CmdForm = command.component
                         return (
-                            <Route key={command.name} path={Nav.tools.items.digiboy.link+command.route}><Form/></Route>)
+                            <Route key={command.name} path={Nav.tools.items.digiboy.link+command.route}><CmdForm/></Route>)
                     })}
-                    <Redirect from={Nav.tools.items.digiboy.link} to={Nav.tools.items.digiboy.link+Object.values(commands)[0].route} />
+                    <Redirect from={Nav.tools.items.digiboy.link} to={Nav.tools.items.digiboy.link+Object.values(db.commands)[0].route} />
                 </Switch>
             </Suspense>
         </>
@@ -306,8 +304,8 @@ export default function () {
                 </div>
                 <div className="dcform">
                     <Typography.Title level={1}>{formTitle}</Typography.Title>
-                    <CommandSelect />
-                    <div style={{marginTop:'20px'}} />
+                    {/*<CommandSelect />*/}
+                    {/*<div style={{marginTop:'20px'}} />*/}
                     <CommandForm />
                 </div>
                 <div className="dclist" style={{borderTop:'1px solid #061006'}}>
