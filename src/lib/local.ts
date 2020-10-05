@@ -54,16 +54,16 @@ export const en = {
             heading: 'Tools',
             items: {
                 passwordGenerator: {
-                    link: "/password-generator",
-                    title: "Readable Password Generator",
+                    link: "/passgen",
+                    title: "Pa$$Gen0w",
                 },
                 writer: {
                     link: "/type",
                     title: "Type",
                 },
-                digiboy: {
-                    link: "/digi-boy",
-                    title: "Digi Boy",
+                digiop: {
+                    link: "/digi-op",
+                    title: "Digi Op",
                 },
                 timers: {
                     link: "/timers",

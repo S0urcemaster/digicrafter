@@ -15,7 +15,7 @@ export type UpdateLogs = {
 export enum project {
     digicrafter,
     pgenerator,
-    digiboy,
+    digiop,
     kontakt,
 }
 
@@ -50,15 +50,16 @@ export const updateLogs: Array<UpdateLogs> = [
     {
         date: new Date('2020-09-29'),
         logs: [
-            {project: project.digiboy, log:"Added Digiboy & basic layout", duration: addDuration(3, 0)},
-            {project: project.digiboy, log:"Added Form for Copy; invented Program generic handling", duration: addDuration(3, 30)},
-            {project: project.digiboy, log:"Added Connections and IndexedDB support", duration: addDuration(1, 20)},
-            {project: project.digiboy, log:"Layout, Form changes; ideas", duration: addDuration(1, 10)},
-            {project: project.digiboy, log:"Object style forms; IndexedDB Bug", duration: addDuration(4,0)},
-            {project: project.digiboy, log:"Models refactoring", duration: addDuration(1, 20)},
-            {project: project.digiboy, log:"Command form with variable payload; remove warning", duration: addDuration(5, 10)},
-            // {project: project.digiboy, log:"", duration: addDuration()},
-            // {project: project.digiboy, log:"", duration: addDuration()},
+            {project: project.digiop, log:"Added Digiboy & basic layout", duration: addDuration(3, 0)},
+            {project: project.digiop, log:"Added Form for Copy; invented Program generic handling", duration: addDuration(3, 30)},
+            {project: project.digiop, log:"Added Connections and IndexedDB support", duration: addDuration(1, 20)},
+            {project: project.digiop, log:"Layout, Form changes; ideas", duration: addDuration(1, 10)},
+            {project: project.digiop, log:"Object style forms; IndexedDB Bug", duration: addDuration(4,0)},
+            {project: project.digiop, log:"Models refactoring", duration: addDuration(1, 20)},
+            {project: project.digiop, log:"Command form with variable payload; remove warning", duration: addDuration(5, 10)},
+            {project: project.digiop, log:"Styling", duration: addDuration(0, 30)},
+            {project: project.digiop, log:"Renaming/Refactoring", duration: addDuration(1, 10)},
+            // {project: project.digiop, log:"", duration: addDuration()},
         ],
         total: sumDurations()
     },

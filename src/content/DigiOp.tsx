@@ -1,5 +1,5 @@
 import React, {useEffect, useState, Suspense} from "react";
-import '../css/DigiBoy.css'
+import '../css/DigiOp.css'
 import {Button, Modal, Select, Space, Table, Typography} from "antd";
 import {InfoCircleOutlined} from '@ant-design/icons';
 import {Route, Switch, Redirect, useHistory} from "react-router-dom";
@@ -8,13 +8,13 @@ import {ColumnsType} from "antd/lib/table";
 import {Nav} from "../lib/Nav";
 import dbImage from "../img/db.png"
 import {idb} from "../lib/data/idb";
-import * as db from "../lib/data/digiboy";
-import BasicForm from "./digiboy/BasicForm";
+import * as db from "../lib/data/digiop";
+import BasicForm from "./digiop/BasicForm";
 import {BrowserNotify, run} from "../lib/Programs";
-import {selfEP} from "../lib/digiboy/Endpoints";
+import {selfEP} from "../lib/digiop/Endpoints";
 
 enum FormTitle {
-    new = 'New Program', edit = 'Edit Program'
+    new = 'New Operation', edit = 'Edit Operation'
 }
 
 enum ConnetctionButtonCaption {
@@ -38,7 +38,7 @@ enum ConnetctionButtonCaption {
 type Program = {
     name: string,
     description: string,
-    command: string,
+    status: string,
     nextTimeout: Date | undefined,
     lastrun: Date,
     actions: string[]
@@ -79,7 +79,7 @@ export default function () {
         },
         {title: 'Description', dataIndex: 'description',
         },
-        {title: 'Command', dataIndex: 'command',
+        {title: 'Status', dataIndex: 'status',
             filters: [{text: 'Joe', value: 'Joe',}, {text: 'Jim', value: 'Jim',},],
             onFilter: (value:any, record:any) => record.name.indexOf(value) === 0,
             sorter: (a:any, b:any) => a.age - b.age,
@@ -140,21 +140,21 @@ export default function () {
     ];
 
     const programsData:Program[] = [
-        {name: 'notify:hello', description: 'Notify me!', command: 'BrowserNotify', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
-        {name: 'sudo chmod', description: 'digicrafter> npm start', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'push update', description: 'write update log and commit/push git', command: 'sequence', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'cold_start', description: 'Open all after os restart', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'gelbersack', description: 'Gelber Sack Termine', command: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
-        {name: 'digicrafter lines', description: 'count lines of code', command: 'sourcestats/lines', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
-        {name: 'start_digi1', description: 'digicrafter> npm start', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'deploy_digicrafter1', description: 'Run build > copy server', command: 'sequence', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'cold_start1', description: 'Open all after os restart', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'gelbersack1', description: 'Gelber Sack Termine', command: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
-        {name: 'dump_words2', description: 'Make database backup', command: 'postgresDump', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
-        {name: 'start_digi2', description: 'digicrafter> npm start', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'deploy_digicrafter2', description: 'Run build > copy server', command: 'sequence', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'cold_start2', description: 'Open all after os restart', command: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'gelbersack2', description: 'Gelber Sack Termine', command: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
+        {name: 'notify:hello', description: 'Notify me!', status: 'inactive', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
+        {name: 'sudo chmod', description: 'digicrafter> npm start', status: 'wait for timeout', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'push update', description: 'write update log and commit/push git', status: '', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'cold_start', description: 'Open all after os restart', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'gelbersack', description: 'Gelber Sack Termine', status: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
+        {name: 'digicrafter lines', description: 'count lines of code', status: 'sourcestats/lines', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
+        {name: 'start_digi1', description: 'digicrafter> npm start', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'deploy_digicrafter1', description: 'Run build > copy server', status: 'sequence', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'cold_start1', description: 'Open all after os restart', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'gelbersack1', description: 'Gelber Sack Termine', status: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
+        {name: 'dump_words2', description: 'Make database backup', status: 'postgresDump', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
+        {name: 'start_digi2', description: 'digicrafter> npm start', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'deploy_digicrafter2', description: 'Run build > copy server', status: 'sequence', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'cold_start2', description: 'Open all after os restart', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'gelbersack2', description: 'Gelber Sack Termine', status: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
         // {name: '', description: '', command: '', nextTimeout: undefined, lastrun: false, actions: [],},
     ];
 
@@ -294,7 +294,7 @@ export default function () {
             <div style={{display:'grid', gridTemplateColumns:'70% 30%', height:'calc(100vh - 68px)', alignContent:'start'}}>
                 <div className="dclist">
                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                        <Typography.Title level={1}>Digiboy Programs</Typography.Title>
+                        <Typography.Title level={1}>Digi Ops</Typography.Title>
                         <img src={dbImage} width={40} height={40} alt="Digi Boy"/>
                         <Button className="infobutton" size="large" icon={<InfoCircleOutlined/>}
                                 onClick={() => setInfoVisible(true)}/>
@@ -303,17 +303,17 @@ export default function () {
                     pagination={{pageSize:10}}/>
                 </div>
                 <div className="dcform">
-                    <Typography.Title level={1}>{formTitle}</Typography.Title>
+                    <Typography.Title level={1} style={{marginBottom:'5px'}}>{formTitle}</Typography.Title>
                     {/*<CommandSelect />*/}
                     {/*<div style={{marginTop:'20px'}} />*/}
                     <CommandForm />
                 </div>
                 <div className="dclist" style={{borderTop:'1px solid #061006'}}>
-                    <Typography.Title level={1}>Endpoints</Typography.Title>
+                    <Typography.Title level={1}>Operators</Typography.Title>
                     <Table rowKey="name" size="small" columns={connectionsColumns as any} dataSource={connectionsData} onChange={onConnectionsChange} />
                 </div>
                 <div className="dcform" style={{borderTop:'1px solid #061006'}}>
-                    <Typography.Title level={1}>New Endpoint</Typography.Title>
+                    <Typography.Title level={1}>New Operator</Typography.Title>
                     <ConnectionForm />
                 </div>
             </div>

@@ -93,8 +93,8 @@ export class Program implements IProgram {
     run () {
         this.commands.forEach(id => {return idb.transaction('rw', idb.dbCommands, async () => {
             const command = await idb.dbCommands.get(id);
-            // this.id = await idb.dbPrograms.add(new Program(this.name, this.description, this.digiboy));
-            // let id = await idb.dbPrograms.add({name: this.name, description: this.description, digiboy: this.digiboy} as Program);
+            // this.id = await idb.dbPrograms.add(new Program(this.name, this.description, this.digiop));
+            // let id = await idb.dbPrograms.add({name: this.name, description: this.description, digiop: this.digiop} as Program);
             // this.id = await idb.dbPrograms.add(this);
         })})
     }
@@ -120,21 +120,21 @@ export const commands:CommandList = {
     copy: {
         name: 'Copy',
         route: '/copy',
-        component: React.lazy(() => import('../../content/digiboy/BasicForm')),
+        component: React.lazy(() => import('../../content/digiop/BasicForm')),
     },
     copyToConnection: {
         name: 'Copy to Connection',
         route: '/copy-to-connection',
-        component: React.lazy(() => import('../../content/digiboy/Copy')),
+        component: React.lazy(() => import('../../content/digiop/Copy')),
     },
     osRun1: {
         name: 'OS Run',
         route: '/osrun',
-        component: React.lazy(() => import('../../content/digiboy/Copy')),
+        component: React.lazy(() => import('../../content/digiop/Copy')),
     },
     gitpull: {
         name: 'Git Pull',
         route: '/gitpull',
-        component: React.lazy(() => import('../../content/digiboy/Copy')),
+        component: React.lazy(() => import('../../content/digiop/Copy')),
     },
 }

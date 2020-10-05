@@ -36,7 +36,7 @@ export const Nav:NavSection = {
         items: {
             passwordGenerator: {link: nav.tools.items.passwordGenerator.link, title: nav.tools.items.passwordGenerator.title, source: '/content/PasswordGenerator.tsx'},
             edit: {link: nav.tools.items.writer.link, title: nav.tools.items.writer.title, source:'/content/Type.tsx'},
-            digiboy: {link: nav.tools.items.digiboy.link, title: nav.tools.items.digiboy.title, source:'/content/DigiBoy.tsx'},
+            digiop: {link: nav.tools.items.digiop.link, title: nav.tools.items.digiop.title, source:'/content/DigiOp.tsx'},
             tracktag: {link: nav.tools.items.tracktag.link, title: nav.tools.items.tracktag.title, source:'/content/TrackTag.tsx', disabled: true},
             timers: {link: nav.tools.items.timers.link, title: nav.tools.items.timers.title, source:'/content/Timers.tsx', disabled: true},
             // : {link: nav, title: nav},

@@ -8,7 +8,7 @@
     /*min-width: 768px;*/
     /*max-width: 768px;*/
     /*margin-left: 256px;*/
-    padding: 12px;
+    padding: 10px 10px 10px 16px;
     height: 100%;
     /*white-space: normal;*/
 }
@@ -20,7 +20,7 @@
     border-left: 1px solid #061006;
     border-top: 1px solid #061006;
     height: 100%;
-    padding: 10px 10px 10px 20px;
+    padding: 10px 10px 10px 16px;
 }
 
 .infobutton {

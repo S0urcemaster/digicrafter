@@ -19,7 +19,7 @@ import MusicProduction from "./content/MusicProduction";
 import Timers from "./content/Timers";
 import PasswordGenerator from "./content/PasswordGenerator";
 import Wiki from "./content/Wiki";
-import DigiBoy from "./content/DigiBoy";
+import DigiBoy from "./content/DigiOp";
 
 enum Theme {
   default = 'default',
@@ -158,7 +158,7 @@ function App() {
                     <Input.Search placeholder="input here"/>
                   </AutoComplete>
                   <Button className="button-square button-linkbutton" onClick={() => history.push('/projects/overview')} shape="round">Projects</Button>
-                  <Button className="button-square button-linkbutton" onClick={() => history.push('/password-generator')} shape="round">PWD Generator</Button>
+                  <Button className="button-square button-linkbutton" onClick={() => history.push(Nav.tools.items.passwordGenerator.link)} shape="round">PWD Generator</Button>
                 </Space>
               </Col>
               <Col>
@@ -184,7 +184,7 @@ function App() {
                   <Route exact path={Nav.tools.items.edit.link}>
                     <Type />
                   </Route>
-                  {/*<Redirect from={Nav.tools.items.digiboy.link} to={Nav.tools.items.digiboy.link + '/copy'}/>*/}
+                  {/*<Redirect from={Nav.tools.items.digiop.link} to={Nav.tools.items.digiop.link + '/copy'}/>*/}
                   <Route path={Nav.tools.items.digiboy.link}>
                     <DigiBoy />
                   </Route>

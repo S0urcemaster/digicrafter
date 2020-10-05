@@ -1,8 +1,8 @@
-import {ICommand} from "../data/digiboy";
+import {ICommand} from "../data/digiop";
 import {Type} from "typescript";
 
 export enum Datatype {
-    StringType, NumberType
+    StringType, NumberType, TimeType
 }
 
 type Property = {

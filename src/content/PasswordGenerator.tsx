@@ -336,7 +336,7 @@ export default function PasswordGenerator() {
             <Layout>
                 <div className="pgsider">
                     <div style={{display:'flex', justifyContent:'space-between'}}>
-                        <Title level={1}>Readable Password Generator</Title>
+                        <Title level={1}>Pa$$Gen0w</Title>
                         <Button className="infobutton" size="large" icon={<InfoCircleOutlined />} onClick={() => setInfoVisible(true)} />
                     </div>
                     <Divider orientation="left" style={{marginTop:'8px', color:'lightgreen'}}>Wortbasis</Divider>

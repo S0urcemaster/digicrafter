@@ -1,5 +1,5 @@
 import Dexie, {Table} from 'dexie';
-import * as db from "./digiboy";
+import * as db from "./digiop";
 
 export class Idb extends Dexie {
 
@@ -11,9 +11,9 @@ export class Idb extends Dexie {
         super("Digicrafter")
         this.version(1).stores({
             dbCommands: '++id, &name, path, payload',
-            dbPrograms: '++id, name, description, digiboy',
+            dbPrograms: '++id, name, description, digiop',
             dbEndpoints: '++id, name, description, type, &path',
-            // dbPrograms: '++id, name, description, digiboy, nextTimeout, repeat',
+            // dbPrograms: '++id, name, description, digiop, nextTimeout, repeat',
         })
         this.dbCommands = this.table('dbCommands')
         this.dbPrograms = this.table('dbPrograms')
