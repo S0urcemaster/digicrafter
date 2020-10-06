@@ -2,37 +2,43 @@ import React, {PropsWithChildren, useEffect, useState} from "react";
 import '../../css/NarrowForm.css'
 import {Button, Form, Input} from "antd";
 import {EndpointType} from "../../lib/data/digiop";
-import {Arg, ActionDef, selfOp, Action} from "../../lib/digiop/Operators";
+import {ArgDef, selfOp, Action} from "../../lib/digiop/Operators";
 import ActionList from "./ActionList";
+import ToggleButton from "../../components/ToggleButton";
 
+enum TimeoutType {
+    at = 'At', in = 'In'
+}
 
 export default function (props:PropsWithChildren<any>) {
 
     const [actionsDisabled, setActionsDisabled] = useState(true)
-    const [endpoint, setEndpoint] = useState <EndpointType>(EndpointType.self)
-    const [actions, setActions] = useState <Action[]>()
+    const [timeoutType, setTimeoutType] = useState(TimeoutType.in)
 
     useEffect(() => {
         setActionsDisabled(false)
-    }, [endpoint])
+    }, [])
 
-    function getActions (type: EndpointType) :ActionDef[] {
-        switch (type) {
-            case EndpointType.self:
-                return selfOp.actions
-            case EndpointType.local:
-
-                break
-            case EndpointType.remote:
-
-                break
-        }
-        return []
-    }
+    // function getActions (type: EndpointType) :ActionDef[] {
+    //     switch (type) {
+    //         case EndpointType.self:
+    //             return selfOp.actionDefs
+    //         case EndpointType.local:
+    //
+    //             break
+    //         case EndpointType.remote:
+    //
+    //             break
+    //     }
+    //     return []
+    // }
 
     function endpointTypeChanged(type: EndpointType) {
-        setEndpoint(type)
         setActionsDisabled(false)
+    }
+
+    function timeoutTypeChange () {
+        setTimeoutType(timeoutType === TimeoutType.in ? TimeoutType.at : TimeoutType.in)
     }
 
     return (
@@ -50,6 +56,15 @@ export default function (props:PropsWithChildren<any>) {
                 <Input />
             </Form.Item>
             <Form.Item label="Description" name="description" rules={[{ required: false, message: ' ' }]}>
+                <Input />
+            </Form.Item>
+            <Form.Item label="Timeout" name="timeout" rules={[{ required: false, message: ' ' }]}>
+                <div style={{display:'flex'}}>
+                    <Button onClick={timeoutTypeChange}>{timeoutType}</Button>
+                    <Input />
+                </div>
+            </Form.Item>
+            <Form.Item label="Repeat" name="repeat" rules={[{ required: false, message: ' ' }]}>
                 <Input />
             </Form.Item>
             <ActionList operator={props.operator} />

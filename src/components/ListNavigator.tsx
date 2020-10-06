@@ -5,22 +5,25 @@ import '../css/colors.css'
 
 export default function (props:PropsWithChildren<any>) {
 
-    // const [indices, setIndices] = useState <number[]>([])
-    const [currentId, setCurrentId] = useState <number>(0)
-    const [currentItem, setCurrentItem] = useState({})
-    const [list, setList] = useState(props.list)
+    // const [currentId, setCurrentId] = useState <number>(0)
+    // const [list, setList] = useState(props.list)
 
-    useEffect(() => {
-        console.log(props.list, 'current: ', currentId)
-    }, [currentId])
+    // useEffect(() => {
+    //     // console.log('currentId: ', currentId)
+    //     // console.log('currentId: ', list[currentId])
+    //     if (list[props.currentId]) props.onChangeCurrent(list[props.currentId])
+    // }, [props.currentId])
+
+    // useEffect(() => {
+    //     console.log(list, 'currentList: ', list)
+    // }, [list])
 
     function left() {
-        const list = (([] as number[]).concat(props.items.slice(0, currentId), currentId, props.items.slice(currentId, props.items.length)))
-        setCurrentId(currentId -1)
+        props.onChangeCurrent(props.currentId -1)
     }
 
     function right() {
-
+        props.onChangeCurrent(props.currentId +1)
     }
 
     function shiftLeft() {
@@ -32,15 +35,18 @@ export default function (props:PropsWithChildren<any>) {
     }
 
     function add () :void {
-        if (currentId === 0) {
-            props.onChangeList([currentItem])
+        if (props.currentId === 0) {
+            props.onChangeList((emptyItem:any) => ([] as any).concat(props.list, emptyItem))
         } else {
-            props.onChangeList(([] as any).concat(list.slice(0, currentId), currentItem, list.slice(currentId, list.length)))
+            props.onChangeList((emptyItem:any) => ([] as any).concat(
+                props.list.slice(0, props.currentId), emptyItem, props.list.slice(props.currentId, props.list.length)))
         }
-        setCurrentId(currentId +1)
+        props.onChangeCurrent(props.currentId +1)
+        // setCurrentId(currentId +1)
+        // setCurrentItem(list[currentId])
     }
 
-    function rem () {
+    function remove () {
 
     }
 
@@ -53,23 +59,23 @@ export default function (props:PropsWithChildren<any>) {
     </>
 
     const RemoveButton = () => <>
-        <But disabled={currentId === 0} className='red' onClick={rem}>-</But>
+        <But disabled={props.list.length === 1} className='red' onClick={remove}>-</But>
     </>
 
     const LeftButton = () => <>
-        <But disabled={currentId < 2} onClick={left}>
+        <But disabled={props.currentId < 1} onClick={left}>
             <CaretLeftOutlined style={{marginBottom:'-5px', lineHeight:'30px'}} />
         </But>
     </>
 
     const RightButton = () => <>
-        <But disabled={props.list ? currentId === props.list.length : true} onClick={right}>
+        <But disabled={props.currentId > props.list.length-2} onClick={right}>
             <CaretRightOutlined style={{marginBottom:'-5px', lineHeight:'30px'}} />
         </But>
     </>
 
     const ShiftLeftButton = () => <>
-        <But disabled={currentId < 2} onClick={shiftLeft}>
+        <But disabled={props.currentId < 1} onClick={shiftLeft}>
             <div style={{display:'flex', marginLeft:'-3px', alignItems:'center'}}>
                 <div className='green'>·</div>
                 <CaretLeftOutlined />
@@ -79,7 +85,7 @@ export default function (props:PropsWithChildren<any>) {
     </>
 
     const ShiftRightButton = () => <>
-        <But disabled={props.list ? currentId > props.list.length -2 : true} onClick={shiftRight}>
+        <But disabled={props.currentId > props.list.length-2} onClick={shiftRight}>
             <div style={{display:'flex', marginLeft:'-3px', alignItems:'center'}}>
                 <div className='red'>·</div>
                 <CaretRightOutlined />
@@ -89,7 +95,7 @@ export default function (props:PropsWithChildren<any>) {
     </>
 
     const CurrentButton = () => <>
-        <Button className='blue' style={{height:'30px', minWidth:'30px'}} size="small">{currentId}</Button>
+        <Button className='blue' style={{height:'30px', minWidth:'30px'}} size="small">{props.currentId+1}</Button>
     </>
 
 

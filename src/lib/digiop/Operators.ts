@@ -12,30 +12,58 @@ type Property = {
 
 export type Action = {
     name:string
-    operator: Operator
-    payload:any
+    // operator: Operator
+    args:ArgDef[]
+    payload:(string|number)[]
 }
 
-export type Arg = {
+export type ArgDef = {
     name:string
     datatype:Datatype
 }
 
-export type ActionDef = {
-    name:string
-    args:Arg[]
-}
+// export type ActionDef = {
+//     name:string
+//     args:ArgDef[]
+// }
 
 export interface Operator {
-    actions: ActionDef[]
+    // actionDefs: ActionDef[]
+    actionDefs: Action[]
     run (action: Action) :void
 }
 
+// function arg2Payload (arg:ArgDef) :any {
+//     switch (arg.datatype) {
+//         case Datatype.StringType:
+//             return ''
+//         case Datatype.NumberType:
+//             return 0
+//         case Datatype.TimeType:
+//             return ''
+//     }
+// }
+
 class SelfOperator implements Operator{
-    actions: ActionDef[] = [
-        {name:'browserNotify', args:[{name:'text', datatype:Datatype.StringType}]},
-        {name:'anotherCommand', args:[{name:'text', datatype:Datatype.StringType}, {name:'number', datatype:Datatype.NumberType}]},
+    actionDefs: Action[] = [
+        {name:'browserNotify', args:[{name:'text', datatype:Datatype.StringType}], payload:['']},
+        {name:'anotherCommand', args:[{name:'text', datatype:Datatype.StringType},
+                {name:'number', datatype:Datatype.NumberType}], payload:['', 0]},
     ]
+
+    // actions: Action[]
+
+    constructor() {
+        // this.actions = this.actionDefs.map(def => {
+        //     return {
+        //         name: def.name,
+        //         operator: this,
+        //         definition: def,
+        //         payload: def.args.map(arg => arg2Payload(arg))
+        //     }
+        // })
+    }
+
 
     private browserNotify = (text: string) => {
         if (Notification.permission === "granted") {
@@ -67,31 +95,49 @@ class SelfOperator implements Operator{
 
 export const selfOp = new SelfOperator()
 
-export class LocalOperator implements Operator {
-
-    path: string
-    actions: ActionDef[] = []
-
-    constructor(path: string) {
-        this.path = path
-    }
-
-    run(action: Action): void {
-    }
-
-}
-
-export class RemoteOperator implements Operator  {
-
-    path: string
-    actions: ActionDef[] = []
-
-    constructor(path: string) {
-        this.path = path
-    }
-
-    run(action: Action): void {
-    }
-
-}
+// export class LocalOperator implements Operator {
+//
+//     path: string
+//     actionDefs: ActionDef[] = []
+//     actions: Action[]
+//
+//     constructor(path: string) {
+//         this.path = path
+//         this.actions = this.actionDefs.map(def => {
+//             return {
+//                 name: def.name,
+//                 operator: this,
+//                 definition: def,
+//                 payload: def.args.map(arg => arg2Payload(arg))
+//             }
+//         })
+//     }
+//
+//     run(action: Action): void {
+//     }
+//
+// }
+//
+// export class RemoteOperator implements Operator  {
+//
+//     path: string
+//     actionDefs: ActionDef[] = []
+//     actions: Action[]
+//
+//     constructor(path: string) {
+//         this.path = path
+//         this.actions = this.actionDefs.map(def => {
+//             return {
+//                 name: def.name,
+//                 operator: this,
+//                 definition: def,
+//                 payload: def.args.map(arg => arg2Payload(arg))
+//             }
+//         })
+//     }
+//
+//     run(action: Action): void {
+//     }
+//
+// }
 

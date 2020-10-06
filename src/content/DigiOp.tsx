@@ -9,6 +9,7 @@ import {idb} from "../lib/data/idb";
 import * as db from "../lib/data/digiop";
 import {BrowserNotify, run} from "../lib/Programs";
 import Operation from "./digiop/Operation";
+import {selfOp} from "../lib/digiop/Operators";
 
 enum FormTitle {
     new = 'New Operation', edit = 'Edit Operation'
@@ -303,7 +304,7 @@ export default function () {
                     <Typography.Title level={1} style={{marginBottom:'5px'}}>{formTitle}</Typography.Title>
                     {/*<CommandSelect />*/}
                     {/*<div style={{marginTop:'20px'}} />*/}
-                    <Operation />
+                    <Operation operator={selfOp} />
                 </div>
                 <div className="dclist" style={{borderTop:'1px solid #061006'}}>
                     <Typography.Title level={1}>Operators</Typography.Title>

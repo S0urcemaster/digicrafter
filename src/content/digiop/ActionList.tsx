@@ -1,19 +1,40 @@
-import React, {useState} from "react";
-import {Action, ActionDef, Arg, Datatype, Operator, selfOp} from "../../lib/digiop/Operators";
+import React, {useEffect, useState} from "react";
+import {Action, ArgDef, Datatype, Operator, selfOp} from "../../lib/digiop/Operators";
 import {Form, Input, InputNumber, Select, Typography} from "antd";
 import ListNavigator from "../../components/ListNavigator";
 import {EndpointType} from "../../lib/data/digiop";
 
 export default (props:any) => {
 
-    const [actionDef, setActionDef] = useState <ActionDef>({name: 'select', args: []})
-    const [operator, setOperator] = useState <Operator>(selfOp)
-    const [actions, setActions] = useState <Action[]>([] as Action[])
-    const [currentAction, setCurrentAction] = useState <Action>({} as Action)
+    const [actions, setActions] = useState <Action[]>([props.operator.actionDefs[0]])
+    const [currentActionId, setCurrentActionId] = useState (0)
 
-    const Payload = (props: {args:Arg[]}) => {
+    // useEffect(() => {
+    //     console.log(currentActionId)
+    // }, [currentActionId])
+    //
+    // useEffect(() => {
+    //     console.log(actions)
+    // }, [actions])
 
-        const Prop = (props: {arg:Arg}) => {
+    function actionSelected (name: string) {
+        const actionId = props.operator.actionDefs.findIndex((action: Action) => action.name === name)
+        const res = actions.slice(0)
+        res[currentActionId] = props.operator.actionDefs[actionId]
+        setActions(res)
+    }
+
+    function changeActions (insertActionCallback:Function) {
+        setActions(insertActionCallback(props.operator.actionDefs[0]))
+    }
+
+    function changeCurrentAction (id: number) {
+        setCurrentActionId(id)
+    }
+
+    const Payload = (props:{action:Action}) => {
+
+        const Prop = (props: {arg:ArgDef, payload:any}) => {
             switch (props.arg.datatype) {
                 case Datatype.StringType:
                     return <Input.TextArea style={{height:'40px'}} rows={1} />
@@ -29,42 +50,34 @@ export default (props:any) => {
 
         return (
             <>
-                {props.args.map((arg:Arg) =>
+                {props.action.args.map((arg:ArgDef, index) =>
                     <Form.Item
                         key={arg.name}
                         label={arg.name[0].toUpperCase() + arg.name.slice(1)}
                         rules={[{ required: true, message: <></> }]}
                     >
-                        <Prop arg={arg}/>
+                        <Prop arg={arg} payload={props.action.payload[index]}/>
                     </Form.Item>
                 )}
             </>
         )
     }
 
-    function actionChanged (name: string) {
-        setActionDef(operator.actions.find(action => action.name === name)!)
-    }
-
-    function changeActions (actions:Action[]) {
-        setActions(actions)
-    }
-
-    function changeCurrentAction (action:Action) {
-        setCurrentAction(action)
-    }
-
     return (
-        // <div style={{marginLeft:'8px', marginRight:'8px'}}>
         <div>
             <div style={{display:'flex', justifyContent:'space-between', marginBottom:'0', marginTop:'9px'}}>
                 <Typography.Title style={{marginBottom:'3px'}} level={3}>Actions</Typography.Title>
-                <ListNavigator list={actions} onChangeList={changeActions} onChangeCurrent={changeCurrentAction} />
+                <ListNavigator
+                    key={currentActionId}
+                    list={actions}
+                    currentId={currentActionId}
+                    onChangeList={changeActions}
+                    onChangeCurrent={changeCurrentAction} />
             </div>
             <Form.Item
                 label="Operator"
                 rules={[{ required: true, message: ' ' }]}
-                initialValue= {currentAction.operator}
+                initialValue={props.operator}
             >
                 <Select style={{width:'100%'}}>
                     {Object.keys(EndpointType).map((key) => <Select.Option key={key} value={EndpointType[key as keyof typeof EndpointType]}>{EndpointType[key as keyof typeof EndpointType]}</Select.Option>)}
@@ -73,13 +86,13 @@ export default (props:any) => {
             <Form.Item
                 label="Action"
                 rules={[{ required: true, message: ' ' }]}
-                initialValue={actionDef.name}
+                initialValue={actions[currentActionId].name}
             >
-                <Select style={{width:'100%'}} onChange={actionChanged}>
-                    {operator && operator.actions.map((action) => <Select.Option key={action.name} value={action.name}>{action.name}</Select.Option>)}
+                <Select style={{width:'100%'}} onChange={actionSelected} value={actions[currentActionId].name}>
+                    {props.operator.actionDefs.map((action:Action) => <Select.Option key={action.name} value={action.name}>{action.name}</Select.Option>)}
                 </Select>
             </Form.Item>
-            <Payload args={actionDef.args} />
+            <Payload key={actions[currentActionId].name} action={actions[currentActionId]}/>
         </div>
     )
 }
