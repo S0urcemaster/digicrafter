@@ -6,27 +6,33 @@ export enum Datatype {
 }
 
 type Property = {
-    name:string,
+    name:string
     value:string | number
 }
 
-type Command = {
-    name:string,
+export type Action = {
+    name:string
+    operator: Operator
     payload:any
 }
 
 export type Arg = {
-    name:string,
-    datatype:Datatype,
+    name:string
+    datatype:Datatype
 }
 
-export type CommandDef = {
-    name:string,
+export type ActionDef = {
+    name:string
     args:Arg[]
 }
 
-class SelfEndpoint {
-    commands: CommandDef[] = [
+export interface Operator {
+    actions: ActionDef[]
+    run (action: Action) :void
+}
+
+class SelfOperator implements Operator{
+    actions: ActionDef[] = [
         {name:'browserNotify', args:[{name:'text', datatype:Datatype.StringType}]},
         {name:'anotherCommand', args:[{name:'text', datatype:Datatype.StringType}, {name:'number', datatype:Datatype.NumberType}]},
     ]
@@ -54,27 +60,37 @@ class SelfEndpoint {
         }
     }
 
-    run (command:Command) {
-        (this as any)[command.name](command.payload)
+    run (action:Action) {
+        (this as any)[action.name](action.payload)
     }
 }
 
-export const selfEP = new SelfEndpoint()
+export const selfOp = new SelfOperator()
 
-export class LocalEndpoint {
+export class LocalOperator implements Operator {
+
     path: string
+    actions: ActionDef[] = []
 
     constructor(path: string) {
         this.path = path
     }
 
+    run(action: Action): void {
+    }
+
 }
 
-export class RemoteEndpoint {
+export class RemoteOperator implements Operator  {
+
     path: string
+    actions: ActionDef[] = []
 
     constructor(path: string) {
         this.path = path
+    }
+
+    run(action: Action): void {
     }
 
 }

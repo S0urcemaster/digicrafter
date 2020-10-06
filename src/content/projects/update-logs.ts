@@ -59,6 +59,7 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.digiop, log:"Command form with variable payload; remove warning", duration: addDuration(5, 10)},
             {project: project.digiop, log:"Styling", duration: addDuration(0, 30)},
             {project: project.digiop, log:"Renaming/Refactoring", duration: addDuration(1, 10)},
+            {project: project.digiop, log:"Common ListNavigator added; Op structure changes", duration: addDuration(4, 0)},
             // {project: project.digiop, log:"", duration: addDuration()},
         ],
         total: sumDurations()

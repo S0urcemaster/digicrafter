@@ -185,7 +185,7 @@ function App() {
                     <Type />
                   </Route>
                   {/*<Redirect from={Nav.tools.items.digiop.link} to={Nav.tools.items.digiop.link + '/copy'}/>*/}
-                  <Route path={Nav.tools.items.digiboy.link}>
+                  <Route path={Nav.tools.items.digiop.link}>
                     <DigiBoy />
                   </Route>
                   <Route exact path={Nav.tools.items.timers.link}>

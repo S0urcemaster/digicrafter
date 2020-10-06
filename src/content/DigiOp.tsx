@@ -2,16 +2,13 @@ import React, {useEffect, useState, Suspense} from "react";
 import '../css/DigiOp.css'
 import {Button, Modal, Select, Space, Table, Typography} from "antd";
 import {InfoCircleOutlined} from '@ant-design/icons';
-import {Route, Switch, Redirect, useHistory} from "react-router-dom";
 import {Form, Input, Radio} from 'antd';
 import {ColumnsType} from "antd/lib/table";
-import {Nav} from "../lib/Nav";
 import dbImage from "../img/db.png"
 import {idb} from "../lib/data/idb";
 import * as db from "../lib/data/digiop";
-import BasicForm from "./digiop/BasicForm";
 import {BrowserNotify, run} from "../lib/Programs";
-import {selfEP} from "../lib/digiop/Endpoints";
+import Operation from "./digiop/Operation";
 
 enum FormTitle {
     new = 'New Operation', edit = 'Edit Operation'
@@ -224,30 +221,30 @@ export default function () {
     });
 
     // new BrowserNotify('x', 'y').run()
-    selfEP.run({name: selfEP.commands[1].name, payload: {text: 'Hallo', number: 5}})
+    // selfOp.run({name: selfOp.actions[1].name, payload: {text: 'Hallo', number: 5}})
 
-    const CommandSelect = () =>
-        <>
-            <Form.Item label="Command" name="command">
-                <Select style={{width:'100%'}} value={Object.values(db.commands)[0].route} onChange={commandSelected}>
-                    {Object.values(db.commands).map((command:db.UICommand) => <Select.Option key={command.name} value={command.route}>{command.name}</Select.Option>)}
-                </Select>
-            </Form.Item>
-        </>
-
-    const CommandForm = () =>
-        <>
-            <Suspense fallback={<div>Loading..</div>}>
-                <Switch>
-                    {Object.values(db.commands).map((command:db.UICommand) => {
-                        const CmdForm = command.component
-                        return (
-                            <Route key={command.name} path={Nav.tools.items.digiboy.link+command.route}><CmdForm/></Route>)
-                    })}
-                    <Redirect from={Nav.tools.items.digiboy.link} to={Nav.tools.items.digiboy.link+Object.values(db.commands)[0].route} />
-                </Switch>
-            </Suspense>
-        </>
+    // const ActionSelect = () =>
+    //     <>
+    //         <Form.Item label="Command" name="command">
+    //             <Select style={{width:'100%'}} value={Object.values(db.commands)[0].route} onChange={commandSelected}>
+    //                 {Object.values(db.commands).map((command:db.UICommand) => <Select.Option key={command.name} value={command.route}>{command.name}</Select.Option>)}
+    //             </Select>
+    //         </Form.Item>
+    //     </>
+    //
+    // const CommandForm = () =>
+    //     <>
+    //         <Suspense fallback={<div>Loading..</div>}>
+    //             <Switch>
+    //                 {Object.values(db.commands).map((command:db.UICommand) => {
+    //                     const CmdForm = command.component
+    //                     return (
+    //                         <Route key={command.name} path={Nav.tools.items.digiop.link+command.route}><CmdForm/></Route>)
+    //                 })}
+    //                 <Redirect from={Nav.tools.items.digiop.link} to={Nav.tools.items.digiop.link+Object.values(db.commands)[0].route} />
+    //             </Switch>
+    //         </Suspense>
+    //     </>
 
     const ConnectionForm = () =>
         <>
@@ -306,7 +303,7 @@ export default function () {
                     <Typography.Title level={1} style={{marginBottom:'5px'}}>{formTitle}</Typography.Title>
                     {/*<CommandSelect />*/}
                     {/*<div style={{marginTop:'20px'}} />*/}
-                    <CommandForm />
+                    <Operation />
                 </div>
                 <div className="dclist" style={{borderTop:'1px solid #061006'}}>
                     <Typography.Title level={1}>Operators</Typography.Title>
