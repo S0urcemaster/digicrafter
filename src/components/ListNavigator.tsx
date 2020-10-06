@@ -5,19 +5,6 @@ import '../css/colors.css'
 
 export default function (props:PropsWithChildren<any>) {
 
-    // const [currentId, setCurrentId] = useState <number>(0)
-    // const [list, setList] = useState(props.list)
-
-    // useEffect(() => {
-    //     // console.log('currentId: ', currentId)
-    //     // console.log('currentId: ', list[currentId])
-    //     if (list[props.currentId]) props.onChangeCurrent(list[props.currentId])
-    // }, [props.currentId])
-
-    // useEffect(() => {
-    //     console.log(list, 'currentList: ', list)
-    // }, [list])
-
     function left() {
         props.onChangeCurrent(props.currentId -1)
     }
@@ -27,27 +14,40 @@ export default function (props:PropsWithChildren<any>) {
     }
 
     function shiftLeft() {
-
+        let arr = props.list.slice(0)
+        const removed = arr.splice(props.currentId, 1)[0]
+        arr.splice(props.currentId -1, 0, removed)
+        props.onListChanged(arr)
+        left()
     }
 
     function shiftRight() {
-
+        const arr = props.list.slice(0)
+        const removed = arr.splice(props.currentId, 1)[0]
+        arr.splice(props.currentId +1, 0, removed)
+        props.onListChanged(arr)
+        right()
     }
 
     function add () :void {
-        if (props.currentId === 0) {
-            props.onChangeList((emptyItem:any) => ([] as any).concat(props.list, emptyItem))
-        } else {
-            props.onChangeList((emptyItem:any) => ([] as any).concat(
-                props.list.slice(0, props.currentId), emptyItem, props.list.slice(props.currentId, props.list.length)))
-        }
+        let arr = props.list.slice(0)
+        props.onAddToList((emptyItem:any) => {
+            arr.splice(props.currentId + 1, 0, emptyItem)
+            return arr
+        })
         props.onChangeCurrent(props.currentId +1)
-        // setCurrentId(currentId +1)
-        // setCurrentItem(list[currentId])
     }
 
     function remove () {
-
+        let arr = props.list.slice(0)
+        if (props.currentId === props.list.length -1) {
+            arr = arr.slice(0, props.list.length -1)
+            props.onListChanged(arr)
+            props.onChangeCurrent(props.currentId -1)
+        } else {
+            arr.splice(props.currentId, 1)
+            props.onListChanged(arr)
+        }
     }
 
     const But = (props:PropsWithChildren<any>) => <>

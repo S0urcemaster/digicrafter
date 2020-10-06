@@ -13,9 +13,9 @@ export default (props:any) => {
     //     console.log(currentActionId)
     // }, [currentActionId])
     //
-    // useEffect(() => {
-    //     console.log(actions)
-    // }, [actions])
+    useEffect(() => {
+        console.log(actions)
+    }, [actions])
 
     function actionSelected (name: string) {
         const actionId = props.operator.actionDefs.findIndex((action: Action) => action.name === name)
@@ -24,8 +24,12 @@ export default (props:any) => {
         setActions(res)
     }
 
-    function changeActions (insertActionCallback:Function) {
+    function addToActions (insertActionCallback:Function) {
         setActions(insertActionCallback(props.operator.actionDefs[0]))
+    }
+
+    function changeActions (actions:Action[]) {
+        setActions(actions)
     }
 
     function changeCurrentAction (id: number) {
@@ -71,7 +75,8 @@ export default (props:any) => {
                     key={currentActionId}
                     list={actions}
                     currentId={currentActionId}
-                    onChangeList={changeActions}
+                    onAddToList={addToActions}
+                    onListChanged={changeActions}
                     onChangeCurrent={changeCurrentAction} />
             </div>
             <Form.Item
