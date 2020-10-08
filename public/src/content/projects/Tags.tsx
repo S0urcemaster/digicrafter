@@ -80,10 +80,18 @@ function techToTag(tech:string):React.ReactElement {
             return softwareTag('npm')
         case 'composer':
             return softwareTag('Composer')
+        case 'indexeddb':
+            return frameworkTag('IndexedDB')
+        case 'dexie':
+            return frameworkTag('Dexie')
+        case 'expressjs':
+            return frameworkTag('ExpressJS')
         // case '':
-        //     return <Tag color=""></Tag>
+        //     return Tag('')
         // case '':
-        //     return <Tag color=""></Tag>
+        //     return Tag('')
+        // case '':
+        //     return Tag('')
         default:
             return <Tag color="cyan">Not found</Tag>
     }

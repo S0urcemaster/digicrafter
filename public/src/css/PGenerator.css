@@ -21,6 +21,10 @@
     padding: 10px 10px 10px 20px;
 }
 
+.infobutton {
+    color: #20d1ff;
+}
+
 /*.ant-radio-button-wrapper:not(:first-child)::before {*/
 /*    position: absolute;*/
 /*    top: 0px;*/

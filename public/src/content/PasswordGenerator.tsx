@@ -25,10 +25,11 @@ enum wordLength {
     short = 'short', medium = 'medium', long = 'long', all = 'all'
 }
 
-export default function () {
+export default function PasswordGenerator() {
 
     const [sentences, setSentences] = useState <string[]>([])
-    const [sentence, setSentence] = useState()
+    const [initSents, setInitSents] = useState <string[]>([])
+    const [sentence, setSentence] = useState <string>()
     const [passwords, setPasswords] = useState <string[]>([])
     const [passwordHistory, setPasswordhistory] = useState <string[]>([])
 
@@ -67,9 +68,6 @@ export default function () {
         { label: 'Zufällig', value: 'Zufällig', disabled: true },
         { label: 'Folge', value: 'Folge'},
     ];
-    const replaceOptions = [
-        { label: 'B > 3' },
-    ];
 
     useEffect(() => {
         generate()
@@ -83,7 +81,13 @@ export default function () {
         genPasswords(sentences)
     }, [replacementsActive])
 
+    let init = true
+
     useEffect(() => {
+        if (init) {
+            setInitSents(sentences)
+            init = false
+        }
         genPasswords(sentences)
     }, [sentences])
 
@@ -109,9 +113,9 @@ export default function () {
     useEffect(() => {
         if (sentence === undefined) return
         if(sentences.length > 4) {
-            setSentences(sentences.concat(sentence).slice(1, 6))
+            setSentences(sentences.concat(sentence!).slice(1, 6))
         } else {
-            setSentences(sentences.concat(sentence).slice(0, 5))
+            setSentences(sentences.concat(sentence!).slice(0, 5))
         }
     }, [sentence])
 
@@ -175,7 +179,8 @@ export default function () {
 
     function capitalsCamelCase(sent: string) : string {
         return sent.split(' ').map(word => {
-            return word[0].toUpperCase() + word.slice(1)
+            if (word.length > 1) return word[0].toUpperCase() + word.slice(1)
+            return word
         }).join(' ')
     }
 
@@ -219,7 +224,7 @@ export default function () {
 
     function generate() {
         for (let i = 0; i < 5; i++) {
-            axios.get('http://localhost:8000/api/sentence/' +optionWordLength)
+            axios.get('https://digi-craft.de/worddb/api/sentence/' +optionWordLength)
                 .then(res => {
                     let sent = ''
                     Object.values(res.data).forEach((item) => {
@@ -233,7 +238,7 @@ export default function () {
     }
 
     function changeSentence (event: React.ChangeEvent<HTMLInputElement>, n:number) {
-        let sents = sentences.slice(0, sentences.length)
+        let sents = sentences.slice(0)
         sents[n] = event.target.value!
         setSentences(sents)
     }
@@ -280,10 +285,6 @@ export default function () {
         setReplacementsActive(selected)
     }
 
-    function digitSelected(selected: Map<string, boolean>) {
-
-    }
-
     function changeChars(event:React.ChangeEvent<HTMLInputElement>) {
         setUserChars(event.target.value)
     }
@@ -317,7 +318,8 @@ export default function () {
                 ]}
             >
                 <p>Die bislang geltenden Regeln für sichere Passwörter gelten als überholt:</p>
-                <ExternalLink href="https://www.deutschlandfunknova.de/beitrag/bill-burr-unsere-passwort-regeln-taugen-nichts">https://www.deutschlandfunknova.de/beitrag/bill-burr-unsere-passwort-regeln-taugen-nichts</ExternalLink>
+                <ExternalLink href="https://www.deutschlandfunknova.de/beitrag/bill-burr-unsere-passwort-regeln-taugen-nichts">https://www.deutschlandfunknova.de/beitrag/bill-burr-unsere-passwort-regeln-taugen-nichts</ExternalLink><br />
+                <ExternalLink href="https://it-service.network/blog/2017/10/23/sichere-passwoerter-passwortsicherheit/">https://it-service.network/blog/2017/10/23/sichere-passwoerter-passwortsicherheit/</ExternalLink>
                 <br />
                 <p style={{paddingTop:'14px'}}>Ein Passwort mit 8 Zeichen, Klein-/Großbuchstaben, Zahlen, Sonderzeichen hat etwa 70^8 = 576 Billionen Kobinationen.</p>
                 <p>Ein Passwort mit 5 Wörtern aus einem minimalen Wortpool von 1000 Wörtern (Deutsch hat 75.000 Wörter) hat bereits 1000^5 = 1 Billiarde Kombinationen,
@@ -341,41 +343,46 @@ export default function () {
             <Layout>
                 <div className="pgsider">
                     <div style={{display:'flex', justifyContent:'space-between'}}>
-                        <Title level={1}>Readable Password Generator</Title>
-                        <Button size="large" icon={<InfoCircleOutlined />} onClick={() => setInfoVisible(true)} />
+                        <Title level={1}>Pa$$Gen0w</Title>
+                        <Button className="infobutton" size="large" icon={<InfoCircleOutlined />} onClick={() => setInfoVisible(true)} />
                     </div>
-                    <Divider orientation="left" style={{marginTop:'8px', color:'lightgreen'}}>Wortbasis</Divider>
-                    <Space direction='vertical' style={{width:'100%'}}>
+                    <Divider orientation="left" style={{marginTop:'8px'}}>Wortbasis</Divider>
+                    <div style={{width:'100%'}}>
                         <Input placeholder="Eingabe oder generieren" value={sentences[0]}
                                onChange={(event) => changeSentence(event, 0)}/>
+                               <div style={{borderBottom: '1px solid #333333'}}/>
                         <Input placeholder="Eingabe oder generieren" value={sentences[1]}
                                onChange={(event) => changeSentence(event, 1)}/>
+                        <div style={{borderBottom: '1px solid #333333'}}/>
                         <Input placeholder="Eingabe oder generieren" value={sentences[2]}
                                onChange={(event) => changeSentence(event, 2)}/>
+                        <div style={{borderBottom: '1px solid #333333'}}/>
                         <Input placeholder="Eingabe oder generieren" value={sentences[3]}
                                onChange={(event) => changeSentence(event, 3)}/>
+                        <div style={{borderBottom: '1px solid #333333'}}/>
                         <Input placeholder="Eingabe oder generieren" value={sentences[4]}
                                onChange={(event) => changeSentence(event, 4)}/>
-                    </Space>
-                    <Divider orientation="left">Wortgenerator</Divider>
+                        <div style={{borderBottom: '1px solid #333333'}}/>
+                    </div>
                     <Form
                         labelCol={{span: 6}}
                         wrapperCol={{span: 16}}
                         layout="horizontal"
                     >
-                        <Form.Item label="Generator Modus" name="mode">
-                            <Radio.Group defaultValue='Satzbau' options={modeOptions} optionType="button"/>
+                        <Divider orientation="left">Wortgenerator</Divider>
+                        <Form.Item label="Generator Modus" name="mode" initialValue='Satzbau'>
+                            <Radio.Group value='Satzbau' options={modeOptions} optionType="button" />
                         </Form.Item>
                         <UndisplayContainer visible={true}>
                             <Row style={{marginBottom:'10px'}}>
                                 <Col span={6}/>
                                 <Col span={16}>
-                                    <Radio.Group defaultValue='Satzbau 1' options={syntaxOptions} optionType="button"/>
+                                    <Radio.Group value='Satzbau 1' options={syntaxOptions} optionType="button"/>
                                 </Col>
                             </Row>
                         </UndisplayContainer>
-                        <Form.Item label="Wortlänge" name="length">
-                            <Radio.Group defaultValue={wordLength.medium} onChange={(event) =>setOptionWordLength(event.target.value)}>
+                        <Form.Item label="Wortlänge" name="length" initialValue={wordLength.medium}>
+                            <Radio.Group value={wordLength.medium} onChange={(event) =>setOptionWordLength(event.target.value)}>
                                 <Radio.Button value={wordLength.short}>kurz</Radio.Button>
                                 <Radio.Button value={wordLength.medium}>mittel</Radio.Button>
                                 <Radio.Button value={wordLength.long}>lang</Radio.Button>
@@ -383,7 +390,7 @@ export default function () {
                             </Radio.Group>
                         </Form.Item>
                         {/*<Form.Item label="Generator Optionen" name="options">*/}
-                        {/*    <Radio.Group defaultValue='alliteration'>*/}
+                        {/*    <Radio.Group value='alliteration'>*/}
                         {/*        <Radio.Button value="alliteration">Alliteration</Radio.Button>*/}
                         {/*        <Radio.Button value="5">CamelCase</Radio.Button>*/}
                         {/*        <Radio.Button value="random">Zufällig groß</Radio.Button>*/}
@@ -391,7 +398,7 @@ export default function () {
                         {/*    </Radio.Group>*/}
                         {/*</Form.Item>*/}
                         <Form.Item label="Generieren">
-                            <Button style={{marginBottom: '10px', color:'#5cd61f'}} onClick={generate}>Generieren</Button>
+                            <Button type='primary' onClick={generate}>Generieren</Button>
                         </Form.Item>
                     </Form>
                     <Divider orientation="left">Passwortoptionen</Divider>
@@ -400,8 +407,8 @@ export default function () {
                         wrapperCol={{span: 16}}
                         layout="horizontal"
                     >
-                        <Form.Item label="Worttrennung" name="spacing">
-                            <Radio.Group defaultValue={spacing.none} onChange={changeSpacing}>
+                        <Form.Item label="Worttrennung" name="spacing" initialValue={spacing.none}>
+                            <Radio.Group value={spacing.none} onChange={changeSpacing}>
                                 <Radio.Button value={spacing.none}>Ohne</Radio.Button>
                                 <Radio.Button value={spacing.spaces}>Leerzeichen</Radio.Button>
                                 <Radio.Button value={spacing.user}>Eigene Zeichen</Radio.Button>
@@ -412,7 +419,7 @@ export default function () {
                             <Row style={{marginBottom:'10px'}}>
                                 <Col span={6}/>
                                 <Col span={16}>
-                                    <Radio.Group defaultValue='Folge' options={numbersOptions} optionType="button"/>
+                                    <Radio.Group value='Folge' options={numbersOptions} optionType="button"/>
                                 </Col>
                             </Row>
                             <Row style={{marginBottom:'10px'}}>
@@ -430,8 +437,8 @@ export default function () {
                                 </Col>
                             </Row>
                         </UndisplayContainer>
-                        <Form.Item label="Groß-/Kleinschreibung" name="capitals">
-                            <Radio.Group defaultValue={capitals.spelling} onChange={changeCapitals}>
+                        <Form.Item label="Groß-/Kleinschreibung" name="capitals" initialValue={capitals.spelling}>
+                            <Radio.Group value={capitals.spelling} onChange={changeCapitals}>
                                 <Radio.Button value={capitals.spelling}>Wie Eingabe</Radio.Button>
                                 <Radio.Button value={capitals.camelcase}>CamelCase</Radio.Button>
                                 <Radio.Button value={capitals.random}>Zufällig</Radio.Button>

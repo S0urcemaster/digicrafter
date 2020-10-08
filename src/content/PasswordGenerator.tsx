@@ -28,6 +28,7 @@ enum wordLength {
 export default function PasswordGenerator() {
 
     const [sentences, setSentences] = useState <string[]>([])
+    const [initSents, setInitSents] = useState <string[]>([])
     const [sentence, setSentence] = useState <string>()
     const [passwords, setPasswords] = useState <string[]>([])
     const [passwordHistory, setPasswordhistory] = useState <string[]>([])
@@ -80,7 +81,13 @@ export default function PasswordGenerator() {
         genPasswords(sentences)
     }, [replacementsActive])
 
+    let init = true
+
     useEffect(() => {
+        if (init) {
+            setInitSents(sentences)
+            init = false
+        }
         genPasswords(sentences)
     }, [sentences])
 
@@ -231,7 +238,7 @@ export default function PasswordGenerator() {
     }
 
     function changeSentence (event: React.ChangeEvent<HTMLInputElement>, n:number) {
-        let sents = sentences.slice(0, sentences.length)
+        let sents = sentences.slice(0)
         sents[n] = event.target.value!
         setSentences(sents)
     }
@@ -339,27 +346,32 @@ export default function PasswordGenerator() {
                         <Title level={1}>Pa$$Gen0w</Title>
                         <Button className="infobutton" size="large" icon={<InfoCircleOutlined />} onClick={() => setInfoVisible(true)} />
                     </div>
-                    <Divider orientation="left" style={{marginTop:'8px', color:'lightgreen'}}>Wortbasis</Divider>
-                    <Space direction='vertical' style={{width:'100%'}}>
+                    <Divider orientation="left" style={{marginTop:'8px'}}>Wortbasis</Divider>
+                    <div style={{width:'100%'}}>
                         <Input placeholder="Eingabe oder generieren" value={sentences[0]}
                                onChange={(event) => changeSentence(event, 0)}/>
+                               <div style={{borderBottom: '1px solid #333333'}}/>
                         <Input placeholder="Eingabe oder generieren" value={sentences[1]}
                                onChange={(event) => changeSentence(event, 1)}/>
+                        <div style={{borderBottom: '1px solid #333333'}}/>
                         <Input placeholder="Eingabe oder generieren" value={sentences[2]}
                                onChange={(event) => changeSentence(event, 2)}/>
+                        <div style={{borderBottom: '1px solid #333333'}}/>
                         <Input placeholder="Eingabe oder generieren" value={sentences[3]}
                                onChange={(event) => changeSentence(event, 3)}/>
+                        <div style={{borderBottom: '1px solid #333333'}}/>
                         <Input placeholder="Eingabe oder generieren" value={sentences[4]}
                                onChange={(event) => changeSentence(event, 4)}/>
-                    </Space>
-                    <Divider orientation="left">Wortgenerator</Divider>
+                        <div style={{borderBottom: '1px solid #333333'}}/>
+                    </div>
                     <Form
                         labelCol={{span: 6}}
                         wrapperCol={{span: 16}}
                         layout="horizontal"
                     >
-                        <Form.Item label="Generator Modus" name="mode">
-                            <Radio.Group value='Satzbau' options={modeOptions} optionType="button"/>
+                        <Divider orientation="left">Wortgenerator</Divider>
+                        <Form.Item label="Generator Modus" name="mode" initialValue='Satzbau'>
+                            <Radio.Group value='Satzbau' options={modeOptions} optionType="button" />
                         </Form.Item>
                         <UndisplayContainer visible={true}>
                             <Row style={{marginBottom:'10px'}}>
@@ -369,7 +381,7 @@ export default function PasswordGenerator() {
                                 </Col>
                             </Row>
                         </UndisplayContainer>
-                        <Form.Item label="Wortlänge" name="length">
+                        <Form.Item label="Wortlänge" name="length" initialValue={wordLength.medium}>
                             <Radio.Group value={wordLength.medium} onChange={(event) =>setOptionWordLength(event.target.value)}>
                                 <Radio.Button value={wordLength.short}>kurz</Radio.Button>
                                 <Radio.Button value={wordLength.medium}>mittel</Radio.Button>
@@ -386,7 +398,7 @@ export default function PasswordGenerator() {
                         {/*    </Radio.Group>*/}
                         {/*</Form.Item>*/}
                         <Form.Item label="Generieren">
-                            <Button style={{marginBottom: '10px', color:'#5cd61f'}} onClick={generate}>Generieren</Button>
+                            <Button type='primary' onClick={generate}>Generieren</Button>
                         </Form.Item>
                     </Form>
                     <Divider orientation="left">Passwortoptionen</Divider>
@@ -395,7 +407,7 @@ export default function PasswordGenerator() {
                         wrapperCol={{span: 16}}
                         layout="horizontal"
                     >
-                        <Form.Item label="Worttrennung" name="spacing">
+                        <Form.Item label="Worttrennung" name="spacing" initialValue={spacing.none}>
                             <Radio.Group value={spacing.none} onChange={changeSpacing}>
                                 <Radio.Button value={spacing.none}>Ohne</Radio.Button>
                                 <Radio.Button value={spacing.spaces}>Leerzeichen</Radio.Button>
@@ -425,7 +437,7 @@ export default function PasswordGenerator() {
                                 </Col>
                             </Row>
                         </UndisplayContainer>
-                        <Form.Item label="Groß-/Kleinschreibung" name="capitals">
+                        <Form.Item label="Groß-/Kleinschreibung" name="capitals" initialValue={capitals.spelling}>
                             <Radio.Group value={capitals.spelling} onChange={changeCapitals}>
                                 <Radio.Button value={capitals.spelling}>Wie Eingabe</Radio.Button>
                                 <Radio.Button value={capitals.camelcase}>CamelCase</Radio.Button>

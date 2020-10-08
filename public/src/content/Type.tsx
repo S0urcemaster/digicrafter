@@ -4,7 +4,7 @@ import React, { useMemo, useState } from "react";
 import { createEditor } from 'slate'
 import { Slate, Editable, withReact } from 'slate-react'
 import {Layout, Menu, Tabs, Typography} from 'antd'
-import {db} from './TypeDB'
+import {db} from '../lib/data/TypeDB'
 
 const {Title} = Typography
 const {Sider, Content} = Layout

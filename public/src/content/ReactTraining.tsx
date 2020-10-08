@@ -100,14 +100,14 @@ export default function ReatTraining () {
                     <Text>~40h</Text>
                 </Item>
                 <Item>
-                    {/*<Typography.Title level={3}>Rebuilding The Project With Ant Design And Going For TypeScript On This Occasion</Typography.Title>*/}
-                    {/*<Typography.Title level={4}>Challenges:</Typography.Title>*/}
-                    {/*<ul>*/}
-                    {/*    <li>TypeScript</li>*/}
-                    {/*    <li>Ant Design</li>*/}
-                    {/*    <li>UI UX</li>*/}
-                    {/*</ul>*/}
-                    {/*<Text>21h</Text>*/}
+                    <Typography.Title level={3}>Started a Tool to Cover Some of My Developer Needs</Typography.Title>
+                    <Typography.Title level={4}>Challenges:</Typography.Title>
+                    <ul>
+                        <li>React</li>
+                        <li>IndexedDB</li>
+                        <li>Express JS</li>
+                    </ul>
+                    <Text>30h yet</Text>
                 </Item>
                 <Item>
                     {/*<Typography.Title level={3}>Break to Building My Homepage</Typography.Title>*/}

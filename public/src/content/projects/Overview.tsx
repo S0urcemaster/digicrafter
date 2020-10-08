@@ -34,6 +34,16 @@ export default function ProjectsOverview () {
                    dataSource={[
                        {
                            key: keyUp(),
+                           started: "10/2020",
+                           title: <InternalLink to={Nav.tools.items.digiop.link}>{Nav.tools.items.digiop.title} (digi-craft.de)</InternalLink>,
+                           description: 'Developer Tools Manager',
+                           motivation: 'Fun/Training/Need',
+                           tech: tags(['react', 'typescript', 'antdesign', 'indexeddb', 'dexie', 'expressjs']),
+                           scope: "2 weeks",
+                           repo: '',
+                       },
+                       {
+                           key: keyUp(),
                            started: "9/2020",
                            title: <InternalLink to={Nav.home.items.landing.link}>digicrafter (digi-craft.de)</InternalLink>,
                            description: 'Single-Page Homepage',
@@ -55,7 +65,7 @@ export default function ProjectsOverview () {
                        {
                            key: keyUp(),
                            started: "8/2020",
-                           title: <InternalLink to={Nav.tools.items.edit.link}>digi/>type (digi-craft.de)</InternalLink>,
+                           title: <InternalLink to={Nav.tools.items.edit.link}>digi/&gt;type (digi-craft.de)</InternalLink>,
                            description: 'Tool',
                            motivation: 'Fun/Need',
                            tech: tags(['typescript', 'react']),

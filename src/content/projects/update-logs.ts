@@ -50,7 +50,7 @@ export const updateLogs: Array<UpdateLogs> = [
     {
         date: new Date('2020-09-29'),
         logs: [
-            {project: project.digiop, log:"Added Digiboy & basic layout", duration: addDuration(3, 0)},
+            {project: project.digiop, log:"Added Digiop & basic layout", duration: addDuration(3, 0)},
             {project: project.digiop, log:"Added Form for Copy; invented Program generic handling", duration: addDuration(3, 30)},
             {project: project.digiop, log:"Added Connections and IndexedDB support", duration: addDuration(1, 20)},
             {project: project.digiop, log:"Layout, Form changes; ideas", duration: addDuration(1, 10)},
@@ -62,6 +62,11 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.digiop, log:"Common ListNavigator added; Op structure changes; Refactorings", duration: addDuration(4, 0)},
             {project: project.digiop, log:"Refactoring Operation types, ListNavigator Alpha", duration: addDuration(2, 30)},
             {project: project.digiop, log:"ListNavigator working", duration: addDuration(0,40)},
+            {project: project.digiop, log:"Timeout/Repeat approach", duration: addDuration(0, 40)},
+            {project: project.digiop, log:"DigiOp Info; PGenerator form fixes;Quotes", duration: addDuration(3,20)},
+            {project: project.digiop, log:"Fix initial menu path; display multiple source files", duration: addDuration(2, 20)},
+            // {project: project.digiop, log:"", duration: addDuration()},
+            // {project: project.digiop, log:"", duration: addDuration()},
             // {project: project.digiop, log:"", duration: addDuration()},
         ],
         total: sumDurations()

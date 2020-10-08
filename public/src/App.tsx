@@ -3,9 +3,24 @@ import './css/ant.css'
 import './css/App.css'
 import './css/digicrafter.css'
 import React, {useEffect, useState} from 'react';
-import {Route, Switch, useHistory} from "react-router-dom";
+import {Route, Switch, Redirect, useHistory} from "react-router-dom";
+import Location from "react-router"
 import axios from "axios";
-import {AutoComplete, Button, Col, Drawer, Input, Layout, Menu, Row, Space, Tooltip, Typography} from 'antd'
+import {
+  AutoComplete,
+  Button,
+  Col,
+  Drawer,
+  Input,
+  Layout,
+  Menu,
+  Modal,
+  Row,
+  Space,
+  Tabs,
+  Tooltip,
+  Typography
+} from 'antd'
 import SubMenu from "antd/es/menu/SubMenu";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -19,6 +34,16 @@ import MusicProduction from "./content/MusicProduction";
 import Timers from "./content/Timers";
 import PasswordGenerator from "./content/PasswordGenerator";
 import Wiki from "./content/Wiki";
+import DigiBoy from "./content/DigiOp";
+import MusicMixing from "./content/MusicMixing";
+import {InfoCircleOutlined} from "@ant-design/icons";
+import {sprueche} from "./lib/quotes";
+import {random} from "./lib/random";
+import ContentTabs from "./components/ContentTabs";
+import ProjectsOverview from "./content/projects/Overview";
+import UpdateLogs from "./content/projects/UpdateLogs";
+import Todo from "./content/projects/Todo";
+import SourceCodeTabs from "./SourceCodeTabs";
 
 enum Theme {
   default = 'default',
@@ -34,28 +59,26 @@ function App() {
   const [menuOpenKeys, setMenuOpenKeys] = useState([Nav.home.heading])
   const [selectedMenu, setSelectedMenu] = useState(Nav.home.items.landing.link)
   const [sourceVisible, setSourceVisible] = useState(false)
-  const [sourceCode, setSourceCode] = useState('')
+  const [sourceCodePaths, setSourceCodePaths] = useState <string[]> ([])
   const [sourceCodeFilename, setSourceCodeFilename] = useState('App.tsx')
+  const [infoVisible, setInfoVisible] = useState(false)
+  const [hintoftheday, setHintoftheday] = useState('')
+  const [hintofthedayVisible, setHintofthedayVisible] = useState(false)
   const rootKeys = Object.values(Nav).map((item) => item.heading)
   const history = useHistory()
 
   useEffect(() => {
-    console.log(history.location.pathname)
-    history.listen((location) => path2Menu(location))
-    loadSource('https://digi-craft.de/src/App.tsx')
-    // loadSource('http://localhost:3000/src/App.tsx')
+    history.listen((location) => path2Menu(location.pathname))
     path2Menu(history.location.pathname)
+    rollHint()
   },[])
 
-  function path2Menu (location: any) {
-    // go through the Nav object and and set the main menu's state to the actual path location
-    // also load the right source code (when set)
-    let source:string = ''
+  function path2Menu(path: string) {
     Object.values(Nav).find(nav => {
       const found = Object.values(nav.items).find((item) => {
-        const found = item.link === location.pathname
+        const found = item.link === path
         if(found) {
-          source = item.source
+          setSourceCodePaths(item.source)
           setSelectedMenu(item.link)
         }
         return found
@@ -64,20 +87,6 @@ function App() {
         setMenuOpenKeys([nav.heading])
       }
     })
-    if(source) {
-      setSourceCodeFilename(source)
-      const path = 'https://digi-craft.de/src' +source
-      // const path = 'http://localhost:3000/src' +source
-      loadSource(path)
-    }
-  }
-
-  function loadSource (path:string) {
-    axios.get(path)
-        .then(res => {
-          setSourceCode(res.data)
-        }).catch(() => {
-        })
   }
 
   function menuItems (topic:any, props?:any) {
@@ -119,110 +128,135 @@ function App() {
     setSourceVisible(!sourceVisible)
   }
 
-  function onSourceClose() {
-    setSourceVisible(false)
+  function rollHint () {
+    setHintoftheday(sprueche[random(0, sprueche.length)])
   }
 
-  const RightDrawerTitle =
-      <div style={{display:'flex', justifyContent:'space-between', alignContent:'baseline'}}>
-        {sourceCodeFilename}
-        <Button size="small" onClick={() => setSourceVisible(false)}>x</Button>
-      </div>
-
   return (
-      <Layout data-theme={theme}>
-        <Sider>
-          <div className="digicrafterContainer">
-            <div onClick={logoClicked}><Title className='digicrafter' level={3}>digicrafter</Title></div>
-          </div>
-          <Menu theme="dark" mode="inline"
-                // defaultSelectedKeys={[Nav.projects.items.digicrafter.link]}
-                // defaultOpenKeys={menuOpenKeys}
-                selectedKeys={[selectedMenu]}
-                openKeys={menuOpenKeys}
-                onOpenChange={onMenuOpenChange}>
-            {menuTopics()}
-          </Menu>
-        </Sider>
-        <Layout>
-          <Header className="header">
-            <Row justify="space-between">
-              <Col>
-                <Space size="large">
-                  <AutoComplete
-                      dropdownClassName="certain-category-search-dropdown"
-                      dropdownMatchSelectWidth={500}
-                      style={{width: 250}}
-                      options={[]}
-                  >
-                    <Input.Search placeholder="input here"/>
-                  </AutoComplete>
-                  <Button className="button-square button-linkbutton" onClick={() => history.push('/projects/overview')} shape="round">Projects</Button>
-                  <Button className="button-square button-linkbutton" onClick={() => history.push('/password-generator')} shape="round">PWD Generator</Button>
-                </Space>
-              </Col>
-              <Col>
-                <Tooltip placement="left" title="scroll horizontally with <shift>">
-                  <Button onClick={showSource} shape="round">{"<Source/>"}</Button>
-                </Tooltip>
-              </Col>
-            </Row>
-          </Header>
-          <Content>
-            <div className="site-drawer-render-in-current-wrapper">
-              <div className="site-layout-content">
-                <Switch>
-                  <Route exact path={Nav.home.items.landing.link}>
-                    <Home />
-                  </Route>
-                  <Route exact path={Nav.home.items.reactTraining.link}>
-                    <ReactTraining />
-                  </Route>
-                  <Route exact path={Nav.tools.items.passwordGenerator.link}>
-                    <PasswordGenerator />
-                  </Route>
-                  <Route exact path={Nav.tools.items.edit.link}>
-                    <Type />
-                  </Route>
-                  <Route exact path={Nav.tools.items.timers.link}>
-                    <Timers />
-                  </Route>
-                  <Route exact path={Nav.projects.items.overview.link}>
-                    <Projects />
-                  </Route>
-                  <Route exact path={Nav.projects.items.archive.link}>
-                    <ProjectsArchive />
-                  </Route>
-                  <Route exact path={Nav.music.items.production.link}>
-                    <Wiki />
-                  </Route>
-                  <Route exact path="/wiki/a0">
-                    <Wiki />
-                  </Route>
-                  {/*<Route exact path={Nav.items.link}>*/}
-                  {/*  < />*/}
-                  {/*</Route>*/}
-                </Switch>
-                <div style={{height:"20px"}} />
-              </div>
-              <Drawer
-                  title={RightDrawerTitle}
-                  placement="right"
-                  closable={false}
-                  onClose={onSourceClose}
-                  visible={sourceVisible}
-                  getContainer={false}
-                  style={{ position: 'absolute' }}
-                  width={768}
-              >
-                <SyntaxHighlighter language="tsx" style={atomDark}>
-                  {sourceCode}
-                </SyntaxHighlighter>
-              </Drawer>
+      <>
+        <Modal
+            title="Tipp des Tages"
+            visible={hintofthedayVisible}
+            onOk={() => setHintofthedayVisible(false)}
+            onCancel={() => setHintofthedayVisible(false)}
+            footer={[
+              <Button key="roll" onClick={rollHint}>
+                Nächster Tipp
+              </Button>,
+              <Button key="fine" type="primary" onClick={() => setHintofthedayVisible(false)}>
+                Aha
+              </Button>,
+            ]}
+        >
+          <p>{hintoftheday}</p>
+        </Modal>
+        <Modal
+            visible={infoVisible}
+            title="Digicrafter Info"
+            onOk={() => setInfoVisible(false)}
+            onCancel={() => setInfoVisible(false)}
+            footer={[
+              <Button key="ok" type="primary" onClick={() => setInfoVisible(false)}>
+                OK
+              </Button>,
+            ]}
+        >
+          <p>Digicrafter is a developer's base.</p>
+          <p>You can checkout the source code with the top-right button.</p>
+        </Modal>
+        <Layout data-theme={theme}>
+          <Sider>
+            <div className="digicrafterContainer">
+              <div onClick={logoClicked}><Title className='digicrafter' level={3}>digicrafter</Title></div>
             </div>
-          </Content>
+            <Menu theme="dark" mode="inline"
+                  // defaultSelectedKeys={[Nav.projects.items.digicrafter.link]}
+                  // defaultOpenKeys={menuOpenKeys}
+                  selectedKeys={[selectedMenu]}
+                  openKeys={menuOpenKeys}
+                  onOpenChange={onMenuOpenChange}>
+              {menuTopics()}
+            </Menu>
+          </Sider>
+          <Layout>
+            <Header className="header">
+              <Row justify="space-between">
+                <Col>
+                  <Space size="large">
+                    <AutoComplete
+                        dropdownClassName="certain-category-search-dropdown"
+                        dropdownMatchSelectWidth={500}
+                        style={{width: 250}}
+                        options={[]}
+                    >
+                      <Input.Search placeholder="input here"/>
+                    </AutoComplete>
+                    <Button className="button-square button-linkbutton" onClick={() => history.push('/projects/overview')} shape="round">Projects</Button>
+                    <Button className="button-square button-linkbutton"
+                            onClick={() => history.push(Nav.tools.items.passwordGenerator.link)} shape="round">{Nav.tools.items.passwordGenerator.title}</Button>
+                    <Button className="button-square button-linkbutton" loading
+                            onClick={() => history.push(Nav.tools.items.digiop.link)} shape="round">{Nav.tools.items.digiop.title}</Button>
+                    <Button className="infobutton" icon={<InfoCircleOutlined/>}
+                            onClick={() => setInfoVisible(true)}/>
+                  </Space>
+                </Col>
+                <Col>
+                  <Tooltip placement="left" title="scroll horizontally with <shift>">
+                    <Button onClick={showSource} shape="round">{"<Source/>"}</Button>
+                  </Tooltip>
+                </Col>
+              </Row>
+            </Header>
+            <Content>
+              <div className="site-drawer-render-in-current-wrapper">
+                <div className="site-layout-content">
+                  <Switch>
+                    <Route exact path={Nav.home.items.landing.link}>
+                      <Home />
+                    </Route>
+                    <Route exact path={Nav.home.items.reactTraining.link}>
+                      <ReactTraining />
+                    </Route>
+                    <Route exact path={Nav.tools.items.passwordGenerator.link}>
+                      <PasswordGenerator />
+                    </Route>
+                    <Route exact path={Nav.tools.items.edit.link}>
+                      <Type />
+                    </Route>
+                    {/*<Redirect from={Nav.tools.items.digiop.link} to={Nav.tools.items.digiop.link + '/copy'}/>*/}
+                    <Route path={Nav.tools.items.digiop.link}>
+                      <DigiBoy />
+                    </Route>
+                    <Route exact path={Nav.tools.items.timers.link}>
+                      <Timers />
+                    </Route>
+                    <Route exact path={Nav.projects.items.overview.link}>
+                      <Projects />
+                    </Route>
+                    <Route exact path={Nav.projects.items.archive.link}>
+                      <ProjectsArchive />
+                    </Route>
+                    <Route exact path={Nav.music.items.mixing.link}>
+                      <MusicMixing />
+                    </Route>
+                    <Route exact path={Nav.music.items.production.link}>
+                      <MusicProduction />
+                    </Route>
+                    <Route exact path={Nav.wiki.items[0].link}>
+                      <Wiki />
+                    </Route>
+                    {/*<Route exact path={Nav.items.link}>*/}
+                    {/*  < />*/}
+                    {/*</Route>*/}
+                  </Switch>
+                  <div style={{height:"20px"}} />
+                </div>
+                <SourceCodeTabs key={sourceCodePaths[0]} paths={sourceCodePaths} visible={sourceVisible} />
+              </div>
+            </Content>
+          </Layout>
         </Layout>
-      </Layout>
+      </>
   );
 }
 

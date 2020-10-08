@@ -40,7 +40,9 @@ a:visited {
 }
 
 .header {
-  border-bottom: 1px solid #235d32;
+  /*border-bottom: 1px solid #061006;*/
+  /*border-bottom: 1px solid #061006;*/
+  /*border-bottom: 1px solid #235d32;*/
 }
 
 .site-drawer-render-in-current-wrapper {
