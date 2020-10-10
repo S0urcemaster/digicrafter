@@ -8,6 +8,9 @@ export default function MusicMixing () {
 
     return (
         <Content title="Digital Mixing">
+                <iframe width="100%" height="120"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fsebastian-teister%2Ffree-mix-mixing-my-own-tracks-5-with-some-of-my-favorites%2F"
+                        frameBorder="0"></iframe>
             <iframe width="100%" height="120"
                     src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fsebastian-teister%2Fzappys-clubnight-mix-012%2F"
                     frameBorder="0"></iframe>

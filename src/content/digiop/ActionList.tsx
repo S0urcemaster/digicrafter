@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {Action, ArgDef, Datatype, Operator, selfOp} from "../../lib/digiop/Operators";
+import {Job, Arg, Datatype, Broker} from "../../lib/digiop/Broker";
 import {Form, Input, InputNumber, Select, Typography} from "antd";
 import ListNavigator from "../../components/ListNavigator";
 import {EndpointType} from "../../lib/data/digiop";
 
 export default (props:any) => {
 
-    const [actions, setActions] = useState <Action[]>([props.operator.actionDefs[0]])
+    const [actions, setActions] = useState <Job[]>([props.operator.actionDefs[0]])
     const [currentActionId, setCurrentActionId] = useState (0)
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export default (props:any) => {
     }, [actions])
 
     function actionSelected (name: string) {
-        const actionId = props.operator.actionDefs.findIndex((action: Action) => action.name === name)
+        const actionId = props.operator.actionDefs.findIndex((action: Job) => action.name === name)
         const res = actions.slice(0)
         res[currentActionId] = props.operator.actionDefs[actionId]
         setActions(res)
@@ -24,7 +24,7 @@ export default (props:any) => {
         setActions(insertActionCallback(props.operator.actionDefs[0]))
     }
 
-    function changeActions (actions:Action[]) {
+    function changeActions (actions:Job[]) {
         setActions(actions)
     }
 
@@ -32,15 +32,15 @@ export default (props:any) => {
         setCurrentActionId(id)
     }
 
-    const Payload = (props:{action:Action}) => {
+    const Payload = (props:{action:Job}) => {
 
-        const Prop = (props: {arg:ArgDef, payload:any}) => {
+        const Prop = (props: {arg:Arg, payload:any}) => {
             switch (props.arg.datatype) {
-                case Datatype.StringType:
+                case Datatype.String:
                     return <Input.TextArea style={{height:'40px'}} rows={1} />
-                case Datatype.NumberType:
+                case Datatype.Number:
                     return <InputNumber style={{width:'50px'}} placeholder={'Weeks'} />
-                case Datatype.TimeType:
+                case Datatype.Time:
                     return <div style={{display:'flex', maxWidth:'20px!important', width:'20px!important'}}>
                         <InputNumber style={{maxWidth:'20px'}} placeholder={'Weeks'} />
                     </div>
@@ -50,7 +50,7 @@ export default (props:any) => {
 
         return (
             <>
-                {props.action.args.map((arg:ArgDef, index) =>
+                {props.action.args.map((arg:Arg, index) =>
                     <Form.Item
                         key={arg.name}
                         label={arg.name[0].toUpperCase() + arg.name.slice(1)}
@@ -66,7 +66,7 @@ export default (props:any) => {
     return (
         <div>
             <div style={{display:'flex', justifyContent:'space-between', marginBottom:'0', marginTop:'9px'}}>
-                <Typography.Title style={{marginBottom:'3px'}} level={3}>Actions</Typography.Title>
+                <Typography.Title style={{marginBottom:'3px'}} level={3}>Jobs</Typography.Title>
                 <ListNavigator
                     key={currentActionId}
                     list={actions}
@@ -76,7 +76,7 @@ export default (props:any) => {
                     onChangeCurrent={changeCurrentAction} />
             </div>
             <Form.Item
-                label="Operator"
+                label="Broker"
                 rules={[{ required: true, message: ' ' }]}
                 initialValue={props.operator}
             >
@@ -85,12 +85,12 @@ export default (props:any) => {
                 </Select>
             </Form.Item>
             <Form.Item
-                label="Action"
+                label="Feature"
                 rules={[{ required: true, message: ' ' }]}
                 initialValue={actions[currentActionId].name}
             >
                 <Select style={{width:'100%'}} onChange={actionSelected} value={actions[currentActionId].name}>
-                    {props.operator.actionDefs.map((action:Action) => <Select.Option key={action.name} value={action.name}>{action.name}</Select.Option>)}
+                    {props.operator.actionDefs.map((action:Job) => <Select.Option key={action.name} value={action.name}>{action.name}</Select.Option>)}
                 </Select>
             </Form.Item>
             <Payload key={actions[currentActionId].name} action={actions[currentActionId]}/>

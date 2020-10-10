@@ -24,7 +24,8 @@ export default function (props:PropsWithChildren<any>) {
         //     'Pragma': 'no-cache',
         //     'Expires': '0',
         // }
-        axios.get('http://localhost:3001/src' +path)
+        axios.get('https://digi-craft.de/src' +path)
+        // axios.get('http://localhost:3001/src' +path)
             .then(res => {
                 setSource(res.data)
             }).catch(() => {

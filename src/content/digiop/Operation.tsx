@@ -2,7 +2,7 @@ import React, {PropsWithChildren, useEffect, useState} from "react";
 import '../../css/NarrowForm.css'
 import {Button, Form, Input} from "antd";
 import {EndpointType} from "../../lib/data/digiop";
-import {ArgDef, selfOp, Action} from "../../lib/digiop/Operators";
+import {Arg, selfOp, Job} from "../../lib/digiop/Broker";
 import ActionList from "./ActionList";
 import ToggleButton from "../../components/ToggleButton";
 

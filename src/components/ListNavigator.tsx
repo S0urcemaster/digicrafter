@@ -95,7 +95,7 @@ export default function (props:PropsWithChildren<any>) {
     </>
 
     const CurrentButton = () => <>
-        <Button className='blue' style={{height:'30px', minWidth:'30px'}} size="small">{props.currentId+1}</Button>
+        <Button className='blue' style={{height:'30px', minWidth:'30px'}} size="small">{props.currentId+1}/{props.list.length}</Button>
     </>
 
 

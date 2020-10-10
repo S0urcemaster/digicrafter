@@ -63,7 +63,7 @@ function App() {
   const [sourceCodeFilename, setSourceCodeFilename] = useState('App.tsx')
   const [infoVisible, setInfoVisible] = useState(false)
   const [hintoftheday, setHintoftheday] = useState('')
-  const [hintofthedayVisible, setHintofthedayVisible] = useState(false)
+  const [hintofthedayVisible, setHintofthedayVisible] = useState(true)
   const rootKeys = Object.values(Nav).map((item) => item.heading)
   const history = useHistory()
 

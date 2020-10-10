@@ -9,10 +9,11 @@ import {idb} from "../lib/data/idb";
 import * as db from "../lib/data/digiop";
 import {BrowserNotify, run} from "../lib/Programs";
 import Operation from "./digiop/Operation";
-import {selfOp} from "../lib/digiop/Operators";
+import Brokers from "./digiop/Brokers";
+import {SelfBroker} from "../lib/digiop/Broker";
 
 enum FormTitle {
-    new = 'New Operation', edit = 'Edit Operation'
+    new = 'New Routine', edit = 'Edit Routine'
 }
 
 enum ConnetctionButtonCaption {
@@ -40,12 +41,6 @@ type Program = {
     nextTimeout: Date | undefined,
     lastrun: Date,
     actions: string[]
-}
-
-type Connection = {
-    name: string,
-    description: string,
-    path: string,
 }
 
 // type FilteredInfo = {
@@ -116,35 +111,14 @@ export default function () {
         })
     }
 
-    const connectionsColumns:ColumnsType<Connection> = [
-        {title: 'Name', dataIndex: 'name',
-            sorter: (a:any, b:any) => a.name.length - b.name.length,
-            sortDirections: ['descend'],
-        },
-        {title: 'Description', dataIndex: 'description',
-        },
-        {title: 'path', dataIndex: 'path',
-            sorter: (a:any, b:any) => a.age - b.age,
-            defaultSortOrder: 'ascend',
-        },
-        {title: 'Actions',
-            render: () => <>
-                <Space>
-                    <Typography.Link>Connect</Typography.Link>
-                    <Typography.Link>Disconnect</Typography.Link>
-                </Space>
-            </>,
-        },
-    ];
-
     const programsData:Program[] = [
         {name: 'notify:hello', description: 'Notify me!', status: 'success', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
-        {name: 'sudo chmod', description: 'digicrafter> npm start', status: 'error', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'push update', description: 'write update log and commit/push git', status: 'warning', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'cold_start', description: 'Open all after os restart', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'gelbersack', description: 'Gelber Sack Termine', status: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
-        {name: 'digicrafter lines', description: 'count lines of code', status: 'sourcestats/lines', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
-        {name: 'start_digi1', description: 'digicrafter> npm start', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'sudo chmod', description: 'change attributes', status: 'error', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'new employee', description: 'create user for new employee', status: 'warning', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'cold_start', description: 'Open all after pc restart', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
+        {name: 'chef geburtstag', description: '', status: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
+        {name: 'commit push myProject', description: 'count lines of code', status: 'sourcestats/lines', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
+        {name: '', description: 'digicrafter> npm start', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
         {name: 'deploy_digicrafter1', description: 'Run build > copy server', status: 'sequence', nextTimeout: undefined, lastrun: new Date(), actions: [],},
         {name: 'cold_start1', description: 'Open all after os restart', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
         {name: 'gelbersack1', description: 'Gelber Sack Termine', status: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
@@ -156,23 +130,12 @@ export default function () {
         // {name: '', description: '', command: '', nextTimeout: undefined, lastrun: false, actions: [],},
     ];
 
-    const connectionsData:Connection[] = [
-        {name: 'self', description: navigator.userAgent, path: '',},
-        {name: 'local', description: 'c:/', path: 'http://localhost:3000',},
-        {name: 'digi-craft', description: 'server', path: 'https://digi-craft.de:7000',},
-        // {name: '', description: '', path: '',},
-    ];
-
     function onProgramsChange(pagination:any, filters:any, sorter:any, extra:any) {
         console.log('params', pagination, filters, sorter, extra);
     }
 
     function commandSelected (value:string) {
 
-    }
-
-    function onConnectionsChange(pagination:any, filters:any, sorter:any, extra:any) {
-        console.log('params', pagination, filters, sorter, extra);
     }
 
     function connectionSelected (value:string) {
@@ -187,39 +150,39 @@ export default function () {
 
     }
 
-    try {
-        idb.delete()
-        idb.open()
-    } catch (ex) {
-        console.error(ex)
-    }
-
-    idb.dbCommands.put({name:"BrowserNotify", path:"/browser/notify"}).then(() => {
-
-    }).catch(function(error: string) {
-        alert ("Put command: " + error);
-    });
-
-    const dbp = new db.Program("notify:hello", "Browsernotify", [])
-    dbp.save()
-    // dbp.save()
-    // idb.dbPrograms.add(dbp).then((id) => {
-    //     dbp.id = id
-    //     idb.dbPrograms.toArray().then((ps) => {
-    //         programs = ps
-    //     })
+    // try {
+    //     idb.delete()
+    //     idb.open()
+    // } catch (ex) {
+    //     console.error(ex)
+    // }
+    //
+    // idb.dbCommands.put({name:"BrowserNotify", path:"/browser/notify"}).then(() => {
+    //
     // }).catch(function(error: string) {
-    //     alert ("Put program: " + error);
+    //     alert ("Put command: " + error);
     // });
-
-
-    idb.dbEndpoints.put({name: "local", description: "C:", type: db.EndpointType.local, path: "C:/"}).then (function() {
-        return idb.dbEndpoints.get(1);
-    }).then(function (dbConnection: db.IEndpoint | undefined) {
-        // alert ("Nicolas has shoe size " + dbConnection? dbConnection!.path: '');
-    }).catch(function(error: string) {
-        alert ("Put connection: " + error);
-    });
+    //
+    // const dbp = new db.Program("notify:hello", "Browsernotify", [])
+    // dbp.save()
+    // // dbp.save()
+    // // idb.dbPrograms.add(dbp).then((id) => {
+    // //     dbp.id = id
+    // //     idb.dbPrograms.toArray().then((ps) => {
+    // //         programs = ps
+    // //     })
+    // // }).catch(function(error: string) {
+    // //     alert ("Put program: " + error);
+    // // });
+    //
+    //
+    // idb.dbEndpoints.put({name: "local", description: "C:", type: db.EndpointType.local, path: "C:/"}).then (function() {
+    //     return idb.dbEndpoints.get(1);
+    // }).then(function (dbConnection: db.IEndpoint | undefined) {
+    //     // alert ("Nicolas has shoe size " + dbConnection? dbConnection!.path: '');
+    // }).catch(function(error: string) {
+    //     alert ("Put connection: " + error);
+    // });
 
     const ConnectionForm = () =>
         <>
@@ -263,7 +226,7 @@ export default function () {
             >
                 <p>(I released this projects's state as it will take longer than expected and I need to get more content onto my page fast.
                     Nothing is working here yet except for the Actions list navigator.)</p>
-                <p>Digi Op stands for 'Digital Operator' and is related to the term 'Dev Ops'.</p>
+                <p>Digi Op stands for 'Digital Operator' and is related to the term 'Dev Op'.</p>
                 <p>It's purpose is to be a manager for all kinds of operations a developer, admin or both: a DevOp needs to do during his day's work.</p>
                 <p>While a web app isn't allowed to do much on a workstation or server, it can be a manager of backend services, though.
                 And backend services <i>do</i> have access to the operating system as much as you like. They can send Emails, copy files, edit
@@ -271,7 +234,7 @@ export default function () {
                     with one click.</p>
                 <p>Don't write a wiki entry - write an operation that is doing what you'd just documented instead.
                     Next time you don't look up in the wiki and repeat what you'd written down manually,
-                    you just look up for the operation you created possibly making some changes to it and press "run".</p>
+                    you just look up for the operation you created, possibly make some changes to it and press "run".</p>
             </Modal>
             <div style={{display:'grid', gridTemplateColumns:'70% 30%', height:'calc(100vh - 68px)', alignContent:'start'}}>
                 <div className="dclist">
@@ -288,18 +251,17 @@ export default function () {
                     <Typography.Title level={1} style={{marginBottom:'5px'}}>{formTitle}</Typography.Title>
                     {/*<CommandSelect />*/}
                     {/*<div style={{marginTop:'20px'}} />*/}
-                    <Operation operator={selfOp} />
+                    <Operation operator={new SelfBroker()} />
                 </div>
                 <div className="dclist" style={{borderTop:'1px solid #061006'}}>
-                    <Typography.Title level={1}>Operators</Typography.Title>
-                    <Table rowKey="name" size="small" columns={connectionsColumns as any} dataSource={connectionsData} onChange={onConnectionsChange} />
+                    <Typography.Title level={1}>Brokers</Typography.Title>
+                    <Brokers />
                 </div>
                 <div className="dcform" style={{borderTop:'1px solid #061006'}}>
-                    <Typography.Title level={1}>New Operator</Typography.Title>
+                    <Typography.Title level={1}>New Broker</Typography.Title>
                     <ConnectionForm />
                 </div>
             </div>
         </>
     )
-
 }
