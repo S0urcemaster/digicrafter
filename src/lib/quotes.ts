@@ -65,7 +65,6 @@ export const sprueche = [
     "Eine wahrhafte Anstrengung in die Richtung eines bestimmten Zieles, gibt dem Leben Sinn und Zweck.",
     "Am meisten über einen Menschen sagt nicht aus, wie er mit Freunden umgeht, sondern mit Fremden.",
     "Geh deinen Weg und lass die Leute reden!",
-    "Gar nicht krank ist auch nicht gesund.",
     "Des is wia bei jeda Wissenschaft, am Schluss stellt sich dann heraus, dass alles ganz anders war.",
     "Jedes Ding hat drei Seiten, eine positive, eine negative und eine komische.",
     "Als ich das Licht der Welt und sodann die Hebamme erblickte, war ich sprachlos. Ich hatte diese Frau ja noch nie in meinem Leben gesehen.",

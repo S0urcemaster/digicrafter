@@ -1,16 +1,17 @@
-import React, {useEffect, useState, Suspense} from "react";
+import React, {useEffect, useState} from "react";
 import '../css/DigiOp.css'
-import {Button, Modal, Select, Space, Table, Typography} from "antd";
+import {Button, Modal, Space, Table, Typography} from "antd";
 import {InfoCircleOutlined} from '@ant-design/icons';
-import {Form, Input, Radio} from 'antd';
+import {Form, Input} from 'antd';
 import {ColumnsType} from "antd/lib/table";
 import dbImage from "../img/db.png"
 import {idb} from "../lib/data/idb";
 import * as db from "../lib/data/digiop";
 import {BrowserNotify, run} from "../lib/Programs";
-import Operation from "./digiop/Operation";
+import RoutineForm from "./digiop/RoutineForm";
 import Brokers from "./digiop/Brokers";
-import {SelfBroker} from "../lib/digiop/Broker";
+import {Arg, Broker, Datatype, Job, RemoteBroker, Routine, SelfBroker} from "../lib/digiop/Broker";
+import Routines from "./digiop/Routines";
 
 enum FormTitle {
     new = 'New Routine', edit = 'Edit Routine'
@@ -20,122 +21,152 @@ enum ConnetctionButtonCaption {
     test = 'Test', save = 'Save'
 }
 
-// type FilteredInfo = {
-//     name: string,
-//     value: string,
-//     address: string,
-// }
-//
-// type SortedInfo = {
-//     name: string,
-//     columnKey: string,
-//     order: string,
-//     address: string,
-//     age: string,
-// }
-
-type Program = {
-    name: string,
-    description: string,
-    status: string,
-    nextTimeout: Date | undefined,
-    lastrun: Date,
-    actions: string[]
-}
-
-// type FilteredInfo = {
-//     name: string | null,
-//     value: string | null,
-//     address: string | null,
-// }
-//
-// type SortedInfo = {
-//     name: string | null,
-//     columnKey: string | null,
-//     order: string | null,
-//     address: string | null,
-//     age: string | null,
-// }
-
 export default function () {
 
     const [infoVisible, setInfoVisible] = useState(false)
     const [formTitle, setFormTitle] = useState(FormTitle.new)
     const [connectionButtonCaption, setConnectionButtonCaption] = useState(ConnetctionButtonCaption.test)
+
+    const localBroker = new RemoteBroker('http://localhost:3000', 'local')
+    localBroker.features = [
+        {key:'info', label:'Info', broker:localBroker, args:[]},
+        {key:'runCmd', label:'Run Command', broker:localBroker, args:[
+                {key:'command', label:'Command', datatype:Datatype.String, payload:''},
+                {key:'path', label:'Path', datatype:Datatype.String, payload:''},
+            ]},
+        {key:'copyFile', label:'Copy File', broker:localBroker, args:[
+                {key:'from', label:'From Path', datatype:Datatype.String, payload:''},
+                {key:'to', label:'To Path', datatype:Datatype.String, payload:''},
+            ]},
+        {key:'getDirectory', label:'Copy Directory', broker:localBroker, args:[
+                {key:'path', label:'Path', datatype:Datatype.String, payload:''},
+                {key:'recursive', label:'Recursive', datatype:Datatype.String, payload:''},
+            ]},
+        {key:'getFile', label:'Get File', broker:localBroker, args:[
+                {key:'path', label:'Path', datatype:Datatype.String, payload:''},
+            ]},
+        {key:'putFile', label:'Put File', broker:localBroker, args:[
+                {key:'path', label:'Path', datatype:Datatype.String, payload:''},
+            ]},
+    ]
+
+    const digiBroker = new RemoteBroker('https://digi-craft:3000', 'server')
+    digiBroker.features = [
+        {key:'info', label:'Info', broker:digiBroker, args:[]},
+        {key:'getFile', label:'Get File', broker:digiBroker, args:[
+                {key:'path', label:'Path', datatype:Datatype.String, payload:''},
+            ]},
+        {key:'putFile', label:'Put File', broker:digiBroker, args:[
+                {key:'path', label:'Path', datatype:Datatype.String, payload:''},
+            ]},
+        {key:'putDirectory', label:'Put Directory', broker:digiBroker, args:[
+                {key:'path', label:'Path', datatype:Datatype.String, payload:''},
+            ]},
+        {key:'removeDirectory', label:'Remove Directory', broker:digiBroker, args:[
+                {key:'path', label:'Path', datatype:Datatype.String, payload:''},
+            ]},
+        {key:'editPgHba', label:'Edit pg_hba', broker:digiBroker, args:[]},
+        {key:'chmod', label:'cdmod', broker:digiBroker, args:[
+                {key:'file', label:'File', datatype:Datatype.String, payload:''},
+                {key:'directory', label:'Directory', datatype:Datatype.String, payload:''},
+                {key:'attributes', label:'Attributes', datatype:Datatype.String, payload:''},
+            ]},
+        {key:'restartService', label:'systemctl restart', broker:digiBroker, args:[
+                {key:'service', label:'Service Name', datatype:Datatype.String, payload:''},
+            ]},
+        {key:'observeDir', label:'Observe Directory', broker:digiBroker, args:[
+                {key:'path', label:'Path', datatype:Datatype.String, payload:''},
+                {key:'frequency', label:'Frequency', datatype:Datatype.Number, payload:''},
+            ]},
+    ]
+
+    const deploymentRoutine:Routine = {
+        name: 'digicrafter deployment',
+        description: '',
+        status: '',
+        nextTimeout: '',
+        lastRun: '',
+        jobs: [
+            {key:'runCmd', label:'Run Command', broker:localBroker, args:[
+                    {key:'command', label:'Command', datatype:Datatype.String, payload:'npm run build'},
+                    {key:'path', label:'Path', datatype:Datatype.String, payload:'c:/users/sebas/phpstormprojects/digicrafter'},
+                ]},
+            {key:'removeDirectory', label:'Remove Directory', broker:digiBroker, args:[
+                    {key:'path', label:'Path', datatype:Datatype.String, payload:'/var/www/html'},
+                ]},
+            {key:'getDirectory', label:'Get Directory Contents', broker:localBroker, args:[
+                    {key:'path', label:'Path', datatype:Datatype.String, payload:'c:/users/sebas/phpstormprojects/digicrafter/build'},
+                    {key:'recursive', label:'Recursive', datatype:Datatype.String, payload:'true'},
+                ]},
+            {key:'putDirectory', label:'Put Directory', broker:digiBroker, args:[
+                    {key:'path', label:'Path', datatype:Datatype.String, payload:'/var/www/html'},
+                ]},
+        ]
+    }
+
+    const installRoutine:Routine = {
+        name: 'Server Fresh Setup',
+        description: '',
+        status: '',
+        nextTimeout: '',
+        lastRun: '',
+        jobs: []
+    }
+
+    const employeeRoutine:Routine = {
+        name: 'Neuer Mitarbeiter',
+        description: '',
+        status: '',
+        nextTimeout: '',
+        lastRun: '',
+        jobs: []
+    }
+
+    const virtualHostRoutine:Routine = {
+        name: 'Neuer VirtualHost',
+        description: '',
+        status: '',
+        nextTimeout: '',
+        lastRun: '',
+        jobs: []
+    }
+
+    const localBackupRoutine:Routine = {
+        name: 'Lokales Backup',
+        description: '',
+        status: '',
+        nextTimeout: '',
+        lastRun: '',
+        jobs: []
+    }
+
+    const publishLaravelRoutine:Routine = {
+        name: 'Publish Laravel',
+        description: '',
+        status: '',
+        nextTimeout: '',
+        lastRun: '',
+        jobs: []
+    }
+
+    const editPghbaRoutine:Routine = {
+        name: 'Edit pg_hba',
+        description: '',
+        status: '',
+        nextTimeout: '',
+        lastRun: '',
+        jobs: []
+    }
+
+    const [brokers, setBrokers] = useState <Broker[]>([new SelfBroker(), localBroker, digiBroker])
+    const [routines, setRoutines] = useState <Routine[]>([deploymentRoutine, installRoutine,
+        employeeRoutine, virtualHostRoutine, localBackupRoutine, publishLaravelRoutine, editPghbaRoutine])
+    const [currentRoutine, setCurrentRoutine] = useState(deploymentRoutine)
     // const [sortedInfo, setSortedInfo] = useState <SortedInfo | null>(null)
     // const [filteredInfo, setFilteredInfo] = useState <FilteredInfo | null>(null)
 
-    const programsColumns:ColumnsType<Program> = [
-        {title: 'Name', dataIndex: 'name',
-            sorter: (a:any, b:any) => a.name.length - b.name.length,
-            sortDirections: ['descend'],
-        },
-        {title: 'Description', dataIndex: 'description',
-        },
-        {title: 'Last Status', dataIndex: 'status',
-            filters: [{text: 'Joe', value: 'Joe',}, {text: 'Jim', value: 'Jim',},],
-            onFilter: (value:any, record:any) => record.name.indexOf(value) === 0,
-            sorter: (a:any, b:any) => a.age - b.age,
-            defaultSortOrder: 'ascend',
-        },
-        {title: 'Timeout', dataIndex: 'timeout',
-            sorter: (a:any, b:any) => a.address.length - b.address.length,
-            sortDirections: ['descend', 'ascend'],
-        },
-        {title: 'Last Run', dataIndex: 'lastrun',
-            sorter: (a:any, b:any) => a.address.length - b.address.length,
-            sortDirections: ['descend', 'ascend'],
-        },
-        {title: 'Actions',
-            render: (record: Program) => <>
-                <Space>
-                    <Typography.Link onClick={() => runProgram(record)}>Run</Typography.Link>
-                    <Typography.Link>Delete</Typography.Link>
-                </Space>
-            </>,
-        },
-    ];
-
-    // let programs: DBProgram[] = []
-
-    function runProgram (p: Program) {
-        let programs: db.Program[] = []
-        idb.dbPrograms.toArray().then((ps) => {
-            programs = ps
-        }).then(() => {
-            const program = programs.find((program) => {
-                return program.name === p.name
-            })
-            if (program) program.run()
-            else alert(false)
-        })
-    }
-
-    const programsData:Program[] = [
-        {name: 'notify:hello', description: 'Notify me!', status: 'success', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
-        {name: 'sudo chmod', description: 'change attributes', status: 'error', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'new employee', description: 'create user for new employee', status: 'warning', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'cold_start', description: 'Open all after pc restart', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'chef geburtstag', description: '', status: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
-        {name: 'commit push myProject', description: 'count lines of code', status: 'sourcestats/lines', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
-        {name: '', description: 'digicrafter> npm start', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'deploy_digicrafter1', description: 'Run build > copy server', status: 'sequence', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'cold_start1', description: 'Open all after os restart', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'gelbersack1', description: 'Gelber Sack Termine', status: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
-        {name: 'dump_words2', description: 'Make database backup', status: 'postgresDump', nextTimeout: undefined, lastrun: new Date(), actions: ['Run', 'Delete'],},
-        {name: 'start_digi2', description: 'digicrafter> npm start', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'deploy_digicrafter2', description: 'Run build > copy server', status: 'sequence', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'cold_start2', description: 'Open all after os restart', status: 'runOS', nextTimeout: undefined, lastrun: new Date(), actions: [],},
-        {name: 'gelbersack2', description: 'Gelber Sack Termine', status: 'mailto', nextTimeout: new Date(), lastrun: new Date(), actions: [],},
-        // {name: '', description: '', command: '', nextTimeout: undefined, lastrun: false, actions: [],},
-    ];
-
-    function onProgramsChange(pagination:any, filters:any, sorter:any, extra:any) {
-        console.log('params', pagination, filters, sorter, extra);
-    }
-
-    function commandSelected (value:string) {
-
+    function routineSelected (index: number) {
+        setCurrentRoutine(routines[index])
     }
 
     function connectionSelected (value:string) {
@@ -147,6 +178,10 @@ export default function () {
     }
 
     function onFinishFailedConnection() {
+
+    }
+
+    function saveRoutine (routine: Routine) {
 
     }
 
@@ -184,7 +219,7 @@ export default function () {
     //     alert ("Put connection: " + error);
     // });
 
-    const ConnectionForm = () =>
+    const BrokerForm = () =>
         <>
             <Form
                 labelCol={{ span: 8 }}
@@ -244,22 +279,19 @@ export default function () {
                         <Button className="infobutton" size="large" icon={<InfoCircleOutlined/>}
                                 onClick={() => setInfoVisible(true)}/>
                     </div>
-                    <Table rowKey="name" size="small" columns={programsColumns as any} dataSource={programsData} onChange={onProgramsChange}
-                    pagination={{pageSize:10}}/>
+                    <Routines data={routines} rowClick={routineSelected} />
                 </div>
                 <div className="dcform">
                     <Typography.Title level={1} style={{marginBottom:'5px'}}>{formTitle}</Typography.Title>
-                    {/*<CommandSelect />*/}
-                    {/*<div style={{marginTop:'20px'}} />*/}
-                    <Operation operator={new SelfBroker()} />
+                    <RoutineForm key={currentRoutine.name} brokers={brokers} routine={currentRoutine} onSave={saveRoutine} />
                 </div>
                 <div className="dclist" style={{borderTop:'1px solid #061006'}}>
                     <Typography.Title level={1}>Brokers</Typography.Title>
-                    <Brokers />
+                    <Brokers data={brokers} />
                 </div>
                 <div className="dcform" style={{borderTop:'1px solid #061006'}}>
                     <Typography.Title level={1}>New Broker</Typography.Title>
-                    <ConnectionForm />
+                    <BrokerForm />
                 </div>
             </div>
         </>

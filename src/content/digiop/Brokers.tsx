@@ -12,11 +12,13 @@ type BrokerType = {
 
 export default (props:any) => {
 
-    const [brokers, setBrokers] = useState <Broker[]>([])
+    const brokers:Broker[] = props.data
+
+    // const [brokers, setBrokers] = useState <Broker[]>([])
     // const [brokersData, setBrokersData] = useState <Connection[]> ([])
 
     useEffect(() => {
-        setBrokers([new SelfBroker])
+        // setBrokers([new SelfBroker])
     }, [])
 
     // useEffect(() => {
@@ -35,8 +37,8 @@ export default (props:any) => {
         {title: 'Actions',
             render: () => <>
                 <Space>
-                    <Typography.Link>Connect</Typography.Link>
-                    <Typography.Link>Disconnect</Typography.Link>
+                    {/*<Typography.Link>Connect</Typography.Link>*/}
+                    {/*<Typography.Link>Disconnect</Typography.Link>*/}
                 </Space>
             </>,
         },

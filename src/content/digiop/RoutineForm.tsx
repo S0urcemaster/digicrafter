@@ -2,9 +2,8 @@ import React, {PropsWithChildren, useEffect, useState} from "react";
 import '../../css/NarrowForm.css'
 import {Button, Form, Input} from "antd";
 import {EndpointType} from "../../lib/data/digiop";
-import {Arg, selfOp, Job} from "../../lib/digiop/Broker";
-import ActionList from "./ActionList";
-import ToggleButton from "../../components/ToggleButton";
+import JobList from "./JobList";
+import {Broker, Routine} from "../../lib/digiop/Broker";
 
 enum TimeoutType {
     at = 'At', in = 'In'
@@ -12,17 +11,11 @@ enum TimeoutType {
 
 export default function (props:PropsWithChildren<any>) {
 
-    const [actionsDisabled, setActionsDisabled] = useState(true)
+    const [routine, setRoutine] = useState <Routine>(props.routine)
     const [timeoutType, setTimeoutType] = useState(TimeoutType.in)
     const [day, setDay] = useState(1)
 
-    useEffect(() => {
-        setActionsDisabled(false)
-    }, [])
-
-    function endpointTypeChanged(type: EndpointType) {
-        setActionsDisabled(false)
-    }
+    const brokers:Broker[] = props.brokers
 
     function timeoutTypeChange () {
         setTimeoutType(timeoutType === TimeoutType.in ? TimeoutType.at : TimeoutType.in)
@@ -64,37 +57,37 @@ export default function (props:PropsWithChildren<any>) {
             // style={{border: '2px solid #141414'}}
             style={{backgroundColor: '#1f1f1f'}}
         >
-            <Form.Item style={{margin:0}} label="Name" name="name" rules={[{ required: true, message: ' ' }]}>
-                <Input />
+            <Form.Item style={{margin:0}} label="Name" name="name" rules={[{ required: true, message: ' ' }]} initialValue={routine.name}>
+                <Input value={routine.name} />
             </Form.Item>
-            <Form.Item label="Description" name="description" rules={[{ required: false, message: ' ' }]}>
-                <Input />
+            <Form.Item label="Description" name="description" rules={[{ required: false, message: ' ' }]} initialValue={routine.description}>
+                <Input value={routine.description} />
             </Form.Item>
             <Form.Item label="Start" name="start" rules={[{ required: false, message: ' ' }]}>
                 <div style={{display:'flex'}}>
-                    <Button style={{width:'40px'}} onClick={timeoutTypeChange}>{timeoutType}</Button>
-                    <Button onContextMenu={rightClick} onMouseDown={upHold} onMouseUp={upRelease} style={{width:'40px', paddingLeft:'9px'}}>{day}</Button>
+                    <Button disabled style={{width:'40px'}} onClick={timeoutTypeChange}>{timeoutType}</Button>
+                    <Button disabled onContextMenu={rightClick} onMouseDown={upHold} onMouseUp={upRelease} style={{width:'40px', paddingLeft:'9px'}}>{day}</Button>
                     -
-                    <Button style={{width:'40px', paddingLeft:'9px'}}>01</Button>
+                    <Button disabled style={{width:'40px', paddingLeft:'9px'}}>01</Button>
                     -
-                    <Button style={{width:'50px', paddingLeft:'7px'}}>2020</Button>
+                    <Button disabled style={{width:'50px', paddingLeft:'7px'}}>2020</Button>
                     &nbsp;
-                    <Button style={{width:'40px', paddingLeft:'9px'}}>23</Button>
+                    <Button disabled style={{width:'40px', paddingLeft:'9px'}}>23</Button>
                     :
-                    <Button style={{width:'40px', paddingLeft:'9px'}}>59</Button>
+                    <Button disabled style={{width:'40px', paddingLeft:'9px'}}>59</Button>
                 </div>
             </Form.Item>
             <Form.Item label="Repeat" name="repeat" rules={[{ required: false, message: ' ' }]}>
                 <div style={{display:'flex'}}>
-                    <Button>hr</Button>
-                    <Button>dy</Button>
-                    <Button>wk</Button>
-                    <Button>mo</Button>
-                    <Button>yr</Button>
-                    <Button>off</Button>
+                    <Button disabled>hr</Button>
+                    <Button disabled>dy</Button>
+                    <Button disabled>wk</Button>
+                    <Button disabled>mo</Button>
+                    <Button disabled>yr</Button>
+                    <Button disabled>off</Button>
                 </div>
             </Form.Item>
-            <ActionList operator={props.operator} />
+            <JobList brokers={brokers} jobs={routine.jobs} />
             <div className={'form-spacer'}/>
 
             {/*{props.children}*/}
