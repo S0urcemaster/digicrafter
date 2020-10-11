@@ -5,8 +5,6 @@ import ProjectsOverview from "./projects/Overview";
 import UpdateLogs from "./projects/UpdateLogs";
 import Todo from "./projects/Todo";
 
-const {Title, Text} = Typography
-
 export default function Projects () {
 
 

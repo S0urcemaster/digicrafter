@@ -88,10 +88,6 @@ function techToTag(tech:string):React.ReactElement {
             return frameworkTag('ExpressJS')
         // case '':
         //     return Tag('')
-        // case '':
-        //     return Tag('')
-        // case '':
-        //     return Tag('')
         default:
             return <Tag color="cyan">Not found</Tag>
     }

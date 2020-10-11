@@ -2,7 +2,7 @@ import React from "react";
 import {Table, Typography} from "antd";
 import Content from "../../components/Content";
 import tags from "./Tags";
-import {Experience, xpTracker} from "../../lib/Experience";
+import {xpTracker} from "../../lib/Experience";
 import ExternalLink from "../../components/ExternalLink";
 
 const {Title} = Typography
@@ -151,16 +151,6 @@ export default function Archive () {
                        //     scope: "",
                        //     repo: <Link href="" target="_blank">github.com</Link>,
                        // },
-                       // {
-                       //     key: keyUp(),
-                       //     year: "",
-                       //     title: "",
-                       //     description: '',
-                       //     motivation: '',
-                       //     tech: tags([]),
-                       //     scope: "",
-                       //     repo: <Link href="" target="_blank">github.com</Link>,
-                       // },
                    ]}
             />
             <Title level={2}></Title>
@@ -206,26 +196,6 @@ export default function Archive () {
                            scope: "2 months",
                            repo: '',
                        },
-                       // {
-                       //     key: keyUp(),
-                       //     year: "",
-                       //     title: "",
-                       //     description: '',
-                       //     motivation: '',
-                       //     tech: tags([]),
-                       //     scope: "",
-                       //     repo: <Link href="" target="_blank">github.com</Link>,
-                       // },
-                       // {
-                       //     key: keyUp(),
-                       //     year: "",
-                       //     title: "",
-                       //     description: '',
-                       //     motivation: '',
-                       //     tech: tags([]),
-                       //     scope: "",
-                       //     repo: <Link href="" target="_blank">github.com</Link>,
-                       // },
                        // {
                        //     key: keyUp(),
                        //     year: "",

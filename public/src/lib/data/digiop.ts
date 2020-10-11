@@ -111,30 +111,3 @@ export type UICommand = {
     route: string,
     component: React.ComponentType<any>,
 }
-
-export type CommandList = {
-    [key:string]: UICommand
-}
-
-// export const commands:CommandList = {
-//     copy: {
-//         name: 'Copy',
-//         route: '/copy',
-//         component: React.lazy(() => import('../../content/digiop/Operation')),
-//     },
-//     copyToConnection: {
-//         name: 'Copy to Connection',
-//         route: '/copy-to-connection',
-//         component: React.lazy(() => import('../../content/digiop/Copy')),
-//     },
-//     osRun1: {
-//         name: 'OS Run',
-//         route: '/osrun',
-//         component: React.lazy(() => import('../../content/digiop/Copy')),
-//     },
-//     gitpull: {
-//         name: 'Git Pull',
-//         route: '/gitpull',
-//         component: React.lazy(() => import('../../content/digiop/Copy')),
-//     },
-// }

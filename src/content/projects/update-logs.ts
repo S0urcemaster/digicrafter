@@ -1,4 +1,4 @@
-import {Duration, formatDuration} from "date-fns";
+import {Duration} from "date-fns";
 
 export type UpdateLog = {
     project: number,
@@ -48,13 +48,15 @@ export const updateLogs: Array<UpdateLogs> = [
     //     total: sumDurations()
     // },
     {
-        date: new Date('2020-'),
+        date: new Date('2020-10-11'),
         logs: [
             {project: project.digiop, log:"Refactoring; Types adjustments", duration: addDuration(1, 30)},
             {project: project.digiop, log:"Bugfixing changes", duration: addDuration(0, 30)},
             {project: project.digiop, log:"Broker/Feature Form fix", duration: addDuration(1, 30)},
             {project: project.digiop, log:"Dummy Content", duration: addDuration(1, 10)},
             {project: project.digiop, log:"Example Routine; fixes", duration: addDuration(1, 10)},
+            {project: project.digiop, log:"New Routine, PGenerator layout fix", duration: addDuration(1, 20)},
+            {project: project.digiop, log:"Cleanup; Deployment", duration: addDuration(0, 20)},
             // {project: project.digiop, log:"", duration: addDuration()},
         ],
         total: sumDurations()
@@ -77,9 +79,6 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.digiop, log:"Timeout/Repeat approach", duration: addDuration(0, 40)},
             {project: project.digiop, log:"DigiOp Info; PGenerator form fixes;Quotes", duration: addDuration(3,20)},
             {project: project.digiop, log:"Fix initial menu path; display multiple source files", duration: addDuration(2, 20)},
-            // {project: project.digiop, log:"", duration: addDuration()},
-            // {project: project.digiop, log:"", duration: addDuration()},
-            // {project: project.digiop, log:"", duration: addDuration()},
         ],
         total: sumDurations()
     },

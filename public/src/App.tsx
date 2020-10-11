@@ -4,8 +4,6 @@ import './css/App.css'
 import './css/digicrafter.css'
 import React, {useEffect, useState} from 'react';
 import {Route, Switch, Redirect, useHistory} from "react-router-dom";
-import Location from "react-router"
-import axios from "axios";
 import {
   AutoComplete,
   Button,
@@ -22,8 +20,6 @@ import {
   Typography
 } from 'antd'
 import SubMenu from "antd/es/menu/SubMenu";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import {Nav, NavItem, NavSection} from "./lib/Nav"
 import Projects from "./content/Projects";
 import Type from "./content/Type";
@@ -39,10 +35,6 @@ import MusicMixing from "./content/MusicMixing";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {sprueche} from "./lib/quotes";
 import {random} from "./lib/random";
-import ContentTabs from "./components/ContentTabs";
-import ProjectsOverview from "./content/projects/Overview";
-import UpdateLogs from "./content/projects/UpdateLogs";
-import Todo from "./content/projects/Todo";
 import SourceCodeTabs from "./SourceCodeTabs";
 
 enum Theme {
@@ -63,7 +55,7 @@ function App() {
   const [sourceCodeFilename, setSourceCodeFilename] = useState('App.tsx')
   const [infoVisible, setInfoVisible] = useState(false)
   const [hintoftheday, setHintoftheday] = useState('')
-  const [hintofthedayVisible, setHintofthedayVisible] = useState(false)
+  const [hintofthedayVisible, setHintofthedayVisible] = useState(true)
   const rootKeys = Object.values(Nav).map((item) => item.heading)
   const history = useHistory()
 

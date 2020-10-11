@@ -1,10 +1,6 @@
 import React from "react";
-import {Typography} from "antd";
 import Content from "../components/Content";
 import '../css/MusicProduction.css'
-
-const {Title, Text} = Typography
-
 
 export default function MusicProduction () {
 

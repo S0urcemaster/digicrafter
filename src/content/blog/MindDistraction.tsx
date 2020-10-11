@@ -3,7 +3,7 @@ import {Typography} from "antd";
 import '../../css/App.css'
 import Content from "../../components/Content";
 
-const {Title, Text} = Typography
+const {Text} = Typography
 
 export default function MindDistraction () {
 

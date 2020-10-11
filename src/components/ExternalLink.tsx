@@ -1,7 +1,6 @@
 import React, {PropsWithChildren} from "react";
 import {Typography} from "antd";
 import ExternalSvg from '../img/external-link.svg'
-import Icon from "antd/es/icon";
 
 const {Link} = Typography
 

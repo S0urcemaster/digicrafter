@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import '../css/PGenerator.css'
-import {Button, Col, Divider, Layout, Modal, Row, Space, Typography} from "antd";
+import {Button, Col, Divider, Layout, Modal, Row, Typography} from "antd";
 import { InfoCircleOutlined } from '@ant-design/icons';
 import {Form, Input, Radio} from 'antd';
 import axios from "axios";
@@ -28,7 +28,6 @@ enum wordLength {
 export default function PasswordGenerator() {
 
     const [sentences, setSentences] = useState <string[]>([])
-    const [initSents, setInitSents] = useState <string[]>([])
     const [sentence, setSentence] = useState <string>()
     const [passwords, setPasswords] = useState <string[]>([])
     const [passwordHistory, setPasswordhistory] = useState <string[]>([])
@@ -85,7 +84,6 @@ export default function PasswordGenerator() {
 
     useEffect(() => {
         if (init) {
-            setInitSents(sentences)
             init = false
         }
         genPasswords(sentences)
@@ -206,8 +204,6 @@ export default function PasswordGenerator() {
         }
         return pwd
     }
-
-    // function nextUserChar
 
     function spacingSpecial (sent: string) :string {
         if(specialActive.length === 0) return sent
@@ -389,14 +385,6 @@ export default function PasswordGenerator() {
                                 <Radio.Button value={wordLength.all}>alle</Radio.Button>
                             </Radio.Group>
                         </Form.Item>
-                        {/*<Form.Item label="Generator Optionen" name="options">*/}
-                        {/*    <Radio.Group value='alliteration'>*/}
-                        {/*        <Radio.Button value="alliteration">Alliteration</Radio.Button>*/}
-                        {/*        <Radio.Button value="5">CamelCase</Radio.Button>*/}
-                        {/*        <Radio.Button value="random">Zufällig groß</Radio.Button>*/}
-                        {/*        <Radio.Button value="large">Large</Radio.Button>*/}
-                        {/*    </Radio.Group>*/}
-                        {/*</Form.Item>*/}
                         <Form.Item label="Generieren">
                             <Button type='primary' onClick={generate}>Generieren</Button>
                         </Form.Item>
@@ -449,27 +437,6 @@ export default function PasswordGenerator() {
                                     <ButtonCheckboxRow selected={replacementsSelected} items={replacements}/>
                                 </Col>
                         </Form.Item>
-                        {/*<Form.Item label="Form Size" name="size">*/}
-                        {/*    <Radio.Group>*/}
-                        {/*        <Radio.Button value="small">Small</Radio.Button>*/}
-                        {/*        <Radio.Button value="default">Default</Radio.Button>*/}
-                        {/*        <Radio.Button value="large">Large</Radio.Button>*/}
-                        {/*    </Radio.Group>*/}
-                        {/*</Form.Item>*/}
-                        {/*<Form.Item label="Select">*/}
-                        {/*    <Select>*/}
-                        {/*        <Select.Option value="demo">Demo</Select.Option>*/}
-                        {/*    </Select>*/}
-                        {/*</Form.Item>*/}
-                        {/*<Form.Item label="InputNumber">*/}
-                        {/*    <InputNumber/>*/}
-                        {/*</Form.Item>*/}
-                        {/*<Form.Item label="Alliteration">*/}
-                        {/*    <Switch/>*/}
-                        {/*</Form.Item>*/}
-                        {/*<Form.Item label="Switch">*/}
-                        {/*    <Switch/>*/}
-                        {/*</Form.Item>*/}
                     </Form>
                 </div>
             </Layout>

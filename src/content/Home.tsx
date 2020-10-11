@@ -1,9 +1,8 @@
 import React from "react";
-import {Button, Space, Typography} from "antd";
+import {Typography} from "antd";
 import '../css/App.css'
 import Content, {Item, Columns, Title} from "../components/Content";
 import axios from 'axios'
-import {Link} from "react-router-dom";
 import InternalLink from "../components/InternalLink";
 import ExternalLink from "../components/ExternalLink";
 import {Nav} from "../lib/Nav";
@@ -58,8 +57,6 @@ export default function Home () {
                         <li><Text>Season the generated passwords with extra symbols or numbers.</Text></li>
                         <li><Text>Generate as much passwords as you like until you find one you like.</Text></li>
                         <li><Text>Input your own words to play around with them.</Text></li>
-                        {/*<li><Text></Text></li>*/}
-                        {/*<li><Text></Text></li>*/}
                         {/*<li><Text></Text></li>*/}
                     </ul>
                 </Item>

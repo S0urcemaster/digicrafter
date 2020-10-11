@@ -104,16 +104,6 @@ export default function ProjectsOverview () {
                        },
                        // {
                        //     key: keyUp(),
-                       //     started: "2020",
-                       //     title: <Link href="https://digi-craft.de/customerboard" target="_blank">Kundenbesuchsdatenbank (digi-craft.de)</Link>,
-                       //     description: 'In-house CRM Projekt. Kunden- und Kontaktdaten, Besuchsberichte',
-                       //     motivation: 'Auftrag',
-                       //     tech: tags(['php', 'laravel', 'vue', 'git', 'javascript', 'phpstorm', 'npm', 'composer']),
-                       //     scope: "3 months",
-                       //     repo: <Link href="https://github.com/flammt/CustomerBoard" target="_blank">flammt/CustomerBoard</Link>,
-                       // },
-                       // {
-                       //     key: keyUp(),
                        //     started: "",
                        //     title: "",
                        //     description: '',

@@ -2,7 +2,7 @@ import React from "react";
 import {Typography} from "antd";
 import Content from "../components/Content";
 
-const {Title, Text} = Typography
+const {Text} = Typography
 
 export default function Kontakt  () {
 

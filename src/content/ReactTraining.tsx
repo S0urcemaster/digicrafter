@@ -2,7 +2,6 @@ import React from "react";
 import {Space, Typography} from "antd";
 import '../css/App.css'
 import Content, {Columns, Item, Subtitle, Title} from "../components/Content";
-import {Link} from "react-router-dom";
 
 const {Text} = Typography
 
@@ -110,17 +109,6 @@ export default function ReatTraining () {
                     <Text>30h yet</Text>
                 </Item>
                 <Item>
-                    {/*<Typography.Title level={3}>Break to Building My Homepage</Typography.Title>*/}
-                    {/*<Typography.Title level={4}>Challenges:</Typography.Title>*/}
-                    {/*<ul>*/}
-                    {/*    <li>TypeScript</li>*/}
-                    {/*    <li>Ant Design</li>*/}
-                    {/*    <li>UI UX</li>*/}
-                    {/*    <li>Localization</li>*/}
-                    {/*    <li>Automatic Menu Building</li>*/}
-                    {/*    <li>Ant Design Customization/ Styling</li>*/}
-                    {/*</ul>*/}
-                    {/*<Text>~40h</Text>*/}
                 </Item>
             </Columns>
         </Content>

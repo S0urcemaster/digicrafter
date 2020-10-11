@@ -1,6 +1,7 @@
 .pgsider {
     background-color: #1f1f1f;
-    border-left: 1px solid #235d32;
+    border-left: 1px solid #061006;
+    border-top: 1px solid #061006;
     position: fixed;
     left: 0;
     min-width: 768px;
@@ -16,7 +17,8 @@
     margin-left: 768px;
     margin-top: 0;
     background-color: #1f1f1f;
-    border-left: 1px solid #235d32;
+    border-left: 1px solid #061006;
+    border-top: 1px solid #061006;
     height: calc(100% - 48px);
     padding: 10px 10px 10px 20px;
 }

@@ -2,7 +2,6 @@ import React, {PropsWithChildren} from "react";
 import {Tabs, Typography} from "antd";
 import '../css/App.css'
 
-const {Title} = Typography
 const { TabPane } = Tabs;
 
 

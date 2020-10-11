@@ -5,7 +5,7 @@ import {Duration, format, formatDuration} from "date-fns";
 import {project, UpdateLog} from "./update-logs";
 import {updateLogs as ulogs} from './update-logs'
 
-const {Title, Text} = Typography
+const {Title} = Typography
 
 export default function UpdateLogs () {
 

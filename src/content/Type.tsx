@@ -51,11 +51,6 @@ export default function Type () {
             <Layout>
                 <Sider className="type-sider">
                     <Menu theme="dark" mode="inline"
-                        // defaultSelectedKeys={[Nav.projects.items.digicrafter.link]}
-                        // defaultOpenKeys={menuOpenKeys}
-                        //   selectedKeys={[selectedMenu]}
-                        //   openKeys={menuOpenKeys}
-                        //   onOpenChange={onMenuOpenChange}
                     >
                         <Menu.Item key='h1' onClick={() => menuClicked('h1')}>H1</Menu.Item>
                         <Menu.Item key='h2' onClick={() => menuClicked('h2')}>H2</Menu.Item>

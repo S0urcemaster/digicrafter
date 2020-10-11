@@ -2,7 +2,7 @@ import React from "react";
 import {Table, Typography} from "antd";
 import '../../css/App.css'
 
-const {Title, Text} = Typography
+const {Title} = Typography
 
 export default function Todo () {
 

@@ -17,23 +17,11 @@ export type Experience = {
     }
 }
 
-// const xp:Experience = {
-//     programming: {
-//
-//     }
-// }
-
 export class xpTracker {
 
     durations: (fnsDuration)[] = []
     xp: (Experience)[] = []
     sum: string = ''
-
-    // addDur(M: number, w:number, d:number, h: number, m: number): string {
-    //     const dur = {hours: h, minutes: m}
-    //     this.durations.push(dur)
-    //     return formatDuration(dur)
-    // }
 
     add(xp:Experience) {
         this.xp.push(xp)

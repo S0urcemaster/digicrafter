@@ -3,18 +3,14 @@ import '../css/DigiOp.css'
 import {Button, Modal, Space, Table, Typography} from "antd";
 import {InfoCircleOutlined} from '@ant-design/icons';
 import {Form, Input} from 'antd';
-import {ColumnsType} from "antd/lib/table";
 import dbImage from "../img/db.png"
-import {idb} from "../lib/data/idb";
-import * as db from "../lib/data/digiop";
-import {BrowserNotify, run} from "../lib/Programs";
 import RoutineForm from "./digiop/RoutineForm";
 import Brokers from "./digiop/Brokers";
-import {Arg, Broker, Datatype, Job, RemoteBroker, Routine, SelfBroker} from "../lib/digiop/Broker";
+import {Broker, Datatype, Job, RemoteBroker, Routine, SelfBroker} from "../lib/digiop/Broker";
 import Routines from "./digiop/Routines";
 
 enum FormTitle {
-    new = 'New Routine', edit = 'Edit Routine'
+    new = 'Routine', edit = 'Edit Routine'
 }
 
 enum ConnetctionButtonCaption {
@@ -38,9 +34,12 @@ export default function () {
                 {key:'from', label:'From Path', datatype:Datatype.String, payload:''},
                 {key:'to', label:'To Path', datatype:Datatype.String, payload:''},
             ]},
-        {key:'getDirectory', label:'Copy Directory', broker:localBroker, args:[
+        {key:'getDirectory', label:'Get Directory', broker:localBroker, args:[
                 {key:'path', label:'Path', datatype:Datatype.String, payload:''},
                 {key:'recursive', label:'Recursive', datatype:Datatype.String, payload:''},
+            ]},
+        {key:'putDirectory', label:'Put Directory', broker:localBroker, args:[
+                {key:'path', label:'Path', datatype:Datatype.String, payload:''},
             ]},
         {key:'getFile', label:'Get File', broker:localBroker, args:[
                 {key:'path', label:'Path', datatype:Datatype.String, payload:''},
@@ -162,15 +161,9 @@ export default function () {
     const [routines, setRoutines] = useState <Routine[]>([deploymentRoutine, installRoutine,
         employeeRoutine, virtualHostRoutine, localBackupRoutine, publishLaravelRoutine, editPghbaRoutine])
     const [currentRoutine, setCurrentRoutine] = useState(deploymentRoutine)
-    // const [sortedInfo, setSortedInfo] = useState <SortedInfo | null>(null)
-    // const [filteredInfo, setFilteredInfo] = useState <FilteredInfo | null>(null)
 
     function routineSelected (index: number) {
         setCurrentRoutine(routines[index])
-    }
-
-    function connectionSelected (value:string) {
-
     }
 
     function onFinishConnection() {
@@ -179,6 +172,13 @@ export default function () {
 
     function onFinishFailedConnection() {
 
+    }
+
+    function newRoutine () {
+        const rout:Routine = {
+            description: "", name: "", jobs: []
+        }
+        setCurrentRoutine(rout)
     }
 
     function saveRoutine (routine: Routine) {
@@ -282,7 +282,10 @@ export default function () {
                     <Routines data={routines} rowClick={routineSelected} />
                 </div>
                 <div className="dcform">
-                    <Typography.Title level={1} style={{marginBottom:'5px'}}>{formTitle}</Typography.Title>
+                    <div style={{display:'flex', justifyContent:'space-between'}}>
+                        <Typography.Title level={1} style={{marginBottom:'5px'}}>{formTitle}</Typography.Title>
+                        <Button onClick={newRoutine}>New</Button>
+                    </div>
                     <RoutineForm key={currentRoutine.name} brokers={brokers} routine={currentRoutine} onSave={saveRoutine} />
                 </div>
                 <div className="dclist" style={{borderTop:'1px solid #061006'}}>
@@ -290,7 +293,7 @@ export default function () {
                     <Brokers data={brokers} />
                 </div>
                 <div className="dcform" style={{borderTop:'1px solid #061006'}}>
-                    <Typography.Title level={1}>New Broker</Typography.Title>
+                    <Typography.Title level={1}>Broker</Typography.Title>
                     <BrokerForm />
                 </div>
             </div>
