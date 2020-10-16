@@ -1,7 +1,8 @@
 import React from "react";
 import {Space, Typography} from "antd";
 import '../css/App.css'
-import Content, {Columns, Item, Subtitle, Title} from "../components/Content";
+import Content, {Columns, Item, ItemTitle, Subtitle, Title} from "../components/Content";
+import {Nav} from "../lib/Nav";
 
 const {Text} = Typography
 
@@ -9,7 +10,7 @@ export default function ReatTraining () {
 
     return (
         <Content>
-            <Title>React Training</Title>
+            <Title date={'15.10.2020'} navPrev={Nav.home.items.landing.link} navNext={Nav.projects.items.overview.link}>React Training</Title>
             <Subtitle>Introduction</Subtitle>
             <Item>
                 <Space direction="vertical">
@@ -24,10 +25,10 @@ export default function ReatTraining () {
                     level of abstraction, though.</Text>
                 </Space>
             </Item>
-            <Subtitle level={2}>Approach</Subtitle>
+            <Subtitle>Approach</Subtitle>
             <Columns count={3}>
                 <Item>
-                    <Typography.Title level={3}>Watching YT Videos</Typography.Title>
+                    <ItemTitle date={'9.8.2020'}>Watching YT Videos</ItemTitle>
                     <Text>~ 5h</Text>
                 </Item>
                 <Item>
@@ -109,6 +110,10 @@ export default function ReatTraining () {
                     <Text>30h yet</Text>
                 </Item>
                 <Item>
+                    <ItemTitle date={'15.10.2020'}>Training finished</ItemTitle>
+                    <Typography.Title level={4}>I'd consider my TypeScript/React skills and overall technology overview
+                        regarding webapps as good enough to programming with strategic estimate.</Typography.Title>
+                    <Text>Started on August 8th, now 2 months have passed where I invested about 220 hours.</Text>
                 </Item>
             </Columns>
         </Content>

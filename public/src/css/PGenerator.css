@@ -26,19 +26,3 @@
 .infobutton {
     color: #20d1ff;
 }
-
-/*.ant-radio-button-wrapper:not(:first-child)::before {*/
-/*    position: absolute;*/
-/*    top: 0px;*/
-/*    left: 0px;*/
-/*    display: block;*/
-/*    -webkit-box-sizing: content-box;*/
-/*    box-sizing: content-box;*/
-/*    width: 1px;*/
-/*    height: 100%;*/
-/*    padding: 1px 0;*/
-/*    background-color: #434343;*/
-/*    -webkit-transition: background-color 0.1s;*/
-/*    transition: background-color 0.1s;*/
-/*    content: '';*/
-/*}*/

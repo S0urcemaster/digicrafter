@@ -48,15 +48,21 @@ export const updateLogs: Array<UpdateLogs> = [
     //     total: sumDurations()
     // },
     {
-        date: new Date('2020-10-11'),
+        date: new Date('2020-10-16'),
         logs: [
             {project: project.digiop, log:"Refactoring; Types adjustments", duration: addDuration(1, 30)},
             {project: project.digiop, log:"Bugfixing changes", duration: addDuration(0, 30)},
-            {project: project.digiop, log:"Broker/Feature Form fix", duration: addDuration(1, 30)},
+            {project: project.digiop, log:"Model/Feature Form fix", duration: addDuration(1, 30)},
             {project: project.digiop, log:"Dummy Content", duration: addDuration(1, 10)},
             {project: project.digiop, log:"Example Routine; fixes", duration: addDuration(1, 10)},
             {project: project.digiop, log:"New Routine, PGenerator layout fix", duration: addDuration(1, 20)},
             {project: project.digiop, log:"Cleanup; Deployment", duration: addDuration(0, 20)},
+            {project: project.digiop, log:"Read api/features; added LogView", duration: addDuration(2, 20)},
+            {project: project.digiop, log:"IndexedDB", duration: addDuration(1, 30)},
+            {project: project.digiop, log:"IndexedDB", duration: addDuration(2, 50)},
+            {project: project.digicrafter, log:"Presentation pages revision", duration: addDuration(2, 20)},
+            {project: project.digicrafter, log:"Presentation pages changes", duration: addDuration(2, 0)},
+            {project: project.digiop, log:"Build fixes & release", duration: addDuration(1, 20)},
             // {project: project.digiop, log:"", duration: addDuration()},
         ],
         total: sumDurations()

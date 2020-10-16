@@ -44,6 +44,14 @@ export const en = {
                     link: "/projects/archive",
                     title: "Projects (Archive)",
                 },
+                updateLog: {
+                    link: "/projects/update-log",
+                    title: "Update Log",
+                },
+                insights: {
+                    link: "/projects/insights",
+                    title: "Insights",
+                },
                 // : {
                 //     link: "/",
                 //     title: "",

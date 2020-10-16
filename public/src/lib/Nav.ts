@@ -33,6 +33,24 @@ export const Nav = {
             // : {link: nav.link, title: nav.title},
         }
     },
+    projects: {
+        heading: nav.projects.heading,
+        items: {
+            overview: {link: nav.projects.items.overview.link, title: nav.projects.items.overview.title,
+                source: ['/content/projects/Overview.tsx']},
+            // digicrafter: {link: nav.projects.items.digicrafter.link, title: nav.projects.items.digicrafter.title,
+            //     source: ['/content/projects/UpdateLogs.tsx']},
+            // kontakt: {link: nav.projects.items.kontakt.link, title: nav.projects.items.kontakt.title,
+            //     source: ['/content/Kontakt.tsx'], disabled: true},
+            // beatportFilter: {link: nav.projects.items.beatportFilter.link, title: nav.projects.items.beatportFilter.title,
+            //     source:['/content/MusicMixing.tsx'], disabled: true},
+            // timers: {link: nav.projects.items.timers.link, title: nav.projects.items.timers.title,
+            //     source: ['/content/Timers.tsx'], disabled: true},
+            updateLog: {link: nav.projects.items.updateLog.link, title: nav.projects.items.updateLog.title,
+                source: []},
+            // : {link: nav, title: nav},
+        }
+    },
     tools: {
         heading: nav.tools.heading,
         items: {
@@ -47,24 +65,6 @@ export const Nav = {
                 source:['/content/TrackTag.tsx'], disabled: true},
             timers: {link: nav.tools.items.timers.link, title: nav.tools.items.timers.title,
                 source:['/content/Timers.tsx'], disabled: true},
-            // : {link: nav, title: nav},
-        }
-    },
-    projects: {
-        heading: nav.projects.heading,
-        items: {
-            overview: {link: nav.projects.items.overview.link, title: nav.projects.items.overview.title,
-                source: ['/content/projects/Overview.tsx']},
-            archive: {link: nav.projects.items.archive.link, title: nav.projects.items.archive.title,
-                source: ['/content/projects/Archive.tsx']},
-            digicrafter: {link: nav.projects.items.digicrafter.link, title: nav.projects.items.digicrafter.title,
-                source: ['/content/projects/UpdateLogs.tsx'], disabled: true},
-            kontakt: {link: nav.projects.items.kontakt.link, title: nav.projects.items.kontakt.title,
-                source: ['/content/Kontakt.tsx'], disabled: true},
-            beatportFilter: {link: nav.projects.items.beatportFilter.link, title: nav.projects.items.beatportFilter.title,
-                source:['/content/MusicMixing.tsx'], disabled: true},
-            timers: {link: nav.projects.items.timers.link, title: nav.projects.items.timers.title,
-                source: ['/content/Timers.tsx'], disabled: true},
             // : {link: nav, title: nav},
         }
     },

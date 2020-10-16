@@ -6,8 +6,7 @@ import {Link} from 'react-router-dom'
 import {Nav} from "../../lib/Nav";
 import InternalLink from "../../components/InternalLink";
 import ExternalLink from "../../components/ExternalLink";
-
-const {Title, Text} = Typography
+import Content, {Subtitle, Title} from "../../components/Content";
 
 export default function ProjectsOverview () {
 
@@ -20,7 +19,6 @@ export default function ProjectsOverview () {
 
     return (
         <>
-            <Title level={3}>Active Projects</Title>
             <Table pagination={false}
                    columns={[
                        {title: "Started", dataIndex: "started", key: "started"},

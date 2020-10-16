@@ -4,27 +4,22 @@ import ContentTabs from "../components/ContentTabs";
 import ProjectsOverview from "./projects/Overview";
 import UpdateLogs from "./projects/UpdateLogs";
 import Todo from "./projects/Todo";
+import Content, {Item, Subtitle, Title} from "../components/Content";
+import Archive from "./projects/Archive";
+import {Nav} from "../lib/Nav";
 
 export default function Projects () {
 
 
     return (
-        <ContentTabs title="Active Projects"
-                     tabs={[
-                         {
-                             title: 'Overview',
-                             content: <ProjectsOverview />
-                         },
-                         {
-                             title: 'Update Logs',
-                             content: <UpdateLogs />
-                         },
-                         {
-                             title: 'Todo',
-                             content: <Todo />
-                         },
-                     ]}
-        >
-        </ContentTabs>
+        <Content>
+            <Title date={'15.10.2020'} navPrev={Nav.home.items.reactTraining.link} navNext={Nav.projects.items.updateLog.link}>Projects</Title>
+            <Subtitle date={'14.9.2020'}>Active</Subtitle>
+            <Item>
+                <ProjectsOverview />
+            </Item>
+            <Subtitle date={'14.9.2020'}>Archive</Subtitle>
+            <Archive />
+        </Content>
     )
 }

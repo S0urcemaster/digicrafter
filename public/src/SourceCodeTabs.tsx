@@ -18,13 +18,13 @@ export default function (props:PropsWithChildren<any>) {
     function loadSource (path:string) {
         //   // const path = 'https://digi-craft.de/src' +source
         // const path = 'http://localhost:3001/src' +paths.find((path) => source === path)
-        axios.defaults.headers = {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache',
-            'Expires': '0',
-        }
-        // axios.get('https://digi-craft.de/src' +path)
-        axios.get('http://localhost:3001/src' +path)
+        // axios.defaults.headers = {
+        //     'Cache-Control': 'no-cache',
+        //     'Pragma': 'no-cache',
+        //     'Expires': '0',
+        // }
+        axios.get('https://digi-craft.de/src' +path)
+        // axios.get('http://localhost:3001/src' +path)
             .then(res => {
                 setSource(res.data)
             }).catch(() => {

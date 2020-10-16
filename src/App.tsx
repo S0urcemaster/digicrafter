@@ -3,39 +3,40 @@ import './css/ant.css'
 import './css/App.css'
 import './css/digicrafter.css'
 import React, {useEffect, useState} from 'react';
-import {Route, Switch, Redirect, useHistory} from "react-router-dom";
+import {Route, Switch, useHistory} from "react-router-dom";
 import {
   AutoComplete,
   Button,
   Col,
-  Drawer,
   Input,
   Layout,
   Menu,
   Modal,
   Row,
   Space,
-  Tabs,
   Tooltip,
   Typography
 } from 'antd'
 import SubMenu from "antd/es/menu/SubMenu";
 import {Nav, NavItem, NavSection} from "./lib/Nav"
-import Projects from "./content/Projects";
-import Type from "./content/Type";
+import Projects from "./content/projects/Projects";
+import Type from "./content/tools/Type";
 import Home from "./content/Home";
 import ReactTraining from "./content/ReactTraining";
 import ProjectsArchive from "./content/projects/Archive"
 import MusicProduction from "./content/MusicProduction";
-import Timers from "./content/Timers";
-import PasswordGenerator from "./content/PasswordGenerator";
+import PasswordGenerator from "./content/tools/PasswordGenerator";
 import Wiki from "./content/Wiki";
-import DigiBoy from "./content/DigiOp";
+import DigiOps from "./content/tools/DigiOp";
 import MusicMixing from "./content/MusicMixing";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {sprueche} from "./lib/quotes";
-import {random} from "./lib/random";
+import {random} from "./lib/utils";
 import SourceCodeTabs from "./SourceCodeTabs";
+import LogView from "./LogView";
+import DigiBase from "./lib/data/DigiBase";
+import UpdateLogs from "./content/projects/UpdateLogs";
+import Insights from "./content/projects/Insights";
 
 enum Theme {
   default = 'default',
@@ -47,23 +48,33 @@ const {Header, Content, Sider} = Layout
 const {Title} = Typography
 
 function App() {
-  const [theme, setTheme] = useState(Theme.default)
+  const [theme] = useState(Theme.default)
   const [menuOpenKeys, setMenuOpenKeys] = useState([Nav.home.heading])
   const [selectedMenu, setSelectedMenu] = useState(Nav.home.items.landing.link)
   const [sourceVisible, setSourceVisible] = useState(false)
   const [sourceCodePaths, setSourceCodePaths] = useState <string[]> ([])
-  const [sourceCodeFilename, setSourceCodeFilename] = useState('App.tsx')
   const [infoVisible, setInfoVisible] = useState(false)
   const [hintoftheday, setHintoftheday] = useState('')
-  const [hintofthedayVisible, setHintofthedayVisible] = useState(true)
+  const [hintofthedayVisible, setHintofthedayVisible] = useState(false)
+  const [logs, setLogs] = useState <string[]>([])
   const rootKeys = Object.values(Nav).map((item) => item.heading)
   const history = useHistory()
+  const db = new DigiBase()
 
   useEffect(() => {
     history.listen((location) => path2Menu(location.pathname))
     path2Menu(history.location.pathname)
+    clearDB()
     rollHint()
   },[])
+
+  async function clearDB () {
+    try {
+      await Promise.all([db.brokers.clear(), db.routines.clear()])
+    } catch (ex) {
+      setLogs(logs.concat(ex))
+    }
+  }
 
   function path2Menu(path: string) {
     Object.values(Nav).find(nav => {
@@ -161,14 +172,18 @@ function App() {
             <div className="digicrafterContainer">
               <div onClick={logoClicked}><Title className='digicrafter' level={3}>digicrafter</Title></div>
             </div>
-            <Menu theme="dark" mode="inline"
+            <div style={{display:'flex', flexDirection:'column', justifyContent:'space-between', justifyItems:'stretch', maxHeight:'calc(100% - 48px)', height:'calc(100% - 48px)'}}>
+              <Menu theme="dark" mode="inline"
                   // defaultSelectedKeys={[Nav.projects.items.digicrafter.link]}
                   // defaultOpenKeys={menuOpenKeys}
-                  selectedKeys={[selectedMenu]}
-                  openKeys={menuOpenKeys}
-                  onOpenChange={onMenuOpenChange}>
-              {menuTopics()}
-            </Menu>
+                    selectedKeys={[selectedMenu]}
+                    openKeys={menuOpenKeys}
+                    onOpenChange={onMenuOpenChange}>
+                {menuTopics()}
+              </Menu>
+              {logs.length > 0 &&
+              <LogView key={logs.length} style={{maxHeight:'300px', height:'300px'}} logs={logs} updateLogs={(logs: React.SetStateAction<string[]>) => setLogs(logs)} />}
+            </div>
           </Sider>
           <Layout>
             <Header className="header">
@@ -209,24 +224,23 @@ function App() {
                     <Route exact path={Nav.home.items.reactTraining.link}>
                       <ReactTraining />
                     </Route>
+                    <Route exact path={Nav.projects.items.overview.link}>
+                      <Projects />
+                    </Route>
+                    <Route exact path={Nav.projects.items.insights.link}>
+                      <Insights />
+                    </Route>
+                    <Route exact path={Nav.projects.items.updateLog.link}>
+                      <UpdateLogs />
+                    </Route>
                     <Route exact path={Nav.tools.items.passwordGenerator.link}>
                       <PasswordGenerator />
                     </Route>
                     <Route exact path={Nav.tools.items.edit.link}>
                       <Type />
                     </Route>
-                    {/*<Redirect from={Nav.tools.items.digiop.link} to={Nav.tools.items.digiop.link + '/copy'}/>*/}
                     <Route path={Nav.tools.items.digiop.link}>
-                      <DigiBoy />
-                    </Route>
-                    <Route exact path={Nav.tools.items.timers.link}>
-                      <Timers />
-                    </Route>
-                    <Route exact path={Nav.projects.items.overview.link}>
-                      <Projects />
-                    </Route>
-                    <Route exact path={Nav.projects.items.archive.link}>
-                      <ProjectsArchive />
+                      <DigiOps saveRoutine={(routine:any) => db.saveRoutine(routine)} />
                     </Route>
                     <Route exact path={Nav.music.items.mixing.link}>
                       <MusicMixing />

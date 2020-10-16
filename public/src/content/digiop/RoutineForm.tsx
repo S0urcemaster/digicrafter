@@ -2,7 +2,7 @@ import React, {PropsWithChildren, useEffect, useState} from "react";
 import '../../css/NarrowForm.css'
 import {Button, Form, Input} from "antd";
 import JobList from "./JobList";
-import {Broker, Routine} from "../../lib/digiop/Broker";
+import {Broker, Feature, Routine} from "../../lib/model/DigiOp";
 
 enum TimeoutType {
     at = 'At', in = 'In'
@@ -42,6 +42,11 @@ export default function (props:PropsWithChildren<any>) {
 
     function rightClick () {
         setDay(day -1)
+    }
+
+    function jobsChanged(jobs: Feature[]) {
+        setRoutine({...routine, jobs:jobs})
+        // routine.jobs = jobs
     }
 
     return (
@@ -84,11 +89,11 @@ export default function (props:PropsWithChildren<any>) {
                     <Button disabled>off</Button>
                 </div>
             </Form.Item>
-            <JobList brokers={brokers} jobs={routine.jobs} />
+            <JobList brokers={brokers} jobs={routine.jobs} jobsChanged={jobsChanged} />
             <div className={'form-spacer'}/>
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" onClick={() => props.onSave(routine)}>
                     Save
                 </Button>
             </Form.Item>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Job, Routine} from "../../lib/digiop/Broker";
+import {Feature, Routine} from "../../../lib/model/DigiOp";
 import {Space, Table, Typography} from "antd";
 import {ColumnsType} from "antd/lib/table";
 
@@ -38,7 +38,7 @@ export default (props:any) => {
             sortDirections: ['descend', 'ascend'],
         },
         {title: 'Actions',
-            render: (job: Job) => <>
+            render: (job: Feature) => <>
                 <Space>
                     <Typography.Link onClick={() => job.broker.run(job.key, job.args)}>Run</Typography.Link>
                     <Typography.Link>Delete</Typography.Link>

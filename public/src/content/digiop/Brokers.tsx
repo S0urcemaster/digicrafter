@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Broker} from "../../lib/digiop/Broker";
+import {Broker} from "../../lib/model/DigiOp";
 import {Space, Table} from "antd";
 import {ColumnsType} from "antd/lib/table";
 

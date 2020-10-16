@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
-import '../css/PGenerator.css'
+import '../../css/PGenerator.css'
 import {Button, Col, Divider, Layout, Modal, Row, Typography} from "antd";
 import { InfoCircleOutlined } from '@ant-design/icons';
 import {Form, Input, Radio} from 'antd';
 import axios from "axios";
 import {RadioChangeEvent} from "antd/lib/radio";
-import ButtonCheckboxRow from "../components/ButtonCheckboxRow";
-import UndisplayContainer from "../components/UndisplayContainer";
-import {random} from "../lib/random";
-import ExternalLink from "../components/ExternalLink";
-
-const {Title} = Typography
+import ButtonCheckboxRow from "../../components/ButtonCheckboxRow";
+import UndisplayContainer from "../../components/UndisplayContainer";
+import {random} from "../../lib/utils";
+import ExternalLink from "../../components/ExternalLink";
+import {Nav} from "../../lib/Nav";
+import Content, {Columns, Item, Title} from "../../components/Content";
 
 enum spacing {
     none, spaces, specialChars,
@@ -288,14 +288,14 @@ export default function PasswordGenerator() {
     const Pwds = () => <>
         {Object.values(passwords).map((pwd, index) =>
             <div key={index}>
-                <Title style={{marginBottom:'2px'}} level={4}>{pwd}</Title>
+                <Typography.Title style={{marginBottom:'2px'}} level={4}>{pwd}</Typography.Title>
                 <p style={{fontSize:'13px'}}>{sentences[index]}</p>
             </div>
         )}
         <Divider />
         {Object.values(passwordHistory).map((pwd, index) =>
             <div key={index}>
-                <Title style={{marginBottom:'2px'}} level={4}>{pwd}</Title>
+                <Typography.Title style={{marginBottom:'2px'}} level={4}>{pwd}</Typography.Title>
             </div>
         )}
     </>
@@ -336,116 +336,121 @@ export default function PasswordGenerator() {
                 <ExternalLink href="https://password.kaspersky.com/de/">https://password.kaspersky.com/de/</ExternalLink><br />
                 <ExternalLink href="https://www.my1login.com/resources/password-strength-test/">https://www.my1login.com/resources/password-strength-test/</ExternalLink>
             </Modal>
-            <Layout>
-                <div className="pgsider">
-                    <div style={{display:'flex', justifyContent:'space-between'}}>
-                        <Title level={1}>Pa$$Gen0w</Title>
+            <Content>
+                <Title date={
+                    <div style={{display:'flex', justifyContent:'space-between', width:'150px'}}>
                         <Button className="infobutton" size="large" icon={<InfoCircleOutlined />} onClick={() => setInfoVisible(true)} />
-                    </div>
-                    <Divider orientation="left" style={{marginTop:'8px'}}>Wortbasis</Divider>
-                    <div style={{width:'100%'}}>
-                        <Input placeholder="Eingabe oder generieren" value={sentences[0]}
-                               onChange={(event) => changeSentence(event, 0)}/>
-                               <div style={{borderBottom: '1px solid #333333'}}/>
-                        <Input placeholder="Eingabe oder generieren" value={sentences[1]}
-                               onChange={(event) => changeSentence(event, 1)}/>
-                        <div style={{borderBottom: '1px solid #333333'}}/>
-                        <Input placeholder="Eingabe oder generieren" value={sentences[2]}
-                               onChange={(event) => changeSentence(event, 2)}/>
-                        <div style={{borderBottom: '1px solid #333333'}}/>
-                        <Input placeholder="Eingabe oder generieren" value={sentences[3]}
-                               onChange={(event) => changeSentence(event, 3)}/>
-                        <div style={{borderBottom: '1px solid #333333'}}/>
-                        <Input placeholder="Eingabe oder generieren" value={sentences[4]}
-                               onChange={(event) => changeSentence(event, 4)}/>
-                        <div style={{borderBottom: '1px solid #333333'}}/>
-                    </div>
-                    <Form
-                        labelCol={{span: 6}}
-                        wrapperCol={{span: 16}}
-                        layout="horizontal"
-                    >
-                        <Divider orientation="left">Wortgenerator</Divider>
-                        <Form.Item label="Generator Modus" name="mode" initialValue='Satzbau'>
-                            <Radio.Group value='Satzbau' options={modeOptions} optionType="button" />
-                        </Form.Item>
-                        <UndisplayContainer visible={true}>
-                            <Row style={{marginBottom:'10px'}}>
-                                <Col span={6}/>
-                                <Col span={16}>
-                                    <Radio.Group value='Satzbau 1' options={syntaxOptions} optionType="button"/>
-                                </Col>
-                            </Row>
-                        </UndisplayContainer>
-                        <Form.Item label="Wortlänge" name="length" initialValue={wordLength.medium}>
-                            <Radio.Group value={wordLength.medium} onChange={(event) =>setOptionWordLength(event.target.value)}>
-                                <Radio.Button value={wordLength.short}>kurz</Radio.Button>
-                                <Radio.Button value={wordLength.medium}>mittel</Radio.Button>
-                                <Radio.Button value={wordLength.long}>lang</Radio.Button>
-                                <Radio.Button value={wordLength.all}>alle</Radio.Button>
-                            </Radio.Group>
-                        </Form.Item>
-                        <Form.Item label="Generieren">
-                            <Button type='primary' onClick={generate}>Generieren</Button>
-                        </Form.Item>
-                    </Form>
-                    <Divider orientation="left">Passwortoptionen</Divider>
-                    <Form
-                        labelCol={{span: 6}}
-                        wrapperCol={{span: 16}}
-                        layout="horizontal"
-                    >
-                        <Form.Item label="Worttrennung" name="spacing" initialValue={spacing.none}>
-                            <Radio.Group value={spacing.none} onChange={changeSpacing}>
-                                <Radio.Button value={spacing.none}>Ohne</Radio.Button>
-                                <Radio.Button value={spacing.spaces}>Leerzeichen</Radio.Button>
-                                <Radio.Button value={spacing.user}>Eigene Zeichen</Radio.Button>
-                                <Radio.Button value={spacing.specialChars}>Sonderzeichen</Radio.Button>
-                            </Radio.Group>
-                        </Form.Item>
-                        <UndisplayContainer visible={displayDigits}>
-                            <Row style={{marginBottom:'10px'}}>
-                                <Col span={6}/>
-                                <Col span={16}>
-                                    <Radio.Group value='Folge' options={numbersOptions} optionType="button"/>
-                                </Col>
-                            </Row>
-                            <Row style={{marginBottom:'10px'}}>
-                                <Col span={6}/>
-                                <Col span={16}>
-                                    <Input placeholder="Eingabe" onChange={changeChars} value={userChars} />
-                                </Col>
-                            </Row>
-                        </UndisplayContainer>
-                        <UndisplayContainer visible={displaySpecial}>
-                            <Row style={{marginBottom:'10px'}}>
-                                <Col span={6}/>
-                                <Col span={16}>
-                                    <ButtonCheckboxRow selected={specialSelected} items={specialChars}/>
-                                </Col>
-                            </Row>
-                        </UndisplayContainer>
-                        <Form.Item label="Groß-/Kleinschreibung" name="capitals" initialValue={capitals.spelling}>
-                            <Radio.Group value={capitals.spelling} onChange={changeCapitals}>
-                                <Radio.Button value={capitals.spelling}>Wie Eingabe</Radio.Button>
-                                <Radio.Button value={capitals.camelcase}>CamelCase</Radio.Button>
-                                <Radio.Button value={capitals.random}>Zufällig</Radio.Button>
-                            </Radio.Group>
-                        </Form.Item>
-                        <Form.Item label="Ersetzungen" name="size">
-                                <Col span={16}>
-                                    <ButtonCheckboxRow selected={replacementsSelected} items={replacements}/>
-                                </Col>
-                        </Form.Item>
-                    </Form>
-                </div>
-            </Layout>
-            <Layout>
-                <div className="pgcontent">
-                    <Title level={1}>Output</Title>
-                    <Pwds />
-                </div>
-            </Layout>
+                        15.10.2020
+                    </div>} navPrev={Nav.projects.items.updateLog.link} navNext={Nav.tools.items.digiop.link}>
+                    Pa$$Gen0w
+                </Title>
+                <Columns count={2}>
+                    <Item>
+                        <div>
+                            <Divider orientation="left" style={{marginTop:'0'}}>Wortbasis</Divider>
+                            <div style={{width:'100%'}}>
+                                <Input placeholder="Eingabe oder generieren" value={sentences[0]}
+                                       onChange={(event) => changeSentence(event, 0)}/>
+                                <div style={{borderBottom: '1px solid #333333'}}/>
+                                <Input placeholder="Eingabe oder generieren" value={sentences[1]}
+                                       onChange={(event) => changeSentence(event, 1)}/>
+                                <div style={{borderBottom: '1px solid #333333'}}/>
+                                <Input placeholder="Eingabe oder generieren" value={sentences[2]}
+                                       onChange={(event) => changeSentence(event, 2)}/>
+                                <div style={{borderBottom: '1px solid #333333'}}/>
+                                <Input placeholder="Eingabe oder generieren" value={sentences[3]}
+                                       onChange={(event) => changeSentence(event, 3)}/>
+                                <div style={{borderBottom: '1px solid #333333'}}/>
+                                <Input placeholder="Eingabe oder generieren" value={sentences[4]}
+                                       onChange={(event) => changeSentence(event, 4)}/>
+                                <div style={{borderBottom: '1px solid #333333'}}/>
+                            </div>
+                            <Form
+                                labelCol={{span: 6}}
+                                wrapperCol={{span: 16}}
+                                layout="horizontal"
+                            >
+                                <Divider orientation="left">Wortgenerator</Divider>
+                                <Form.Item label="Generator Modus" name="mode" initialValue='Satzbau'>
+                                    <Radio.Group value='Satzbau' options={modeOptions} optionType="button" />
+                                </Form.Item>
+                                <UndisplayContainer visible={true}>
+                                    <Row style={{marginBottom:'10px'}}>
+                                        <Col span={6}/>
+                                        <Col span={16}>
+                                            <Radio.Group value='Satzbau 1' options={syntaxOptions} optionType="button"/>
+                                        </Col>
+                                    </Row>
+                                </UndisplayContainer>
+                                <Form.Item label="Wortlänge" name="length" initialValue={wordLength.medium}>
+                                    <Radio.Group value={wordLength.medium} onChange={(event) =>setOptionWordLength(event.target.value)}>
+                                        <Radio.Button value={wordLength.short}>kurz</Radio.Button>
+                                        <Radio.Button value={wordLength.medium}>mittel</Radio.Button>
+                                        <Radio.Button value={wordLength.long}>lang</Radio.Button>
+                                        <Radio.Button value={wordLength.all}>alle</Radio.Button>
+                                    </Radio.Group>
+                                </Form.Item>
+                                <Form.Item label="Generieren">
+                                    <Button type='primary' onClick={generate}>Generieren</Button>
+                                </Form.Item>
+                            </Form>
+                            <Divider orientation="left">Passwortoptionen</Divider>
+                            <Form
+                                labelCol={{span: 6}}
+                                wrapperCol={{span: 16}}
+                                layout="horizontal"
+                            >
+                                <Form.Item label="Worttrennung" name="spacing" initialValue={spacing.none}>
+                                    <Radio.Group value={spacing.none} onChange={changeSpacing}>
+                                        <Radio.Button value={spacing.none}>Ohne</Radio.Button>
+                                        <Radio.Button value={spacing.spaces}>Leerzeichen</Radio.Button>
+                                        <Radio.Button value={spacing.user}>Eigene Zeichen</Radio.Button>
+                                        <Radio.Button value={spacing.specialChars}>Sonderzeichen</Radio.Button>
+                                    </Radio.Group>
+                                </Form.Item>
+                                <UndisplayContainer visible={displayDigits}>
+                                    <Row style={{marginBottom:'10px'}}>
+                                        <Col span={6}/>
+                                        <Col span={16}>
+                                            <Radio.Group value='Folge' options={numbersOptions} optionType="button"/>
+                                        </Col>
+                                    </Row>
+                                    <Row style={{marginBottom:'10px'}}>
+                                        <Col span={6}/>
+                                        <Col span={16}>
+                                            <Input placeholder="Eingabe" onChange={changeChars} value={userChars} />
+                                        </Col>
+                                    </Row>
+                                </UndisplayContainer>
+                                <UndisplayContainer visible={displaySpecial}>
+                                    <Row style={{marginBottom:'10px'}}>
+                                        <Col span={6}/>
+                                        <Col span={16}>
+                                            <ButtonCheckboxRow selected={specialSelected} items={specialChars}/>
+                                        </Col>
+                                    </Row>
+                                </UndisplayContainer>
+                                <Form.Item label="Groß-/Kleinschreibung" name="capitals" initialValue={capitals.spelling}>
+                                    <Radio.Group value={capitals.spelling} onChange={changeCapitals}>
+                                        <Radio.Button value={capitals.spelling}>Wie Eingabe</Radio.Button>
+                                        <Radio.Button value={capitals.camelcase}>CamelCase</Radio.Button>
+                                        <Radio.Button value={capitals.random}>Zufällig</Radio.Button>
+                                    </Radio.Group>
+                                </Form.Item>
+                                <Form.Item label="Ersetzungen" name="size">
+                                    <Col span={16}>
+                                        <ButtonCheckboxRow selected={replacementsSelected} items={replacements}/>
+                                    </Col>
+                                </Form.Item>
+                            </Form>
+                        </div>
+                    </Item>
+                    <Item>
+                        <Typography.Title level={1}>Output</Typography.Title>
+                        <Pwds />
+                    </Item>
+                </Columns>
+            </Content>
         </>
     )
 

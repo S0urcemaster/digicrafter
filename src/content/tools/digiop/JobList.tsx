@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Broker, Feature} from "../../lib/model/DigiOp";
-import {Arg as Argument} from "../../lib/model/DigiOp"
+import {Broker, Feature} from "../../../lib/model/DigiOp";
+import {Arg as Argument} from "../../../lib/model/DigiOp"
 import {Form, Select, Typography} from "antd";
-import ListNavigator from "../../components/ListNavigator";
+import ListNavigator from "../../../components/ListNavigator";
 import Arg from "./joblist/Arg";
 
 export default (props:any) => {
