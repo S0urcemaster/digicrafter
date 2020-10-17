@@ -1,5 +1,9 @@
 import React from "react";
+import {Typography} from "antd";
+import ContentTabs from "../../components/ContentTabs";
 import ProjectsOverview from "./Overview";
+import UpdateLogs from "./UpdateLogs";
+import Todo from "./Todo";
 import Content, {Item, Subtitle, Title} from "../../components/Content";
 import Archive from "./Archive";
 import {Nav} from "../../lib/Nav";

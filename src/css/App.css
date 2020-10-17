@@ -30,6 +30,12 @@ a:visited {
   /*margin-left: 40px;*/
 }
 
+.content-multiview-headline {
+  padding: 10px 20px 10px 20px;
+  background-color: #1f1f1f;
+  /*margin-left: 40px;*/
+}
+
 /*.sider {*/
 /*  padding: 0 10px;*/
 /*}*/

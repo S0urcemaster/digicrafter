@@ -22,3 +22,7 @@
 .ant-table-row-level-0 {
     border-bottom: 1px solid #177ddc!important;
 }
+
+.ant-table-selection-column {
+    display: none;
+}

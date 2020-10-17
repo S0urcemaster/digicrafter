@@ -62,7 +62,7 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.digiop, log:"IndexedDB", duration: addDuration(2, 50)},
             {project: project.digicrafter, log:"Presentation pages revision", duration: addDuration(2, 20)},
             {project: project.digicrafter, log:"Presentation pages changes", duration: addDuration(2, 0)},
-            {project: project.digiop, log:"Build fixes & release", duration: addDuration(1, 20)},
+            {project: project.digiop, log:"Build fixes & release; added Insights page and content", duration: addDuration(3, 40)},
             // {project: project.digiop, log:"", duration: addDuration()},
         ],
         total: sumDurations()

@@ -12,6 +12,11 @@ export type Arg = {
     payload: Payload
 }
 
+export type Env = {
+    key: string
+    value: string
+}
+
 export type Feature = {
     key: string
     label: string
@@ -25,6 +30,7 @@ export interface Broker {
     path: string
     description: string
     features: Feature[]
+    environment: Env[]
     run (key: string, args:Arg[]) :void
 }
 
@@ -57,6 +63,7 @@ export class RemoteBroker implements Broker {
     path: string
     description: string
     features: Feature[] = []
+    environment: Env[] = []
 
     constructor(path:string ,description:string) {
         this.path = path
@@ -109,6 +116,7 @@ export class SelfBroker implements Broker {
             pipeInArg: 'text',
             resultAction: ResultAction.pipe
         }]
+    environment: Env[] = []
 
     private browserNotify = (args: Arg[]) => {
         if (Notification.permission === "granted") {

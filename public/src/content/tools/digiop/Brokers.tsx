@@ -27,7 +27,7 @@ export default (props:any) => {
                 </Space>
             </>,
         },
-    ]
+    ];
 
     const brokersData:BrokerType[] = brokers.map(broker => {
         return {path: broker.path, description: broker.description}

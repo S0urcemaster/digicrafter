@@ -4,11 +4,13 @@ import {LeftCircleOutlined, RightCircleOutlined} from '@ant-design/icons'
 import '../css/App.css'
 import InternalLink from "./InternalLink";
 
+export const TitleRoutedContent = (props:PropsWithChildren<any>) => {
 
+}
 
 export const Title = (props:PropsWithChildren<any> & {date:string, navPrev:string, navNext:string}) => {
     return (
-        <Item>
+        <Item style={{...props.style}}>
             <div style={{display:"flex", justifyContent:"space-between", alignItems:'end'}}>
                 <div style={{display:"flex"}}>
                     {props.navPrev && <Typography.Title style={{marginBottom:'0', marginTop:'0'}} level={1}>
@@ -66,11 +68,9 @@ export const Columns = (props: PropsWithChildren<any>) => {
 export default function Content (props:PropsWithChildren<any>) {
 
     return (
-        <>
-            <div>
-                {props.children}
-            </div>
-        </>
+        <div>
+            {props.children}
+        </div>
     )
 
 }

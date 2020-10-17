@@ -59,7 +59,6 @@ export default function () {
                         <li>Better layout/components/typography for articles/blogs</li>
                         <li>Search engine reachability is completely untested and unknown for SPA</li>
                         <li>A wiki engine (as soon as the editor is done)</li>
-                        <li>Environment configuration</li>
                     </ul>
                 </Item>
             </Columns>

@@ -23,7 +23,6 @@ import Projects from "./content/projects/Projects";
 import Type from "./content/tools/Type";
 import Home from "./content/Home";
 import ReactTraining from "./content/ReactTraining";
-import ProjectsArchive from "./content/projects/Archive"
 import MusicProduction from "./content/MusicProduction";
 import PasswordGenerator from "./content/tools/PasswordGenerator";
 import Wiki from "./content/Wiki";
@@ -37,6 +36,7 @@ import LogView from "./LogView";
 import DigiBase from "./lib/data/DigiBase";
 import UpdateLogs from "./content/projects/UpdateLogs";
 import Insights from "./content/projects/Insights";
+import RoutinePlanner from "./content/tools/digiop/RoutinePlanner";
 
 enum Theme {
   default = 'default',
@@ -236,11 +236,14 @@ function App() {
                     <Route exact path={Nav.tools.items.passwordGenerator.link}>
                       <PasswordGenerator />
                     </Route>
-                    <Route exact path={Nav.tools.items.edit.link}>
-                      <Type />
+                    <Route path={Nav.tools.items.routinePlanner.link}>
+                      <RoutinePlanner />
                     </Route>
                     <Route path={Nav.tools.items.digiop.link}>
                       <DigiOps saveRoutine={(routine:any) => db.saveRoutine(routine)} />
+                    </Route>
+                    <Route exact path={Nav.tools.items.edit.link}>
+                      <Type />
                     </Route>
                     <Route exact path={Nav.music.items.mixing.link}>
                       <MusicMixing />

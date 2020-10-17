@@ -19,16 +19,15 @@ import {
 } from 'antd'
 import SubMenu from "antd/es/menu/SubMenu";
 import {Nav, NavItem, NavSection} from "./lib/Nav"
-import Projects from "./content/Projects";
-import Type from "./content/Type";
+import Projects from "./content/projects/Projects";
+import Type from "./content/tools/Type";
 import Home from "./content/Home";
 import ReactTraining from "./content/ReactTraining";
 import ProjectsArchive from "./content/projects/Archive"
 import MusicProduction from "./content/MusicProduction";
-import Timers from "./content/Timers";
-import PasswordGenerator from "./content/PasswordGenerator";
+import PasswordGenerator from "./content/tools/PasswordGenerator";
 import Wiki from "./content/Wiki";
-import DigiOps from "./content/DigiOp";
+import DigiOps from "./content/tools/DigiOp";
 import MusicMixing from "./content/MusicMixing";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {sprueche} from "./lib/quotes";
@@ -37,6 +36,7 @@ import SourceCodeTabs from "./SourceCodeTabs";
 import LogView from "./LogView";
 import DigiBase from "./lib/data/DigiBase";
 import UpdateLogs from "./content/projects/UpdateLogs";
+import Insights from "./content/projects/Insights";
 
 enum Theme {
   default = 'default',
@@ -224,27 +224,23 @@ function App() {
                     <Route exact path={Nav.home.items.reactTraining.link}>
                       <ReactTraining />
                     </Route>
+                    <Route exact path={Nav.projects.items.overview.link}>
+                      <Projects />
+                    </Route>
+                    <Route exact path={Nav.projects.items.insights.link}>
+                      <Insights />
+                    </Route>
+                    <Route exact path={Nav.projects.items.updateLog.link}>
+                      <UpdateLogs />
+                    </Route>
                     <Route exact path={Nav.tools.items.passwordGenerator.link}>
                       <PasswordGenerator />
                     </Route>
                     <Route exact path={Nav.tools.items.edit.link}>
                       <Type />
                     </Route>
-                    {/*<Redirect from={Nav.tools.items.digiop.link} to={Nav.tools.items.digiop.link + '/copy'}/>*/}
                     <Route path={Nav.tools.items.digiop.link}>
                       <DigiOps saveRoutine={(routine:any) => db.saveRoutine(routine)} />
-                    </Route>
-                    <Route exact path={Nav.tools.items.timers.link}>
-                      <Timers />
-                    </Route>
-                    <Route exact path={Nav.projects.items.overview.link}>
-                      <Projects />
-                    </Route>
-                    {/*<Route exact path={Nav.projects.items.digicrafter.link}>*/}
-                    {/*  <UpdateLogs />*/}
-                    {/*</Route>*/}
-                    <Route exact path={Nav.projects.items.updateLog.link}>
-                      <UpdateLogs />
                     </Route>
                     <Route exact path={Nav.music.items.mixing.link}>
                       <MusicMixing />
