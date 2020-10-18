@@ -33,13 +33,13 @@ export default (props:any) => {
         return {path: broker.path, description: broker.description}
     })
 
-    function onConnectionsChange(pagination:any, filters:any, sorter:any, extra:any) {
+    function onBrokersChange(pagination:any, filters:any, sorter:any, extra:any) {
         console.log('params', pagination, filters, sorter, extra);
     }
 
     return (
         <div>
-            <Table rowKey="name" size="small" columns={brokerColumns} dataSource={brokersData} onChange={onConnectionsChange} />
+            <Table rowKey="path" size="small" columns={brokerColumns} dataSource={brokersData} onChange={onBrokersChange} />
         </div>
     )
 }

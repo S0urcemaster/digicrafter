@@ -58,8 +58,8 @@ export const Item = (props:PropsWithChildren<any>) => {
 export const Columns = (props: PropsWithChildren<any>) => {
     return (
         <div style={{display:'flex', flexBasis:'1',}}>
-            {props.children.map((child:any) => (
-                <div style={{flexGrow:1, marginBottom:'1px', flexBasis:'0',}}>{child}</div>
+            {props.children.map((child:any, index:number) => (
+                <div key={index} style={{flexGrow:1, marginBottom:'1px', flexBasis:'0',}}>{child}</div>
             ))}
         </div>
     )

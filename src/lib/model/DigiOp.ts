@@ -70,17 +70,6 @@ export class RemoteBroker implements Broker {
         this.description = description
     }
 
-    // static paramToArgType (param:ApiParamType) :ArgType {
-    //     switch (param) {
-    //         case ApiParamType.Number:
-    //             return ArgType.Number
-    //         case ApiParamType.String:
-    //             return ArgType.String
-    //         case ApiParamType.Time:
-    //             return ArgType.Time
-    //     }
-    // }
-
     getFeatures (success:Function, failure:Function) {
         axios.get(this.path +'/features')
             .then((res:AxiosResponse<ApiFeature[]>) => {
@@ -124,7 +113,7 @@ export class SelfBroker implements Broker {
             console.log(notification)
         } else if (Notification.permission !== "denied") {
             Notification.requestPermission().then(permission => {
-                const notification = new Notification(args[0].payload as string)
+                new Notification(args[0].payload as string)
             });
         }
     }
@@ -135,7 +124,7 @@ export class SelfBroker implements Broker {
             console.log(notification)
         } else if (Notification.permission !== "denied") {
             Notification.requestPermission().then(permission => {
-                const notification = new Notification(args[0].payload +' ' +args[1].payload)
+                new Notification(args[0].payload +' ' +args[1].payload)
             });
         }
     }

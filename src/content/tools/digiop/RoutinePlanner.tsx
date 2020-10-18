@@ -1,5 +1,5 @@
 import React from "react";
-import {Columns} from "../../../components/Content";
+import {Columns, Item} from "../../../components/Content";
 import Brokers from "./RoutinePlanner/Brokers";
 import Routine from "./RoutinePlanner/Routine";
 import {Broker} from "../../../lib/model/DigiOp";
@@ -16,15 +16,15 @@ export default function  (props:{
     return (
         <>
             <Columns count={2}>
-                <div>
+                <Item>
                     <Brokers
                         brokers={[]}
                         updateBroker={() => {}}
                     />
-                </div>
-                <div>
+                </Item>
+                <Item>
                     <Routine />
-                </div>
+                </Item>
             </Columns>
         </>
     )

@@ -26,7 +26,7 @@ import ReactTraining from "./content/ReactTraining";
 import MusicProduction from "./content/MusicProduction";
 import PasswordGenerator from "./content/tools/PasswordGenerator";
 import Wiki from "./content/Wiki";
-import DigiOps from "./content/tools/DigiOp";
+import DigiOps from "./content/tools/DigiOps";
 import MusicMixing from "./content/MusicMixing";
 import {InfoCircleOutlined} from "@ant-design/icons";
 import {sprueche} from "./lib/quotes";
@@ -79,7 +79,7 @@ function App() {
   function path2Menu(path: string) {
     Object.values(Nav).find(nav => {
       const found = Object.values(nav.items).find((item) => {
-        const found = item.link === path
+        const found = path.startsWith(item.link)
         if(found) {
           setSourceCodePaths(item.source)
           setSelectedMenu(item.link)
@@ -235,9 +235,6 @@ function App() {
                     </Route>
                     <Route exact path={Nav.tools.items.passwordGenerator.link}>
                       <PasswordGenerator />
-                    </Route>
-                    <Route path={Nav.tools.items.routinePlanner.link}>
-                      <RoutinePlanner />
                     </Route>
                     <Route path={Nav.tools.items.digiop.link}>
                       <DigiOps saveRoutine={(routine:any) => db.saveRoutine(routine)} />

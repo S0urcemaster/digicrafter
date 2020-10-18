@@ -70,12 +70,8 @@ export const en = {
                     title: "Type",
                 },
                 digiop: {
-                    link: "/digi-op",
-                    title: "Digi Op",
-                },
-                routinePlanner: {
-                    link: "/routine-planner",
-                    title: "Routine Planner",
+                    link: "/digiops",
+                    title: "DigiOps",
                 },
                 timers: {
                     link: "/timers",

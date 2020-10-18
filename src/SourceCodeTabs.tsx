@@ -35,7 +35,7 @@ export default function (props:PropsWithChildren<any>) {
         <Drawer
             title={
                 <Radio.Group onChange={(event) => loadSource(event.target.value)} defaultValue={paths[0]}>
-                    {paths.map((path) => <Radio.Button value={path}>{path.slice(path.lastIndexOf('/')+1, path.length)}</Radio.Button>)}
+                    {paths.map((path) => <Radio.Button key={path} value={path}>{path.slice(path.lastIndexOf('/')+1, path.length)}</Radio.Button>)}
                 </Radio.Group>}
             placement="right"
             closable={false}

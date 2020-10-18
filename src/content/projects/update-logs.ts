@@ -51,6 +51,8 @@ export const updateLogs: Array<UpdateLogs> = [
         date: new Date('2020-10-16'),
         logs: [
             {project: project.digiop, log:"Reworking UI", duration: addDuration(3, 0)},
+            {project: project.digiop, log:"Refactorings; Cleanup; subrouting", duration: addDuration(1, 40)},
+            {project: project.digiop, log:"Routine Planner Brokers first layout", duration: addDuration(3, 0)},
             // {project: project.digiop, log:"", duration: addDuration()},
         ],
         total: sumDurations()
