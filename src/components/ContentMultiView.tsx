@@ -56,7 +56,7 @@ export const SubHeadline = (props:PropsWithChildren<any> & {title:string, action
         <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-end', backgroundColor:'#26201A', padding:'5px', paddingLeft:'10px'}}>
             <Typography.Title level={3} style={{marginBottom:'0'}}>{props.children}</Typography.Title>
             <div style={{display:'flex'}}>
-                {props.actions.map((action:any) => {return <><Button key={action.key} onClick={() => action.onClick(action.key)}>{action.title}</Button> &nbsp;</>})}
+                {props.actions && props.actions.map((action:any) => {return <><Button key={action.key} onClick={() => action.onClick(action.key)}>{action.title}</Button> &nbsp;</>})}
             </div>
         </div>
     )

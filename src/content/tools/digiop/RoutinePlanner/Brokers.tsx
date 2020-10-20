@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {Broker, Env} from "../../../../lib/model/DigiOp";
+import {Broker, Env, Feature} from "../../../../lib/model/DigiOp";
 import {EyeOutlined} from '@ant-design/icons';
-import {Input, Table} from 'antd';
+import {Button, Input, Space, Table, Typography} from 'antd';
 import FormItem from "antd/lib/form/FormItem";
 import {SubHeadline} from "../../../../components/ContentMultiView";
 import AddDialog, {DialogBroker} from "./AddBrokerDialog";
@@ -18,6 +18,24 @@ const brokersColumns = [{
     dataIndex: 'actions',
 }]
 
+const featuresColumns = [{
+    title: 'Path',
+    dataIndex: 'path',
+}, {
+    title: 'Label',
+    dataIndex: 'label',
+}, {
+    title: 'Args',
+    dataIndex: 'args',
+}, {
+    title: 'Actions',
+    render: () => <>
+        <Space>
+            <Typography.Link onClick={() => {}}>Use</Typography.Link>
+        </Space>
+    </>,
+}]
+
 
 export default function  (props:{
     brokers:Broker[]
@@ -25,21 +43,22 @@ export default function  (props:{
 }) {
 
     const [currentBroker, setCurrentBroker] = useState <Broker> (props.brokers[0])
-    const [environment, setEnvironment] = useState <Env[]>(currentBroker.environment)
     const [envVisible, setEnvVisible] = useState(true)
     const [brokersTableData, setBrokersTableData] = useState <{key:string, path:string, description:string, actions:any[]}[]>()
-    const [rowSelection, setRowSelection] = useState <any> ([])
+    const [brokersRowSelection, setBrokersRowSelection] = useState <any> ([])
+    const [featuresTableData, setFeaturesTableData] = useState <any> ([])
     const [addDialogVisible, setAddDialogVisible] = useState(false)
     const [newEnvVisible, setNewEnvVisible] = useState(false)
     const [newEnv, setNewEnv] = useState <Env> ({key:'', value:''})
     const [newEnvButtonLabel, setNewEnvButtonLabel] = useState('New')
 
     useEffect(() => {
-        setBrokersTableData(makeTableData(props.brokers))
+        setBrokersTableData(makeBrokersTableData(props.brokers))
     }, [props.brokers])
 
     useEffect(() => {
-        setRowSelection(makeRowKeys([currentBroker]))
+        setBrokersRowSelection(makeBrokersRowKeys([currentBroker]))
+        setFeaturesTableData(makeFeaturesTableData(currentBroker.features))
     }, [currentBroker])
 
     useEffect(() => {
@@ -54,16 +73,24 @@ export default function  (props:{
         }
     }, [newEnv])
 
-    function makeTableData (brokers:Broker[]) : any {
+    function makeBrokersTableData (brokers:Broker[]) : any {
         return brokers.map((broker: Broker) => {
             return {key: broker.path, path: broker.path, description: broker.description, actions: []}
         })
     }
 
-    function makeRowKeys (brokers:Broker[]) : any {
+    function makeBrokersRowKeys (brokers:Broker[]) : any {
         return {selectedRowKeys:brokers.map((broker: Broker) => {
             return broker.path
         })}
+    }
+
+    function makeFeaturesTableData (features:Feature[]) : any {
+        return features.map((feature:Feature) => {
+            return {key:feature.path, path:feature.path, label:feature.label, args:feature.args.map((arg => {
+                    return arg.label
+                })).join(', ')}
+        })
     }
 
     function addVariable(key:string, value:string) {
@@ -94,9 +121,8 @@ export default function  (props:{
                 break
             case 'Save':
                 setNewEnvVisible(false)
+                currentBroker.environment = currentBroker.environment.concat({...newEnv})
                 setNewEnv({key:'', value:''})
-                setEnvironment(environment.concat(newEnv))
-
         }
     }
 
@@ -126,12 +152,13 @@ export default function  (props:{
                    onRow={(record) => ({
                        onClick: () => brokerClicked(record)
                    })}
-                   rowSelection={{type:'radio',...rowSelection}}
+                   rowSelection={{type:'radio',...brokersRowSelection}}
             />
             <SubHeadline actions={[{key:'new', title: newEnvButtonLabel, onClick:newVariable}, {key:'new', title:<EyeOutlined />, onClick:() => setEnvVisible(!envVisible)}]}>Environment</SubHeadline>
             {newEnvVisible &&
-            <FormItem label={<Input value={newEnv.key} onChange={(event) => setNewEnv({...newEnv, key:event.target.value})}/>} labelCol={{span:6}}>
-                <Input.TextArea key={newEnv.key} style={{height:'40px'}} rows={1} value={newEnv.value}
+            <FormItem label={
+                <Input value={newEnv.key} placeholder='key' onChange={(event) => setNewEnv({...newEnv, key:event.target.value})}/>} labelCol={{span:6}}>
+                <Input.TextArea key={newEnv.key} placeholder='value' style={{height:'40px'}} rows={1} value={newEnv.value}
                                 onChange={(event) => setNewEnv({...newEnv, value:event.target.value})} />
             </FormItem>}
             <div style={{display:envVisible ? 'block' : 'none'}}>
@@ -142,6 +169,13 @@ export default function  (props:{
                     </FormItem>
                 )}
             </div>
+            <SubHeadline actions={[]}>Features</SubHeadline>
+            <Table size='small' columns={featuresColumns} dataSource={featuresTableData}
+                   // onRow={(record) => ({
+                   //     onClick: () => brokerClicked(record)
+                   // })}
+                   // rowSelection={{type:'radio',...brokersRowSelection}}
+            />
         </>
     )
 

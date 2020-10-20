@@ -172,6 +172,10 @@ a.ant-typography:visited {
     height: 0!important;
     min-height: 0;
 }
+.ant-form-item-label > label::after {
+    content:none
+}
+
 body {
     margin: 0;
     font-family: Nunito;
