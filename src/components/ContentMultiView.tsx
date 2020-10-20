@@ -31,7 +31,8 @@ const Headline = (props:PropsWithChildren<any> & {date:string, navPrev:string, n
     const history = useHistory()
     let {path} = useRouteMatch();
     return (
-        <div className="content-multiview-headline" style={{marginLeft:'1px', marginTop:'1px', ...props.style}}>
+        // <div className="content-multiview-headline" style={{marginLeft:'1px', marginTop:'1px', ...props.style}}>
+        <div className="content-multiview-headline" style={{borderLeft:'1px solid #141414', borderTop:'1px solid #141414', ...props.style}}>
             <div style={{display:"flex", justifyContent:"space-between", alignItems:'end'}}>
                 <div style={{display:"flex"}}>
                     {props.navPrev && <Typography.Title style={{marginBottom:'0', marginTop:'0'}} level={1}>
@@ -52,10 +53,10 @@ const Headline = (props:PropsWithChildren<any> & {date:string, navPrev:string, n
 
 export const SubHeadline = (props:PropsWithChildren<any> & {title:string, actions:{key:string,title:string, onClick:(key:string) => void}[]}) => {
     return (
-        <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-end', backgroundColor:'#282d28', padding:'5px'}}>
+        <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-end', backgroundColor:'#26201A', padding:'5px', paddingLeft:'10px'}}>
             <Typography.Title level={3} style={{marginBottom:'0'}}>{props.children}</Typography.Title>
             <div style={{display:'flex'}}>
-                {props.actions.map((action:any) => {return <><Button key={action.key} size='small' onClick={() => action.onClick(action.key)}>{action.title}</Button> &nbsp;</>})}
+                {props.actions.map((action:any) => {return <><Button key={action.key} onClick={() => action.onClick(action.key)}>{action.title}</Button> &nbsp;</>})}
             </div>
         </div>
     )

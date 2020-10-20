@@ -49,7 +49,8 @@ export const ItemTitle = (props:PropsWithChildren<any> & {date:string}) => {
 
 export const Item = (props:PropsWithChildren<any>) => {
     return (
-        <div className="content-item" style={{marginLeft:'1px', marginTop:'1px', ...props.style}}>
+        // <div className="content-item" style={{marginLeft:'1px', marginTop:'1px', ...props.style}}>
+        <div className="content-item" style={{borderLeft:'1px solid #141414', borderTop:'1px solid #141414', ...props.style}}>
             {props.children}
         </div>
     )

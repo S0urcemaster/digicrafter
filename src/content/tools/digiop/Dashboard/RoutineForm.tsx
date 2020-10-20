@@ -1,8 +1,8 @@
 import React, {PropsWithChildren, useEffect, useState} from "react";
-import '../../../css/NarrowForm.css'
+import '../../../../css/NarrowForm.css'
 import {Button, Form, Input} from "antd";
 import JobList from "./JobList";
-import {Broker, Feature, Routine} from "../../../lib/model/DigiOp";
+import {Broker, Feature, Routine} from "../../../../lib/model/DigiOp";
 
 enum TimeoutType {
     at = 'At', in = 'In'

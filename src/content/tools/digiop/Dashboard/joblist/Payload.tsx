@@ -1,5 +1,5 @@
 import React from "react";
-import {Arg} from "../../../../lib/model/DigiOp";
+import {Arg} from "../../../../../lib/model/DigiOp";
 import {Input} from "antd";
 
 export default (props: {arg:Arg, payloadChanged:Function}) => {

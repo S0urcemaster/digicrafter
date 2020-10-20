@@ -79,7 +79,7 @@ function App() {
   function path2Menu(path: string) {
     Object.values(Nav).find(nav => {
       const found = Object.values(nav.items).find((item) => {
-        const found = path.startsWith(item.link)
+        const found = item.link === '/' ? path === item.link : path.startsWith(item.link)
         if(found) {
           setSourceCodePaths(item.source)
           setSelectedMenu(item.link)
@@ -196,7 +196,7 @@ function App() {
                         style={{width: 250}}
                         options={[]}
                     >
-                      <Input.Search placeholder="input here"/>
+                      <Input.Search placeholder="Search Wiki"/>
                     </AutoComplete>
                     <Button className="button-square button-linkbutton" onClick={() => history.push('/projects/overview')} shape="round">Projects</Button>
                     <Button className="button-square button-linkbutton"

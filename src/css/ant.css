@@ -90,14 +90,17 @@
 .ant-menu-item-selected {
     background-color: #1f1f1f !important;
     color: #6fff25 !important;
+    color: #FF8325 !important;
 }
 .ant-menu-submenu-selected {
     /*background-color: #1f1f1f !important;*/
     color: #6fff25 !important;
+    color: #ff8325 !important;
 }
 h1.ant-typography {
     font-size: 30px;
     text-shadow: 0 0 8px #2b5822;
+    text-shadow: 0 0 8px #8a4815;
     animation: glow1 50000ms linear infinite 40000ms;
     padding: 0
 }
@@ -124,20 +127,32 @@ h5.ant-typography {
 a.ant-typography {
     color: #c3b21b;
 }
+.ant-typography a {
+    color: #FF8325;
+}
 a.ant-typography:hover {
     color: #c3b21b;
+    opacity: 0.85;
+}
+.ant-typography a:hover {
+    color: #FF8325;
     opacity: 0.85;
 }
 a.ant-typography:visited {
     color: #c3b21b;
     opacity: 0.85;
 }
+.ant-typography a:visited {
+    color: #FF8325;
+    opacity: 0.85;
+}
 .ant-tabs-tab-btn {
-    color: #6fff25 !important;
+    color: #ff8325 !important;
 }
 @keyframes glow1 {
     40% {
         text-shadow: 0 0 8px #3d8833;
+        text-shadow: 0 0 8px #9d5118;
     }
 }
 [data-theme="dark"] .site-layout-content {

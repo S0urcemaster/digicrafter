@@ -53,6 +53,10 @@ export const updateLogs: Array<UpdateLogs> = [
             {project: project.digiop, log:"Reworking UI", duration: addDuration(3, 0)},
             {project: project.digiop, log:"Refactorings; Cleanup; subrouting", duration: addDuration(1, 40)},
             {project: project.digiop, log:"Routine Planner Brokers first layout", duration: addDuration(3, 0)},
+            {project: project.digiop, log:"Added Routine Form", duration: addDuration(1, 0)},
+            {project: project.digiop, log:"Starting server", duration: addDuration(1, 40)},
+            {project: project.digiop, log:"Load/Save Brokers & Routines", duration: addDuration(2, 30)},
+            {project: project.digiop, log:"Menu fix; New Env variable; Broker selection", duration: addDuration()},
             // {project: project.digiop, log:"", duration: addDuration()},
         ],
         total: sumDurations()

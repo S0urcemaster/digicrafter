@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Broker, Feature} from "../../../lib/model/DigiOp";
-import {Arg as Argument} from "../../../lib/model/DigiOp"
+import {Broker, Feature} from "../../../../lib/model/DigiOp";
+import {Arg as Argument} from "../../../../lib/model/DigiOp"
 import {Form, Select, Typography} from "antd";
-import ListNavigator from "../../../components/ListNavigator";
+import ListNavigator from "../../../../components/ListNavigator";
 import Arg from "./joblist/Arg";
 
 export default (props:any) => {
@@ -28,7 +28,7 @@ export default (props:any) => {
     }
 
     function featureSelected (key: string) {
-        const feature = jobs[currentJobId].broker.features.find((job: Feature) => job.key === key)
+        const feature = jobs[currentJobId].broker.features.find((job: Feature) => job.path === key)
         setCurrentJob(feature!)
     }
 
@@ -86,9 +86,9 @@ export default (props:any) => {
                             rules={[{required: true, message: ' '}]}
                         >
                             <Select style={{width: '100%'}} onChange={featureSelected}
-                                    value={jobs[0] && jobs[currentJobId].key}>
-                                {features.map((feature: Feature) => <Select.Option key={feature.key}
-                                                                                   value={feature.key}>{feature.label}</Select.Option>)}
+                                    value={jobs[0] && jobs[currentJobId].path}>
+                                {features.map((feature: Feature) => <Select.Option key={feature.path}
+                                                                                   value={feature.path}>{feature.label}</Select.Option>)}
                             </Select>
                         </Form.Item>
                         {jobs[currentJobId] && jobs[currentJobId].args.map((arg: Argument) =>

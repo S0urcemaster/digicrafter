@@ -1,7 +1,7 @@
 import React from "react";
 import {Form} from "antd";
 import Payload from "./Payload";
-import {Arg as Argument} from "../../../../lib/model/DigiOp"
+import {Arg as Argument} from "../../../../../lib/model/DigiOp"
 
 export default function  (props:{arg:Argument, argChanged:Function}) {
 

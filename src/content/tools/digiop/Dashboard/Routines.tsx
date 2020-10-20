@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Feature, Routine} from "../../../lib/model/DigiOp";
+import {Feature, Routine} from "../../../../lib/model/DigiOp";
 import {Space, Table, Typography} from "antd";
 import {ColumnsType} from "antd/lib/table";
 
@@ -40,7 +40,7 @@ export default (props:any) => {
         {title: 'Actions',
             render: (job: Feature) => <>
                 <Space>
-                    <Typography.Link onClick={() => job.broker.run(job.key, job.args)}>Run</Typography.Link>
+                    <Typography.Link onClick={() => job.broker.run(job.path, job.args)}>Run</Typography.Link>
                     <Typography.Link>Delete</Typography.Link>
                 </Space>
             </>,

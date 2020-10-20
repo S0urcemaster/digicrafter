@@ -1,13 +1,18 @@
+x {
+  color: #770303
+}
+
 a {
   color: #5cd61f;
+  color: #ff8325;
 }
 
 a:hover {
-  color: #5cd61f;
+  color: #ff8325;
   opacity: 0.85;
 }
 a:visited {
-  color: #5cd61f;
+  color: #ff8325;
   opacity: 0.85;
 }
 .layout {
@@ -20,7 +25,8 @@ a:visited {
   overflow-y: scroll;
   overflow-x: hidden;
   height: calc(100vh - 48px);
-  background-color: #061006;
+  background-color: #100B06;
+  background-image: url("../img/rusty1.jpg");
 }
 
 .content-item {
@@ -62,4 +68,5 @@ a:visited {
 
 .button-linkbutton {
   color: #5cd61f;
+  color: #ff8325;
 }

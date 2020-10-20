@@ -5,7 +5,7 @@ import Routine from "./RoutinePlanner/Routine";
 import {Broker} from "../../../lib/model/DigiOp";
 
 export default function  (props:{
-    // brokers:Broker[]
+    brokers:Broker[]
     // saveBroker:() => void
     // updateBroker:() => void
     // reloadBroker:(path:string) => void
@@ -18,7 +18,7 @@ export default function  (props:{
             <Columns count={2}>
                 <Item>
                     <Brokers
-                        brokers={[]}
+                        brokers={props.brokers}
                         updateBroker={() => {}}
                     />
                 </Item>

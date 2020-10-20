@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import {Broker, RemoteBroker, ResultAction, Routine, SelfBroker} from "../../../lib/model/DigiOp";
 import {Button, Form, Input, Typography} from "antd";
 import dbImage from "../../../img/db.png";
-import Routines from "./Routines";
-import RoutineForm from "./RoutineForm";
-import Brokers from "./Brokers";
+import Routines from "./Dashboard/Routines";
+import RoutineForm from "./Dashboard/RoutineForm";
+import Brokers from "./Dashboard/Brokers";
 
 enum FormTitle {
     new = 'Routine', edit = 'Edit Routine'
@@ -16,55 +16,55 @@ export default function (props:any) {
 
     const localBroker = new RemoteBroker('http://localhost:3000', 'local')
     localBroker.features = [
-        {key:'info', label:'Info', broker:localBroker, resultAction:ResultAction.log, args:[]},
-        {key:'runCmd', label:'Run Command', broker:localBroker, resultAction:ResultAction.log, args:[
+        {path:'info', label:'Info', broker:localBroker, resultAction:ResultAction.log, args:[]},
+        {path:'runCmd', label:'Run Command', broker:localBroker, resultAction:ResultAction.log, args:[
                 {key:'command', label:'Command', payload:''},
                 {key:'path', label:'Path', payload:''},
             ]},
-        {key:'copyFile', label:'Copy File', broker:localBroker, resultAction:ResultAction.log, args:[
+        {path:'copyFile', label:'Copy File', broker:localBroker, resultAction:ResultAction.log, args:[
                 {key:'from', label:'From Path', payload:''},
                 {key:'to', label:'To Path', payload:''},
             ]},
-        {key:'getDirectory', label:'Get Directory', broker:localBroker, resultAction:ResultAction.log, args:[
+        {path:'getDirectory', label:'Get Directory', broker:localBroker, resultAction:ResultAction.log, args:[
                 {key:'path', label:'Path', payload:''},
                 {key:'recursive', label:'Recursive', payload:''},
             ]},
-        {key:'putDirectory', label:'Put Directory', broker:localBroker, resultAction:ResultAction.log, args:[
+        {path:'putDirectory', label:'Put Directory', broker:localBroker, resultAction:ResultAction.log, args:[
                 {key:'path', label:'Path', payload:''},
             ]},
-        {key:'getFile', label:'Get File', broker:localBroker, resultAction:ResultAction.log, args:[
+        {path:'getFile', label:'Get File', broker:localBroker, resultAction:ResultAction.log, args:[
                 {key:'path', label:'Path', payload:''},
             ]},
-        {key:'putFile', label:'Put File', broker:localBroker, resultAction:ResultAction.log, args:[
+        {path:'putFile', label:'Put File', broker:localBroker, resultAction:ResultAction.log, args:[
                 {key:'path', label:'Path', payload:''},
             ]},
     ]
 
     const digiBroker = new RemoteBroker('https://digi-craft:3000', 'server')
     digiBroker.features = [
-        {key:'info', label:'Info', broker:digiBroker, resultAction:ResultAction.log, args:[]},
-        {key:'getFile', label:'Get File', broker:digiBroker, resultAction:ResultAction.log, args:[
+        {path:'info', label:'Info', broker:digiBroker, resultAction:ResultAction.log, args:[]},
+        {path:'getFile', label:'Get File', broker:digiBroker, resultAction:ResultAction.log, args:[
                 {key:'path', label:'Path', payload:''},
             ]},
-        {key:'putFile', label:'Put File', broker:digiBroker, resultAction:ResultAction.log, args:[
+        {path:'putFile', label:'Put File', broker:digiBroker, resultAction:ResultAction.log, args:[
                 {key:'path', label:'Path', payload:''},
             ]},
-        {key:'putDirectory', label:'Put Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
+        {path:'putDirectory', label:'Put Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
                 {key:'path', label:'Path', payload:''},
             ]},
-        {key:'removeDirectory', label:'Remove Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
+        {path:'removeDirectory', label:'Remove Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
                 {key:'path', label:'Path', payload:''},
             ]},
-        {key:'editPgHba', label:'Edit pg_hba', broker:digiBroker, resultAction:ResultAction.log, args:[]},
-        {key:'chmod', label:'cdmod', broker:digiBroker, resultAction:ResultAction.log, args:[
+        {path:'editPgHba', label:'Edit pg_hba', broker:digiBroker, resultAction:ResultAction.log, args:[]},
+        {path:'chmod', label:'cdmod', broker:digiBroker, resultAction:ResultAction.log, args:[
                 {key:'file', label:'File', payload:''},
                 {key:'directory', label:'Directory', payload:''},
                 {key:'attributes', label:'Attributes', payload:''},
             ]},
-        {key:'restartService', label:'systemctl restart', broker:digiBroker, resultAction:ResultAction.log, args:[
+        {path:'restartService', label:'systemctl restart', broker:digiBroker, resultAction:ResultAction.log, args:[
                 {key:'service', label:'Service Name', payload:''},
             ]},
-        {key:'observeDir', label:'Observe Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
+        {path:'observeDir', label:'Observe Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
                 {key:'path', label:'Path', payload:''},
                 {key:'frequency', label:'Frequency', payload:''},
             ]},
@@ -77,18 +77,18 @@ export default function (props:any) {
         nextTimeout: '',
         lastRun: '',
         jobs: [
-            {key:'runCmd', label:'Run Command', broker:localBroker, resultAction:ResultAction.log, args:[
+            {path:'runCmd', label:'Run Command', broker:localBroker, resultAction:ResultAction.log, args:[
                     {key:'command', label:'Command', payload:'npm run build'},
                     {key:'path', label:'Path', payload:'c:/users/sebas/phpstormprojects/digicrafter'},
                 ]},
-            {key:'removeDirectory', label:'Remove Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
+            {path:'removeDirectory', label:'Remove Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
                     {key:'path', label:'Path', payload:'/var/www/html'},
                 ]},
-            {key:'getDirectory', label:'Get Directory Contents', broker:localBroker, resultAction:ResultAction.log, args:[
+            {path:'getDirectory', label:'Get Directory Contents', broker:localBroker, resultAction:ResultAction.log, args:[
                     {key:'path', label:'Path', payload:'c:/users/sebas/phpstormprojects/digicrafter/build'},
                     {key:'recursive', label:'Recursive', payload:'true'},
                 ]},
-            {key:'putDirectory', label:'Put Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
+            {path:'putDirectory', label:'Put Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
                     {key:'path', label:'Path', payload:'/var/www/html'},
                 ]},
         ]

@@ -18,7 +18,7 @@ export type Env = {
 }
 
 export type Feature = {
-    key: string
+    path: string
     label: string
     broker: Broker
     args: Arg[]
@@ -74,7 +74,7 @@ export class RemoteBroker implements Broker {
         axios.get(this.path +'/features')
             .then((res:AxiosResponse<ApiFeature[]>) => {
                 res.data.forEach(feature => {
-                    this.features.push({key:feature.path.slice(1), label:feature.path, broker:this, resultAction:ResultAction.log, args:feature.params.map(param => {
+                    this.features.push({path:feature.path.slice(1), label:feature.path, broker:this, resultAction:ResultAction.log, args:feature.params.map(param => {
                         return {key:param.name, label:param.name, payload:''}
                         })})
                 })
@@ -91,14 +91,14 @@ export class SelfBroker implements Broker {
     path = 'self'
     description = 'self'
     features: Feature[] = [
-        {key:'browserNotify', label: 'Browser Notify', broker:this,
+        {path:'browserNotify', label: 'Browser Notify', broker:this,
             args: [
                 {key:'text', label: 'Text', payload:''},
             ],
             pipeInArg: 'text',
             resultAction: ResultAction.self
         },
-        {key:'editText', label: 'Edit Text', broker:this,
+        {path:'editText', label: 'Edit Text', broker:this,
             args: [
                 {key:'text', label: 'Text', payload: ''},
             ],
