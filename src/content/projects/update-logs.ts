@@ -49,7 +49,7 @@ export const updateLogs: Array<UpdateLogs> = [
     //     total: sumDurations()
     // },
     {
-        date: new Date('2020-10-16'),
+        date: new Date('2020-10-21'),
         logs: [
             {project: project.digiop, log:"Reworking UI", duration: addDuration(3, 0)},
             {project: project.digiop, log:"Refactorings; Cleanup; subrouting", duration: addDuration(1, 40)},

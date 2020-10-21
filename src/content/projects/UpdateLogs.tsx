@@ -58,7 +58,7 @@ export default function () {
 
     return (
         <Content>
-            <Title date={'15.10.2020'} navPrev={Nav.projects.items.insights.link} navNext={Nav.tools.items.passwordGenerator.link}>Update Log</Title>
+            <Title date={'21.10.2020'} navPrev={Nav.projects.items.insights.link} navNext={Nav.tools.items.passwordGenerator.link}>Update Log</Title>
             {updateLogs}
             <Item>
                 <Typography.Title level={3}>{format(new Date('2020-09-10'), 'EEEE dd.LL.yyyy')}</Typography.Title>

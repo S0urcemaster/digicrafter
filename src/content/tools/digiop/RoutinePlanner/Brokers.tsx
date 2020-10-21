@@ -153,6 +153,7 @@ export default function  (props:{
                        onClick: () => brokerClicked(record)
                    })}
                    rowSelection={{type:'radio',...brokersRowSelection}}
+                   pagination={false}
             />
             <SubHeadline actions={[{key:'new', title: newEnvButtonLabel, onClick:newVariable}, {key:'new', title:<EyeOutlined />, onClick:() => setEnvVisible(!envVisible)}]}>Environment</SubHeadline>
             {newEnvVisible &&

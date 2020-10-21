@@ -33,7 +33,7 @@ const outputsColumns = [{
 
 const outputsTableData = [
     {key:'1', from:'http://localhost:3000/getFile/{httpd}', abstract:'# This is the main Apache HTTP server configuration file.  It contains the'},
-    {key:'2', from:'user:commit/{1}', abstract:'changed'},
+    {key:'2', from:'http://localhost:3000/pushClient/{1}', abstract:'changed'},
     {key:'3', from:'http://localhost:3000/putFile/{2}', abstract:'File written'},
     {key:'4', from:'http://localhost:3000/checksum/{2}', abstract:'123456789'},
     {key:'5', from:'http://localhost:3000/getFile/{httpd}', abstract:'# This is the main Apache HTTP server configuration file.  It contains the'},
@@ -62,20 +62,27 @@ export default function  () {
     return (
         <>
             <SubHeadline actions={[{key:'save', title:'Save', onClick:save}]}>Routine</SubHeadline>
-            <Form.Item style={{margin:0}} label="Name" name="name" rules={[{ required: true, message: ' ' }]} initialValue={routine.name} labelCol={{span:6}}>
-                <Input value={routine.name} />
-            </Form.Item>
-            <Form.Item label="Description" name="description" rules={[{ required: false, message: ' ' }]} initialValue={routine.description} labelCol={{span:6}}>
-                <Input value={routine.description} />
-            </Form.Item>
+            <Form labelCol={{span:6}}>
+                <Form.Item style={{margin:0}} label="Name" name="name" rules={[{ required: true, message: ' ' }]} initialValue={routine.name}>
+                    <Input value={routine.name} />
+                </Form.Item>
+                <Form.Item label="Description" name="description" rules={[{ required: false, message: ' ' }]} initialValue={routine.description}>
+                    <Input value={routine.description} />
+                </Form.Item>
+                <Form.Item label="Master" name="master" rules={[{ required: true, message: ' ' }]} initialValue={routine.description}>
+                    <Input value={routine.description} />
+                </Form.Item>
+            </Form>
             <SubHeadline actions={[{key:'new', title:'New', onClick:newVariable}, {key:'new', title:<EyeOutlined />, onClick:() => setEnvVisible(!envVisible)}]}>Environment</SubHeadline>
             <div style={{display:envVisible ? 'block' : 'none'}}>
-                {environment.map(env =>
-                    <FormItem label={env.key} labelCol={{span:6}}>
-                        <Input.TextArea key={env.key} style={{height:'40px'}} rows={1} value={env.value}
-                                        onChange={(event) => updateEnv(env, event.target.value)} />
-                    </FormItem>
-                )}
+                <Form labelCol={{span:6}}>
+                    {environment.map(env =>
+                        <FormItem label={env.key} labelCol={{span:6}}>
+                            <Input.TextArea key={env.key} style={{height:'40px'}} rows={1} value={env.value}
+                                            onChange={(event) => updateEnv(env, event.target.value)} />
+                        </FormItem>
+                    )}
+                </Form>
             </div>
             <SubHeadline>Outputs</SubHeadline>
             <Table size='small' columns={outputsColumns} dataSource={outputsTableData}

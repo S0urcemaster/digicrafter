@@ -84,4 +84,5 @@ export const sprueche = [
     "Die Wissenschaft nötigt uns, den Glauben an einfache Kausalitäten aufzugeben.",
     "Wenn du lange in einen Abgrund blickst, blickt der Abgrund auch in dich hinein.",
     "Niemand rettet uns, außer wir selbst. Niemand kann und niemand darf das. Wir müssen selbst den Weg gehen.",
+    "Zuerst wird man für dumm gehalten. Dann ist man ein Lügner.",
 ]

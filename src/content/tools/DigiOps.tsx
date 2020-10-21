@@ -38,6 +38,9 @@ localBroker.environment = [
     {key:'userHome', value:'c:/users/sebas'},
     {key:'httpd', value:'c:/Apache24/conf/httpd.conf'},
     {key:'hosts', value:'c:/windows/system32/drivers/etc/hosts'},
+    {key:'digiBroker', value:'https://digi-craft:3000'},
+    {key:'digiBrokerUser', value:'local'},
+    {key:'digiBrokerPass', value:'DieCertosaImpftDenBobinetAuszutoben'},
 ]
 
 const digiBroker = new RemoteBroker('https://digi-craft:3000', 'server')
