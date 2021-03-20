@@ -91,15 +91,7 @@ export default function PasswordGenerator() {
 
     useEffect(() => {
         genPasswords(sentences)
-    }, [userChars])
-
-    useEffect(() => {
-        genPasswords(sentences)
-    }, [optionSpacing])
-
-    useEffect(() => {
-        genPasswords(sentences)
-    }, [optionCapitals])
+    }, [userChars, optionSpacing, optionCapitals])
 
     useEffect(() => {
         if(pwdResponse.length === 5) {
@@ -341,7 +333,7 @@ export default function PasswordGenerator() {
                     <div style={{display:'flex', justifyContent:'space-between', width:'150px'}}>
                         <Button className="infobutton" size="large" icon={<InfoCircleOutlined />} onClick={() => setInfoVisible(true)} />
                         15.10.2020
-                    </div>} navPrev={Nav.projects.items.updateLog.link} navNext={Nav.tools.items.digiop.link}>
+                    </div>} navPrev={Nav.projects.items.updateLog.link} navNext={Nav.tools.items.listtagger.link}>
                     Pa$$Gen0w
                 </Title>
                 <Columns count={2}>

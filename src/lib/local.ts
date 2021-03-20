@@ -63,7 +63,7 @@ export const en = {
             items: {
                 passwordGenerator: {
                     link: "/passgen",
-                    title: "Pa$$Gen0w",
+                    title: "Passwortgenerator",
                 },
                 writer: {
                     link: "/type",
@@ -80,6 +80,10 @@ export const en = {
                 tracktag: {
                     link: "/tracktag",
                     title: "TrackTag",
+                },
+                listTagger: {
+                    link: "/listtagger",
+                    title: "ListTagger",
                 },
                 // : {
                 //     link: "/",
@@ -123,6 +127,19 @@ export const en = {
                 0: {
                     link: "/wiki/0",
                     title: "0",
+                },
+                // : {
+                //     link: "/",
+                //     title: "",
+                // },
+            }
+        },
+        about: {
+            heading: "About",
+            items: {
+                disclaimer: {
+                    link: "/disclaimer",
+                    title: "Disclaimer",
                 },
                 // : {
                 //     link: "/",

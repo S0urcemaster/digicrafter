@@ -1,13 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react"
 import '../../css/DigiOp.css'
-import {Button, Modal} from "antd";
-import {Nav} from "../../lib/Nav";
-import ContentMultiView from "../../components/ContentMultiView";
-import Dashboard from "./digiop/Dashboard";
-import RoutinePlanner from "./digiop/RoutinePlanner";
-import DigiOpsInfo from "../../modals/DigiOpsInfo";
-import {InfoCircleOutlined} from '@ant-design/icons';
-import {Env, RemoteBroker, ResultAction} from "../../lib/model/DigiOp";
+import {Button, Modal} from "antd"
+import {Nav} from "../../lib/Nav"
+import ContentMultiView from "../../components/ContentMultiView"
+import Dashboard from "./digiop/Routines"
+import Clockwork from "./digiop/Clockwork"
+import RoutinePlanner from "./digiop/RoutinePlanner"
+import DigiOpsInfo from "../../modals/DigiOpsInfo"
+import {InfoCircleOutlined} from '@ant-design/icons'
+import {Env, RemoteBroker, ResultAction} from "../../lib/model/DigiOp"
+import io from "socket.io-client"
+import {ApiFilled} from '@ant-design/icons'
 
 const localBroker = new RemoteBroker('http://localhost:3000', 'local')
 localBroker.features = [
@@ -81,17 +84,41 @@ digiBroker.environment = [
 export default function (props:any) {
 
     const [infoVisible, setInfoVisible] = useState(false)
+    const socket = io.connect('https://localhost:9090', {secure: true})
+    // const socket = require('socket.io-client')('https://localhost:9090', {secure:true, rejectUnauthorized: false })
+    // const https = require('https');
+    // https.globalAgent.options.rejectUnauthorized = false;
+    const [socketConnected, setSocketConnected] = useState(false)
+    const [brokers, setBrokers] = useState({})
+
+    socket.on('connect', () => {
+        setSocketConnected(true)
+    })
+    socket.on('disconnect', () => {
+        setSocketConnected(false)
+    })
+    // socket.on('brokers', (brokers:any) => {
+    //     setBrokers(brokers)
+    // })
+
+    // useEffect(() => {
+    //     // socket.emit('brokers')
+    // }, [socketConnected])
+
+    const ClockworkTitle = () => <>
+        <ApiFilled style={{color:socketConnected?'green':'red'}} /> Clockwork
+    </>
 
     return (
         <>
             <DigiOpsInfo visible={infoVisible} setVisible={setInfoVisible} />
-            <ContentMultiView title={<div style={{display:'flex', alignContent:'middle'}}>DigiOps&nbsp;<Button className="infobutton" size='small' style={{paddingBottom:'20px'}} icon={<InfoCircleOutlined />} onClick={() => setInfoVisible(true)}/></div>}
-                              navPrev={Nav.tools.items.passwordGenerator.link} navNext={Nav.tools.items.edit.link}
+            <ContentMultiView title={<div style={{display:'flex', alignContent:'middle'}}>DigiOps &nbsp;<Button className="infobutton" size='small' style={{paddingBottom:'20px'}} icon={<InfoCircleOutlined />} onClick={() => setInfoVisible(true)}/></div>}
+                              navPrev={Nav.tools.items.listtagger.link} navNext={Nav.tools.items.edit.link}
                               routeMappings={[
-                                  {title:'Dashboard', path:'/dashboard', component:() => <Dashboard />},
-                                  {title:'Routine Planner', path:'/planner', component:() => <RoutinePlanner brokers={[localBroker, digiBroker]} />},
+                                  {title:<ClockworkTitle />, path:'/clockwork', component:() => <Clockwork socket={socket} connected={socketConnected} />},
+                                  {title:'Routines', path:'/dashboard', component:() => <Dashboard />},
+                                  {title:'Routinator', path:'/planner', component:() => <RoutinePlanner brokers={[localBroker, digiBroker]} />},
                               ]}
-
             >
             </ContentMultiView>
         </>

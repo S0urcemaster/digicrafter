@@ -37,6 +37,8 @@ import DigiBase from "./lib/data/DigiBase";
 import UpdateLogs from "./content/projects/UpdateLogs";
 import Insights from "./content/projects/Insights";
 import RoutinePlanner from "./content/tools/digiop/RoutinePlanner";
+import Disclaimer from "./content/Disclaimer";
+import ListTagger from './content/tools/ListTagger';
 
 enum Theme {
   default = 'default',
@@ -55,7 +57,7 @@ function App() {
   const [sourceCodePaths, setSourceCodePaths] = useState <string[]> ([])
   const [infoVisible, setInfoVisible] = useState(false)
   const [hintoftheday, setHintoftheday] = useState('')
-  const [hintofthedayVisible, setHintofthedayVisible] = useState(false)
+  const [hintofthedayVisible, setHintofthedayVisible] = useState(true)
   const [logs, setLogs] = useState <string[]>([])
   const rootKeys = Object.values(Nav).map((item) => item.heading)
   const history = useHistory()
@@ -165,7 +167,7 @@ function App() {
             ]}
         >
           <p>Digicrafter is a developer's base.</p>
-          <p>You can checkout the source code with the top-right button.</p>
+          <p>You can check the source code with the top-right button.</p>
         </Modal>
         <Layout data-theme={theme}>
           <Sider>
@@ -190,19 +192,13 @@ function App() {
               <Row justify="space-between">
                 <Col>
                   <Space size="large">
-                    <AutoComplete
-                        dropdownClassName="certain-category-search-dropdown"
-                        dropdownMatchSelectWidth={500}
-                        style={{width: 250}}
-                        options={[]}
-                    >
-                      <Input.Search placeholder="Search Wiki"/>
-                    </AutoComplete>
                     <Button className="button-square button-linkbutton" onClick={() => history.push('/projects/overview')} shape="round">Projects</Button>
                     <Button className="button-square button-linkbutton"
                             onClick={() => history.push(Nav.tools.items.passwordGenerator.link)} shape="round">{Nav.tools.items.passwordGenerator.title}</Button>
                     <Button className="button-square button-linkbutton" loading
                             onClick={() => history.push(Nav.tools.items.digiop.link)} shape="round">{Nav.tools.items.digiop.title}</Button>
+                    <Button className="button-square button-linkbutton" loading
+                            onClick={() => history.push(Nav.tools.items.listtagger.link)} shape="round">{Nav.tools.items.listtagger.title}</Button>
                     <Button className="infobutton" icon={<InfoCircleOutlined/>}
                             onClick={() => setInfoVisible(true)}/>
                   </Space>
@@ -236,6 +232,9 @@ function App() {
                     <Route exact path={Nav.tools.items.passwordGenerator.link}>
                       <PasswordGenerator />
                     </Route>
+                    <Route exact path={Nav.tools.items.listtagger.link}>
+                      <ListTagger />
+                    </Route>
                     <Route path={Nav.tools.items.digiop.link}>
                       <DigiOps saveRoutine={(routine:any) => db.saveRoutine(routine)} />
                     </Route>
@@ -250,6 +249,9 @@ function App() {
                     </Route>
                     <Route exact path={Nav.wiki.items[0].link}>
                       <Wiki />
+                    </Route>
+                    <Route exact path={Nav.about.items.disclaimer.link}>
+                      <Disclaimer />
                     </Route>
                     {/*<Route exact path={Nav.items.link}>*/}
                     {/*  < />*/}

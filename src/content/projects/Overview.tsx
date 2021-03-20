@@ -48,7 +48,7 @@ export default function ProjectsOverview () {
                            motivation: 'Fun/Training',
                            tech: tags(['react', 'typescript', 'antdesign', 'css', 'phpstorm']),
                            scope: "1 month",
-                           repo: '',
+                           repo: <ExternalLink href="https://github.com/S0urcemaster/digicrafter" target="_blank">S0urcemaster/digicrafter</ExternalLink>,
                        },
                        {
                            key: keyUp(),

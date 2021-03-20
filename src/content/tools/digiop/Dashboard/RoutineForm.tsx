@@ -59,9 +59,6 @@ export default function (props:PropsWithChildren<any>) {
             onFinishFailed={props.onFinishFailed}
             style={{backgroundColor: '#1f1f1f'}}
         >
-            <Form.Item style={{margin:0}} label="Name" name="name" rules={[{ required: true, message: ' ' }]} initialValue={routine.name}>
-                <Input value={routine.name} />
-            </Form.Item>
             <Form.Item label="Description" name="description" rules={[{ required: false, message: ' ' }]} initialValue={routine.description}>
                 <Input value={routine.description} />
             </Form.Item>

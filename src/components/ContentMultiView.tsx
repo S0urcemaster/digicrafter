@@ -4,6 +4,7 @@ import {Button, Radio, Typography} from "antd";
 import {LeftCircleOutlined, RightCircleOutlined} from '@ant-design/icons'
 import '../css/App.css'
 import InternalLink from "./InternalLink";
+import { Item } from "./Content";
 
 export type RouteMapping = {
     title:string

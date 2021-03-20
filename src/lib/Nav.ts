@@ -58,16 +58,18 @@ export const Nav = {
         items: {
             passwordGenerator: {link: nav.tools.items.passwordGenerator.link, title: nav.tools.items.passwordGenerator.title,
                 source: ['/content/tools/PasswordGenerator.tsx']},
+            listtagger: {link: nav.tools.items.listTagger.link, title: nav.tools.items.listTagger.title,
+                source:['/content/tools/listtagger/ListTagger.java', '/content/tools/listtagger/TaggedListTableModel.java', '/content/tools/listtagger/StartDialog.java'], disabled: false},
             digiop: {link: nav.tools.items.digiop.link, title: nav.tools.items.digiop.title,
-                source:['/content/tools/DigiOps.tsx', '/content/tools/digiop/Routines.tsx', '/content/tools/digiop/RoutineForm.tsx', '/content/tools/digiop/Brokers.tsx',
-                    '/content/tools/digiop/JobList.tsx', '/components/ListNavigator.tsx', '/lib/digiop/Broker.ts']},
+                source:['/content/tools/DigiOp.tsx']},
             edit: {link: nav.tools.items.writer.link, title: nav.tools.items.writer.title,
                 source:['/content/tools/Type.tsx']},
             tracktag: {link: nav.tools.items.tracktag.link, title: nav.tools.items.tracktag.title,
                 source:['/content/tools/TrackTag.tsx'], disabled: true},
             timers: {link: nav.tools.items.timers.link, title: nav.tools.items.timers.title,
                 source:['/content/tools/Timers.tsx'], disabled: true},
-            // : {link: nav, title: nav},
+            // : {link: nav, title: nav,
+            //  source:[''], disabled: true},
         }
     },
     music: {
@@ -95,11 +97,18 @@ export const Nav = {
             // : {link: nav.link, title: nav.title},
         }
     },
+    about: {
+        heading: nav.about.heading,
+        items: {
+            disclaimer: {link: nav.about.items.disclaimer.link, title: nav.about.items.disclaimer.title, source:[]},
+            // : {link: nav.link, title: nav.title},
+        }
+    },
     // : {
     //     heading: nav.heading,
     //     items: {
-    //         : {link: nav.items.link, title: nav.title},
-    //         // : {link: nav.link, title: nav.title},
+    //         : {link: nav.items.link, title: nav.title, source:[]},
+    //         // : {link: nav.link, title: nav.title, source:[]},
     //     }
     // },
 

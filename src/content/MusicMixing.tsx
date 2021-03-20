@@ -6,9 +6,9 @@ export default function MusicMixing () {
 
     return (
         <Content title="Digital Mixing">
-        <iframe width="100%" height="120"
-                src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FRickMachado%2Felectronica-dram%C3%A1tica%2F"
-                frameBorder="0"></iframe>
+            <iframe width="100%" height="120"
+                    src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fsebastian-teister%2Fzappy-pearl-dive-mix-2020-014%2F"
+                    frameBorder="0"></iframe>
             <iframe width="100%" height="120"
                     src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fsebastian-teister%2Fall-i-got-3-deck-key-mix-fx-no-pre-select-no-order%2F"
                     frameBorder="0"></iframe>

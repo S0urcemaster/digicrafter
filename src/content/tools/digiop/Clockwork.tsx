@@ -5,14 +5,10 @@ import dbImage from "../../../img/db.png";
 import Routines from "./Dashboard/Routines";
 import RoutineForm from "./Dashboard/RoutineForm";
 import Brokers from "./Dashboard/Brokers";
-
-enum FormTitle {
-    new = 'Routine', edit = 'Edit Routine'
-}
+import io from "socket.io-client";
+import {Item} from "../../../components/Content";
 
 export default function (props:any) {
-
-    const [formTitle, setFormTitle] = useState(FormTitle.new)
 
     const localBroker = new RemoteBroker('http://localhost:3000', 'local')
     localBroker.features = [
@@ -70,104 +66,7 @@ export default function (props:any) {
             ]},
     ]
 
-    const deploymentRoutine:Routine = {
-        name: 'digicrafter deployment',
-        description: '',
-        status: '',
-        nextTimeout: '',
-        lastRun: '',
-        jobs: [
-            {path:'runCmd', label:'Run Command', broker:localBroker, resultAction:ResultAction.log, args:[
-                    {key:'command', label:'Command', payload:'npm run build'},
-                    {key:'path', label:'Path', payload:'c:/users/sebas/phpstormprojects/digicrafter'},
-                ]},
-            {path:'removeDirectory', label:'Remove Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
-                    {key:'path', label:'Path', payload:'/var/www/html'},
-                ]},
-            {path:'getDirectory', label:'Get Directory Contents', broker:localBroker, resultAction:ResultAction.log, args:[
-                    {key:'path', label:'Path', payload:'c:/users/sebas/phpstormprojects/digicrafter/build'},
-                    {key:'recursive', label:'Recursive', payload:'true'},
-                ]},
-            {path:'putDirectory', label:'Put Directory', broker:digiBroker, resultAction:ResultAction.log, args:[
-                    {key:'path', label:'Path', payload:'/var/www/html'},
-                ]},
-        ]
-    }
-
-    const installRoutine:Routine = {
-        name: 'Server Fresh Setup',
-        description: '',
-        status: '',
-        nextTimeout: '',
-        lastRun: '',
-        jobs: []
-    }
-
-    const employeeRoutine:Routine = {
-        name: 'Neuer Mitarbeiter',
-        description: '',
-        status: '',
-        nextTimeout: '',
-        lastRun: '',
-        jobs: []
-    }
-
-    const virtualHostRoutine:Routine = {
-        name: 'Neuer VirtualHost',
-        description: '',
-        status: '',
-        nextTimeout: '',
-        lastRun: '',
-        jobs: []
-    }
-
-    const localBackupRoutine:Routine = {
-        name: 'Lokales Backup',
-        description: '',
-        status: '',
-        nextTimeout: '',
-        lastRun: '',
-        jobs: []
-    }
-
-    const publishLaravelRoutine:Routine = {
-        name: 'Publish Laravel',
-        description: '',
-        status: '',
-        nextTimeout: '',
-        lastRun: '',
-        jobs: []
-    }
-
-    const editPghbaRoutine:Routine = {
-        name: 'Edit pg_hba',
-        description: '',
-        status: '',
-        nextTimeout: '',
-        lastRun: '',
-        jobs: []
-    }
-
     const [brokers, setBrokers] = useState <Broker[]>([new SelfBroker(), localBroker, digiBroker])
-    const [routines, setRoutines] = useState <Routine[]>([deploymentRoutine, installRoutine,
-        employeeRoutine, virtualHostRoutine, localBackupRoutine, publishLaravelRoutine, editPghbaRoutine])
-    const [currentRoutine, setCurrentRoutine] = useState(deploymentRoutine)
-
-    function routineSelected (index: number) {
-        setCurrentRoutine(routines[index])
-    }
-
-    function newRoutine () {
-        const rout:Routine = {
-            description: "", name: "", jobs: []
-        }
-        setCurrentRoutine(rout)
-    }
-
-    function saveRoutine (routine: Routine) {
-        console.log(routine)
-        props.saveRoutine(routine)
-    }
 
     const BrokerForm = () =>
         <>
@@ -196,21 +95,14 @@ export default function (props:any) {
 
     return (
         <>
-            <div style={{display:'grid', gridTemplateColumns:'70% 30%', height:'100%', alignContent:'start', overflowX:'scroll'}}>
-                <div className="dclist">
-                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                        <Typography.Title style={{marginBottom:'0', marginTop:'0'}} level={1}>Routines</Typography.Title>
-                        <img src={dbImage} width={40} height={40} alt="Digi Ops"/>
-                    </div>
-                    <Routines data={routines} rowClick={routineSelected} />
+            <Item>
+                <div style={{display:'flex'}}>
+                    <span>Clockwork: {props.socket && props.socket.io.uri}</span>
+                    <div style={{width:'5px'}}></div>
+                    <span>{props.connected?'connected':'not connected'}</span>
                 </div>
-                <div className="dcform">
-                    <div style={{display:'flex', justifyContent:'space-between'}}>
-                        <Typography.Title level={1} style={{marginBottom:'5px'}}>{formTitle}</Typography.Title>
-                        <Button onClick={newRoutine}>New</Button>
-                    </div>
-                    <RoutineForm key={currentRoutine.name} brokers={brokers} routine={currentRoutine} onSave={saveRoutine} />
-                </div>
+            </Item>
+            <div style={{display:'grid', gridTemplateColumns:'50% 50%', height:'100%', alignContent:'start', overflowX:'scroll'}}>
                 <div className="dclist" style={{borderTop:'1px solid #061006'}}>
                     <Typography.Title level={1}>Brokers</Typography.Title>
                     <Brokers data={brokers} />
