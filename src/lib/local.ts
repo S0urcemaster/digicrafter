@@ -91,6 +91,31 @@ export const en = {
                 // },
             }
         },
+        cppTraining: {
+            heading: "C++ Training",
+            items: {
+                helloworld: {
+                    link: "/cppTraining/hello",
+                    title: "Hello World!",
+                },
+                d210318: {
+                    link: "/cppTraining/210318",
+                    title: "18.03.21 Berechnung in Schleife",
+                },
+                d210319: {
+                    link: "/cppTraining/210319",
+                    title: "19.03.21 Rechner mit Operatorauswahl",
+                },
+                d210322: {
+                    link: "/cppTraining/210322",
+                    title: "22.03.21 Handel 1 - Klassen",
+                },
+                // d210: {
+                //     link: "/cppTraining/210",
+                //     title: ".21 ",
+                // },
+            }
+        },
         music: {
             heading: "Electronic Music",
             items: {

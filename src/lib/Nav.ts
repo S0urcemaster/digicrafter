@@ -30,7 +30,6 @@ export const Nav = {
                 source:['/App.tsx', '/lib/Nav.ts']},
             reactTraining: {link: nav.home.items.reactTraining.link, title: nav.home.items.reactTraining.title,
                 source: ['/content/ReactTraining.tsx']},
-            // : {link: nav.link, title: nav.title},
         }
     },
     projects: {
@@ -70,6 +69,21 @@ export const Nav = {
                 source:['/content/tools/Timers.tsx'], disabled: true},
             // : {link: nav, title: nav,
             //  source:[''], disabled: true},
+        }
+    },
+    cppTraining: {
+        heading: nav.cppTraining.heading,
+        items: {
+            helloworld: {link: nav.cppTraining.items.helloworld.link, title: nav.cppTraining.items.helloworld.title,
+                source:[]},
+            d210318: {link: nav.cppTraining.items.d210318.link, title: nav.cppTraining.items.d210318.title,
+                source:[]},
+            d210319: {link: nav.cppTraining.items.d210319.link, title: nav.cppTraining.items.d210319.title,
+                source:[]},
+            d210322: {link: nav.cppTraining.items.d210322.link, title: nav.cppTraining.items.d210322.title,
+                source:[]},
+            // d210: {link: nav.cppTraining.items.d210.link, title: nav.cppTraining.items.d210.title,
+            //     source:[]},
         }
     },
     music: {

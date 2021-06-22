@@ -26,11 +26,12 @@ export default function () {
                         kenntlich gemacht.
                     </Text>
                     <Text>Es gibt innerhalb keinerlei Werbung oder Tracking seitens meiner Seite. Eingebette Inhalte von beatport.com,
-                        und soundcloud.com und mixcloud.com verwenden Cookies, was außerhalb meiner Kontrolle liegt.
+                        soundcloud.com, mixcloud.com, youtube.com und anderen verwenden Cookies, was außerhalb meiner Kontrolle liegt.
                         Durch Fortfahren auf meiner Seite stimmen Sie der Speicherung von Cookies dieser Anbieter auf ihrem Gerät zu.
                     </Text>
                     <Text>Da dies eine private Homepage ist und ich mich auf den Schutz der eigenen Person berufe,
-                        ist meine Adresse bei meinem Internetprovider unter <ExternalLink href='https://www.ionos.de'>ionos.de</ExternalLink> zu erfragen.
+                        ist meine Adresse bei meinem Internetprovider unter <ExternalLink href='https://www.ionos.de'>ionos.de</ExternalLink> 
+                        zu erfragen.
                     </Text>
                 </Space>
             </Item>

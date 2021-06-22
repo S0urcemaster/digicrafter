@@ -14,6 +14,21 @@ export default function Home() {
         <Content>
             <Title date={'03.03.2021'} navNext={Nav.home.items.reactTraining.link}>Homepage of Sebastian Teister</Title>
             <Columns count={2}>
+                <Item>
+                    <ItemTitle date={'28.03.2021'}>Added <ExternalLink href="https://digi-craft.de/coding-exercises">Coding Exercises</ExternalLink></ItemTitle>
+                </Item>
+                <Item>
+                </Item>
+            </Columns>
+            <Columns count={2}>
+                <Item>
+                    <ItemTitle date={'28.03.2021'}>What can you do?</ItemTitle>
+                </Item>
+                <Item>
+                    <iframe src ="https://teisterevolution.blogspot.com/2021/03/sources-for-boykotting-china-and.html" width="100%" height="300"> </iframe>
+                </Item>
+            </Columns>
+            <Columns count={2}>
                 <Item style={{ textAlign: 'center' }}>
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/jtpOYxsZj7o"
                         frameBorder="0"
@@ -36,11 +51,11 @@ export default function Home() {
             </Columns>
             <Columns count={2}>
                 <Item>
-                    <img width="100%" src={intpt} alt="INTP-T" />
-                </Item>
-                <Item>
                     <ItemTitle date={'17.01.2021'}>Personality Test</ItemTitle>
                     <ExternalLink href="https://www.16personalities.com/profiles/6fcdbb168eb1d">www.16personalities.com</ExternalLink>
+                </Item>
+                <Item>
+                    <img width="100%" src={intpt} alt="INTP-T" />
                 </Item>
             </Columns>
             <Columns count={2}>
@@ -91,12 +106,6 @@ export default function Home() {
                 </Item>
             </Columns>
             <Columns count={2}>
-                <Item style={{ textAlign: 'center' }}>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/P6rm0LrO9vU?start=1540"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen></iframe>
-                </Item>
                 <Item>
                     <Space direction='vertical'>
                         <ItemTitle date={'24.11.2020'}>Jordan B Peterson: 2015 Personality Lecture 18: Openness - Creativity & Intelligence</ItemTitle>
@@ -114,6 +123,12 @@ export default function Home() {
                         <Text><i><b>go off on a tangent (British, American):</b> to start talking about something that is only
                             slightly or indirectly related to the original subject.</i></Text>
                     </Space>
+                </Item>
+                <Item style={{ textAlign: 'center' }}>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/P6rm0LrO9vU?start=1540"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen></iframe>
                 </Item>
             </Columns>
             {/*<Button onClick={send}>Send</Button>*/}

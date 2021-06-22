@@ -7,7 +7,7 @@ import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
   // <React.StrictMode>
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/digicrafter/">
       <App />
     </BrowserRouter>,
   // </React.StrictMode>,

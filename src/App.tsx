@@ -37,8 +37,12 @@ import DigiBase from "./lib/data/DigiBase";
 import UpdateLogs from "./content/projects/UpdateLogs";
 import Insights from "./content/projects/Insights";
 import RoutinePlanner from "./content/tools/digiop/RoutinePlanner";
-import Disclaimer from "./content/Disclaimer";
-import ListTagger from './content/tools/ListTagger';
+import Disclaimer from "./content/Disclaimer"
+import ListTagger from './content/tools/ListTagger'
+import HelloWorld from './content/cppTraining/helloworld'
+import Cpp210318 from './content/cppTraining/cpp210318'
+import Cpp210319 from './content/cppTraining/cpp210319'
+import Cpp210322 from './content/cppTraining/cpp210322'
 
 enum Theme {
   default = 'default',
@@ -240,6 +244,18 @@ function App() {
                     </Route>
                     <Route exact path={Nav.tools.items.edit.link}>
                       <Type />
+                    </Route>
+                    <Route exact path={Nav.cppTraining.items.helloworld.link}>
+                      <HelloWorld />
+                    </Route>
+                    <Route exact path={Nav.cppTraining.items.d210318.link}>
+                      <Cpp210318 />
+                    </Route>
+                    <Route exact path={Nav.cppTraining.items.d210319.link}>
+                      <Cpp210319 />
+                    </Route>
+                    <Route exact path={Nav.cppTraining.items.d210322.link}>
+                      <Cpp210322 />
                     </Route>
                     <Route exact path={Nav.music.items.mixing.link}>
                       <MusicMixing />

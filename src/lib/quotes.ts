@@ -95,4 +95,5 @@ export const sprueche = [
 	"Man kann nur die Dinge tun, die man selber will.",
 	"The imperfection of the present is the opportunity for the future.",
 	"It's possibly good, if people listen to you, to sometimes talk crap so that people always verify what you're saying.",
+    "Für ein Genie ist es Alltag, missverstanden zu werden.",
 ]
